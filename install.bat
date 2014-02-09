@@ -1,5 +1,7 @@
 @echo off
-goto check_Permissions
+rem as put vim file to $HOME directory, no need administrator privilege
+rem goto check_Permissions
+goto link_file
 
 :check_Permissions
     echo Administrative permissions required. Detecting permissions...
@@ -16,7 +18,8 @@ goto check_Permissions
 
 :link_file
     cd ..
-    for /f %%i in ('dir vimfiles\vimrc* /b') do mklink _%%i vimfiles\%%i /h
+    rem for /f %%i in ('dir vimfiles\vimrc* /b') do mklink _%%i vimfiles\%%i /h
+    mklink _vimrc vimfiles\vimrc /h
 
 :update_submodule
     cd vimfiles

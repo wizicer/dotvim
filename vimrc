@@ -160,21 +160,6 @@ let g:vimwiki_menu = ''
 " 是否在计算字串长度时用特别考虑中文字符
 let g:vimwiki_CJK_length = 1
  
-let g:vimwiki_list = [{
-\ 'path': 'C:/!Work/6-Summary/VimWiki/info',
-\ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/work',
-\ 'auto_export': 1,
-\},{
-\ 'path': 'C:/!Work/6-Summary/VimWiki/private',
-\ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/private',
-\ 'auto_export': 0,
-\},{
-\ 'path': 'C:/!Work/6-Summary/VimWiki/site',
-\ 'syntax': 'markdown',
-\ 'ext': '.md'
-\}]
-    " \ 'syntax': 'markdown', 
-
 "     \	'cpp': 'c++',
 " \	'cs': 'c#',
 " Vim file type -> Syntax highlighter language
@@ -327,7 +312,7 @@ let maplocalleader = ","
 
 
 " Host specific config
-let hostfile = $VIM . '\_vimrc-' . substitute(hostname(), "\\..*", "", "")
+let hostfile = $HOME . '\vimfiles\_vimrc-' . substitute(hostname(), "\\..*", "", "")
 if filereadable(hostfile)
   exe 'source ' . hostfile
 endif
