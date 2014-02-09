@@ -1,0 +1,15 @@
+ 
+let g:vimwiki_list = [{
+\ 'path': 'C:/!Work/6-Summary/VimWiki/info',
+\ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/work',
+\ 'auto_export': 1,
+\},{
+\ 'path': 'C:/!Work/6-Summary/VimWiki/private',
+\ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/private',
+\ 'auto_export': 0,
+\},{
+\ 'path': 'C:/!Work/6-Summary/VimWiki/site',
+\ 'syntax': 'markdown',
+\ 'ext': '.md'
+\}]
+    " \ 'syntax': 'markdown', 
