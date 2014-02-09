@@ -327,8 +327,7 @@ let maplocalleader = ","
 
 
 " Host specific config
-let hostfile = $VIM . '\vimrc-' . substitute(hostname(), "\\..*", "", "")
+let hostfile = $VIM . '\_vimrc-' . substitute(hostname(), "\\..*", "", "")
 if filereadable(hostfile)
   exe 'source ' . hostfile
 endif
-
