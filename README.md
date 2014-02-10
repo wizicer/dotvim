@@ -1,14 +1,11 @@
 Vim Configuration
 =================
 
-Install like this:
+Install like this in Windows:
 
-    $ git clone https://github.com/wizicer/dotvim.git
-    $ git submodule update --init
-
-In Windows I do this:
-
-1. Run install.bat as administrator
+    $ git clone https://github.com/wizicer/dotvim.git %USERPROFILE%\vimfiles
+    $ cd %USERPROFILE%\vimfiles
+    $ install.bat
 
 References
 ==========
