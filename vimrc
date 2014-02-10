@@ -289,30 +289,3 @@ let hostfile = $HOME . '\vimfiles\vimrc-' . substitute(hostname(), "\\..*", "", 
 if filereadable(hostfile)
   exe 'source ' . hostfile
 endif
- 
-"     \	'cpp': 'c++',
-" \	'cs': 'c#',
-" Vim file type -> Syntax highlighter language
-let g:vimwiki_list[0].nested_syntaxes = {
-\	'css': 'css',
-\	'pascal': 'pascal',
-\	'vb': 'vb',
-\	'java': 'java',
-\	'javascript': 'javascript',
-\	'php': 'php',
-\	'sql': 'sql',
-\	'python': 'python',
-\	'perl': 'perl',
-\	'sh': 'sh',
-\	'xml': 'xml',
-\	'html': 'html',
-\	'xhtml': 'xhtml',
-\	'xslt': 'xslt',
-\	'haskell': 'haskell',
-\	'ini': 'ini',
-\	'cpp': 'c',
-\	'csharp': 'cs',
-\	'bat': 'dosbatch',
-\	'uml': 'plantuml',
-\	'plantuml': 'plantuml',
-\}
