@@ -163,6 +163,10 @@ let g:vimwiki_CJK_length = 1
 " set markdown syntax default for none-folding
 let g:vim_markdown_folding_disabled=1
 
+" no conceal for links
+let g:vimwiki_conceallevel = -1
+
+
 nmap <A-Q> :VimwikiToggleListItem<CR>
 
 let g:fsharp_interactive_bin = 'C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe'
@@ -205,7 +209,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " editing/reloading vimrc
 map ,v :sp $MYVIMRC<CR><C-W>_
-map <silent> ,V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> ,V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
 "Map escape key to jj -- much faster
 imap jj <esc>
@@ -256,7 +260,7 @@ xnoremap p pgvy
 let g:plantuml_executable_script = "plantuml.jar"
 
 " au BufNewFile,BufRead *.md nnoremap <F5> :w<CR> :silent PandocHtml<CR>
-au BufNewFile,BufRead *.md let g:F6Command = 'PandocHtml'
+" au BufNewFile,BufRead *.md let g:F6Command = 'PandocHtml'
 
 nnoremap <F6> :w<CR>:call RunF6Command()<CR>
 inoremap <F6> <C-O>:w<CR><C-O>:silent call RunF6Command()<CR>
@@ -267,6 +271,21 @@ let g:F6Command = ''
 function! RunF6Command()
   if g:F6Command != ''
     execute g:F6Command
+  else 
+    let l:temppath = getcwd()
+    let l:buildpath = expand("%:p:h") 
+    let l:list = "build.bat:make.bat:"
+    while strlen(l:list)
+        let i = match(l:list, ":")
+        let l:buildfile = strpart(l:list, 0, i)
+        let l:list = strpart(l:list, i+1)
+
+        if filereadable(l:buildpath . '\\' . l:buildfile)
+            exe 'lcd ' . l:buildpath
+            exe 'silent !' . l:buildpath. '\\' . l:buildfile
+        endif
+    endwhile
+    exe 'lcd ' . l:temppath
   endif
 endfunction
 
@@ -278,6 +297,8 @@ endfunction
 
 nmap <F11> :silent !start explorer /select,%:p<CR>
 imap <F11> <Esc><F11>
+
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 let g:Powerline_symbols = 'fancy'
 
