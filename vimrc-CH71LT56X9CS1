@@ -4,13 +4,13 @@ let g:vimwiki_list = [{
 \ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/work',
 \ 'auto_export': 1,
 \},{
+\ 'path': 'C:/!Work/6-Summary/wiki.icerdesign.com',
+\ 'syntax': 'markdown',
+\ 'ext': '.md'
+\},{
 \ 'path': 'C:/!Work/6-Summary/VimWiki/private',
 \ 'path_html': 'C:/!Work/6-Summary/VimWiki/html/private',
 \ 'auto_export': 0,
-\},{
-\ 'path': 'C:/!Work/6-Summary/VimWiki/site',
-\ 'syntax': 'markdown',
-\ 'ext': '.md'
 \}]
     " \ 'syntax': 'markdown', 
 
