@@ -298,6 +298,10 @@ endfunction
 nmap <F11> :silent !start explorer /select,%:p<CR>
 imap <F11> <Esc><F11>
 
+
+" change the current directory automatically
+autocmd BufEnter * silent! lcd %:p:h
+" change the current directory by command
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 let g:Powerline_symbols = 'fancy'
@@ -305,7 +309,7 @@ let g:Powerline_symbols = 'fancy'
 let maplocalleader = ","
 
 
-" Host specific config
+" load specific config by hostname
 let hostfile = $HOME . '\vimfiles\vimrc-' . substitute(hostname(), "\\..*", "", "")
 if filereadable(hostfile)
   exe 'source ' . hostfile
