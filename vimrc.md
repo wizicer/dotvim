@@ -1,18 +1,25 @@
 # Introduction
-test
-dggd
+This vimrc can be translate to markdown file by removing all leading double
+qoutes, here is the example:
 
-`hello` *world*
+1. put script in `script.in` file
 
-* 123
-* 342
-* 4353
+```
+ggVGy
+:e! %:h/vimrc.md
+ggVGx"0pggVx:%s/^" \=//g
+:wq!
+```
+2. start vim by following command `vim -s script.in -n vimrc`
+3. `Optional` generate html from markdown via pandoc
 
 # Configurations
-## Basic
+## Initialize [pathogen]
     call pathogen#infect()
     call pathogen#helptags()
     Helptags
+
+## Basic Initialization
 
     "set langmenu=en_US
     "let $LANG = 'en_US'
@@ -73,6 +80,9 @@ dggd
     set hlsearch                " Highlight searches by default.
     set incsearch               " Incrementally search while typing a /regex
 
+    let mapleader=","
+
+## Other
 
     "tab mappings
     map <M-1> 1gt
@@ -109,6 +119,10 @@ dggd
     au BufNewFile,BufRead *.xaml set filetype=xml
         au BufRead,BufNewFile *.atg    setfiletype coco
 
+## Enhanced Command
+### Window Maximized Shortcut
+Use `Ctrl+F5` to switch between maximized and normal
+
     let g:WindowMaximized = 0
     function! MaxRestoreWindow()
     if g:WindowMaximized == 1
@@ -123,6 +137,10 @@ dggd
     endfunction
     map <c-F5> :call MaxRestoreWindow()<CR>
 
+### Change Font
+No shortcut, but command `ChangeFont` to switch between Chinese character
+available and english font
+
     let g:ChineseFont = 1
     function! ChangeFont()
     if g:ChineseFont == 1
@@ -134,7 +152,11 @@ dggd
     endif
     endfunction
     command Changefont :call ChangeFont()
-    " map <F5> :call ChangeFont()<CR>
+
+### Tab Enhancement
+Temporary enable tab to fire auto-completion, should consider other tab
+enhancement script to replace this, use `ChangeTabCompletion` command to
+switch
 
     let g:EnableTabCompletion = 1
     function! ChangeTabCompletion()
@@ -150,55 +172,50 @@ dggd
 
     let g:Tlist_Ctags_Cmd = "\"C:/Program Files/Vim/vimfiles/ctags58/ctags.exe\""
 
-    " ######### VimWiki 写作助手 ######### "
-    
-    " 使用鼠标映射
-    let g:vimwiki_use_mouse = 1
-    
-    " 不要将驼峰式词组作为 Wiki 词条
-    let g:vimwiki_camel_case = 0
 
-    " 标记为完成的 checklist 项目会有特别的颜色
-    let g:vimwiki_hl_cb_checked = 1
-    
-    let g:vimwiki_hl_headers = 1
+### Build command
+For the habit of using visual studio, I mapped `F6` to build command
 
-    " 我的 vim 是没有菜单的，加一个 vimwiki 菜单项也没有意义
-    let g:vimwiki_menu = ''
-    
-    " 是否开启按语法折叠  会让文件比较慢
-    " let g:vimwiki_folding = 1
-    
-    " 是否在计算字串长度时用特别考虑中文字符
-    let g:vimwiki_CJK_length = 1
+    nnoremap <F6> :w<CR>:call RunF6Command()<CR>
+    inoremap <F6> <C-O>:w<CR><C-O>:silent call RunF6Command()<CR>
+    vnoremap <F6> :<C-U>:w<CR>:call RunF6Command()<CR>
 
-    " set markdown syntax default for none-folding
-    let g:vim_markdown_folding_disabled=1
+    let g:F6Command = ''
+    function! RunF6Command()
+    if g:F6Command != ''
+        execute g:F6Command
+    else 
+        let l:temppath = getcwd()
+        let l:buildpath = expand("%:p:h") 
+        let l:list = "build.bat:make.bat:"
+        while strlen(l:list)
+            let i = match(l:list, ":")
+            let l:buildfile = strpart(l:list, 0, i)
+            let l:list = strpart(l:list, i+1)
 
-    " no conceal for links
-    let g:vimwiki_conceallevel = -1
+            if filereadable(l:buildpath . '\\' . l:buildfile)
+                exe 'lcd ' . l:buildpath
+                exe 'silent !' . l:buildpath. '\\' . l:buildfile
+            endif
+        endwhile
+        exe 'lcd ' . l:temppath
+    endif
+    endfunction
 
+## Split window
 
-    nmap <A-Q> :VimwikiToggleListItem<CR>
+`Ctrl-jklm` to change to that split
 
-    let g:fsharp_interactive_bin = 'C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe'
-
-    let g:html_number_lines=0
-
-    " ctrl-jklm  changes to that split
     map <c-j> <c-w>j
     map <c-k> <c-w>k
     map <c-l> <c-w>l
     map <c-h> <c-w>h
 
-    let mapleader=","
+and lets make these all work in insert mode too ( <C-O> makes next cmd
+ happen as if in command mode )
 
-    " and lets make these all work in insert mode too ( <C-O> makes next cmd
-    "  happen as if in command mode )
     imap <C-W> <C-O><C-W>
 
-    " Open NerdTree
-    map <leader>n :NERDTreeToggle<CR>
 
     " Commenting blocks of code.
     autocmd FileType c,cpp,java,scala,atg let b:comment_leader = '// '
@@ -240,6 +257,11 @@ dggd
     map ,r :set wrap!<cr> 
     map ,s :set spell!<cr> 
 
+## Other
+
+    let g:fsharp_interactive_bin = 'C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe'
+
+    let g:html_number_lines=0
 
     au BufEnter *.wiki set wrap
     au BufLeave *.wiki set nowrap
@@ -274,55 +296,86 @@ dggd
     " au BufNewFile,BufRead *.md nnoremap <F5> :w<CR> :silent PandocHtml<CR>
     " au BufNewFile,BufRead *.md let g:F6Command = 'PandocHtml'
 
-    nnoremap <F6> :w<CR>:call RunF6Command()<CR>
-    inoremap <F6> <C-O>:w<CR><C-O>:silent call RunF6Command()<CR>
-    vnoremap <F6> :<C-U>:w<CR>:call RunF6Command()<CR>
-
-
-    let g:F6Command = ''
-    function! RunF6Command()
-    if g:F6Command != ''
-        execute g:F6Command
-    else 
-        let l:temppath = getcwd()
-        let l:buildpath = expand("%:p:h") 
-        let l:list = "build.bat:make.bat:"
-        while strlen(l:list)
-            let i = match(l:list, ":")
-            let l:buildfile = strpart(l:list, 0, i)
-            let l:list = strpart(l:list, i+1)
-
-            if filereadable(l:buildpath . '\\' . l:buildfile)
-                exe 'lcd ' . l:buildpath
-                exe 'silent !' . l:buildpath. '\\' . l:buildfile
-            endif
-        endwhile
-        exe 'lcd ' . l:temppath
-    endif
-    endfunction
-
-
+## Other
 
     " nnoremap <F5> :w<CR> :silent make<CR>
     " inoremap <F5> <Esc>:w<CR>:silent make<CR>
     " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
+map `F11` to open current file in explorer
+
     nmap <F11> :silent !start explorer /select,%:p<CR>
     imap <F11> <Esc><F11>
 
 
-    " change the current directory automatically
+change the current directory automatically
+
     autocmd BufEnter * silent! lcd %:p:h
-    " change the current directory by command
+
+change the current directory by command `<leader>cd`
+
     nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-    let g:Powerline_symbols = 'fancy'
 
+
+## Plugin Settings
+
+### [VimWiki] Configuration
+    
+使用鼠标映射
+
+    let g:vimwiki_use_mouse = 1
+    
+不要将驼峰式词组作为 Wiki 词条
+
+    let g:vimwiki_camel_case = 0
+
+标记为完成的 checklist 项目会有特别的颜色
+
+    let g:vimwiki_hl_cb_checked = 1
+    let g:vimwiki_hl_headers = 1
+
+我的 vim 是没有菜单的，加一个 vimwiki 菜单项也没有意义
+
+    let g:vimwiki_menu = ''
+    
+是否开启按语法折叠  会让文件比较慢
+    
+    " let g:vimwiki_folding = 1
+    
+是否在计算字串长度时用特别考虑中文字符
+
+    let g:vimwiki_CJK_length = 1
+
+set markdown syntax default for none-folding
+
+    let g:vim_markdown_folding_disabled=1
+
+no conceal for links
+
+    let g:vimwiki_conceallevel = -1
+
+map `Alt+Shift+Q` to trigger todo item switch between checked or not 
+
+    nmap <A-Q> :VimwikiToggleListItem<CR>
+
+### [NerdTree]
+Map `<leader>n" to open [NerdTree]
+
+    map <leader>n :NERDTreeToggle<CR>
+
+### [Powerline]
+
+    let g:Powerline_symbols = 'fancy'
     let maplocalleader = ","
 
+## Host specifed config
+load specific config by hostname
 
-    " load specific config by hostname
     let hostfile = $HOME . '\vimfiles\vimrc-' . substitute(hostname(), "\\..*", "", "")
     if filereadable(hostfile)
     exe 'source ' . hostfile
     endif
+
+[pathogen]: https://github.com/tpope/vim-pathogen
+[NerdTree]: https://github.com/scrooloose/nerdtree 
