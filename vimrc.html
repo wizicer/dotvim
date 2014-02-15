@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="markdown.css" type="text/css" />
+</head>
+<body>
+<h1 id="introduction">Introduction</h1>
+<p>test dggd</p>
+<p><code>hello</code> <em>world</em></p>
+<ul>
+<li>123</li>
+<li>342</li>
+<li>4353</li>
+</ul>
+<h1 id="configurations">Configurations</h1>
+<h2 id="basic">Basic</h2>
+<pre><code>call pathogen#infect()
+call pathogen#helptags()
+Helptags
+
+&quot;set langmenu=en_US
+&quot;let $LANG = &#39;en_US&#39;
+source $VIMRUNTIME/menu.vim
+&quot; source $VIMRUNTIME/delmenu.vim
+set encoding=utf-8
+&quot;set langmenu=zh_CN.UTF-8
+&quot;language message zh_CN.UTF-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set nocompatible
+set magic
+set ru &quot;标尺信息
+set ai
+set sw=4
+set ts=4
+set number
+set dir=%temp%
+filetype plugin on
+syntax on
+set dy=lastline &quot;显示最多行，不用@@
+&quot;以上是缩进相关
+set backspace=indent,eol,start
+colo evening
+sy on
+set go=r &quot;无菜单、工具栏
+set nobackup
+set hlsearch
+set showmatch
+set ignorecase
+set tabstop=2
+set expandtab
+
+&quot;&quot;&quot; Moving Around/Editing
+set cursorline              &quot; have a line indicate the cursor location
+set ruler                   &quot; show the cursor position all the time
+set nostartofline           &quot; Avoid moving cursor to BOL when jumping around
+set virtualedit=block       &quot; Let cursor move past the last char in &lt;C-v&gt; mode
+set scrolloff=3             &quot; Keep 3 context lines above and below the cursor
+set backspace=2             &quot; Allow backspacing over autoindent, EOL, and BOL
+set showmatch               &quot; Briefly jump to a paren once it&#39;s balanced
+set nowrap                  &quot; don&#39;t wrap text
+set linebreak               &quot; don&#39;t wrap textin the middle of a word
+set autoindent              &quot; always set autoindenting on
+set smartindent             &quot; use smart indent if there is no indent file
+set tabstop=4               &quot; &lt;tab&gt; inserts 4 spaces 
+set shiftwidth=4            &quot; but an indent level is 2 spaces wide.
+set softtabstop=4           &quot; &lt;BS&gt; over an autoindent deletes both spaces.
+set expandtab               &quot; Use spaces, not tabs, for autoindent/tab key.
+set shiftround              &quot; rounds indent to a multiple of shiftwidth
+set matchpairs+=&lt;:&gt;         &quot; show matching &lt;&gt; (html mainly) as well
+set foldmethod=indent       &quot; allow us to fold on indents
+set foldlevel=99            &quot; don&#39;t fold by default
+
+&quot;&quot;&quot; Searching and Patterns
+set ignorecase              &quot; Default to using case insensitive searches,
+set smartcase               &quot; unless uppercase letters are used in the regex.
+set smarttab                &quot; Handle tabs more intelligently 
+set hlsearch                &quot; Highlight searches by default.
+set incsearch               &quot; Incrementally search while typing a /regex
+
+
+&quot;tab mappings
+map &lt;M-1&gt; 1gt
+map &lt;M-2&gt; 2gt
+map &lt;M-3&gt; 3gt
+map &lt;M-4&gt; 4gt
+map &lt;M-5&gt; 5gt
+map &lt;M-6&gt; 6gt
+map &lt;M-7&gt; 7gt
+map &lt;M-8&gt; 8gt
+map &lt;M-9&gt; 9gt
+map &lt;M-t&gt; :tabnew&lt;CR&gt;
+map &lt;M-w&gt; :tabclose&lt;CR&gt;
+map! &lt;M-1&gt; &lt;esc&gt;1gt
+map! &lt;M-2&gt; &lt;esc&gt;2gt
+map! &lt;M-3&gt; &lt;esc&gt;3gt
+map! &lt;M-4&gt; &lt;esc&gt;4gt
+map! &lt;M-5&gt; &lt;esc&gt;5gt
+map! &lt;M-6&gt; &lt;esc&gt;6gt
+map! &lt;M-7&gt; &lt;esc&gt;7gt
+map! &lt;M-8&gt; &lt;esc&gt;8gt
+map! &lt;M-9&gt; &lt;esc&gt;9gt
+map! &lt;M-t&gt; &lt;esc&gt;:tabnew&lt;CR&gt;
+map! &lt;M-w&gt; &lt;esc&gt;:tabclose&lt;CR&gt;
+
+&quot; Use CTRL-S for saving, also in Insert mode
+noremap &lt;C-S&gt; :update&lt;CR&gt;
+vnoremap &lt;C-S&gt; &lt;C-C&gt;:update&lt;CR&gt;
+inoremap &lt;C-S&gt; &lt;C-O&gt;:update&lt;CR&gt;
+&quot;2006-09-13 如下：保存视图
+        au BufWinLeave *.ztx mkview
+        au BufWinEnter *.ztx silent loadview
+au BufNewFile,BufRead *.tx1 setf tx1
+au BufNewFile,BufRead *.xaml set filetype=xml
+    au BufRead,BufNewFile *.atg    setfiletype coco
+
+let g:WindowMaximized = 0
+function! MaxRestoreWindow()
+if g:WindowMaximized == 1
+    let g:WindowMaximized = 0
+    &quot; restore the window
+    :simalt ~r
+else
+    let g:WindowMaximized = 1
+    &quot; maximize the window
+    :simalt ~x
+endif
+endfunction
+map &lt;c-F5&gt; :call MaxRestoreWindow()&lt;CR&gt;
+
+let g:ChineseFont = 1
+function! ChangeFont()
+if g:ChineseFont == 1
+    let g:ChineseFont = 0
+    set guifont=SimHei:h10
+else
+    let g:ChineseFont = 1
+    set guifont=FixedSys:h8
+endif
+endfunction
+command Changefont :call ChangeFont()
+&quot; map &lt;F5&gt; :call ChangeFont()&lt;CR&gt;
+
+let g:EnableTabCompletion = 1
+function! ChangeTabCompletion()
+if g:EnableTabCompletion == 1
+    let g:EnableTabCompletion = 0
+    imap &lt;Tab&gt; &lt;C-P&gt;
+else
+    let g:EnableTabCompletion = 1
+    imap &lt;Tab&gt; &lt;Nop&gt;
+endif
+endfunction
+command TabCompletion :call ChangeTabCompletion()
+
+let g:Tlist_Ctags_Cmd = &quot;\&quot;C:/Program Files/Vim/vimfiles/ctags58/ctags.exe\&quot;&quot;
+
+&quot; ######### VimWiki 写作助手 ######### &quot;
+
+&quot; 使用鼠标映射
+let g:vimwiki_use_mouse = 1
+
+&quot; 不要将驼峰式词组作为 Wiki 词条
+let g:vimwiki_camel_case = 0
+
+&quot; 标记为完成的 checklist 项目会有特别的颜色
+let g:vimwiki_hl_cb_checked = 1
+
+let g:vimwiki_hl_headers = 1
+
+&quot; 我的 vim 是没有菜单的，加一个 vimwiki 菜单项也没有意义
+let g:vimwiki_menu = &#39;&#39;
+
+&quot; 是否开启按语法折叠  会让文件比较慢
+&quot; let g:vimwiki_folding = 1
+
+&quot; 是否在计算字串长度时用特别考虑中文字符
+let g:vimwiki_CJK_length = 1
+
+&quot; set markdown syntax default for none-folding
+let g:vim_markdown_folding_disabled=1
+
+&quot; no conceal for links
+let g:vimwiki_conceallevel = -1
+
+
+nmap &lt;A-Q&gt; :VimwikiToggleListItem&lt;CR&gt;
+
+let g:fsharp_interactive_bin = &#39;C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe&#39;
+
+let g:html_number_lines=0
+
+&quot; ctrl-jklm  changes to that split
+map &lt;c-j&gt; &lt;c-w&gt;j
+map &lt;c-k&gt; &lt;c-w&gt;k
+map &lt;c-l&gt; &lt;c-w&gt;l
+map &lt;c-h&gt; &lt;c-w&gt;h
+
+let mapleader=&quot;,&quot;
+
+&quot; and lets make these all work in insert mode too ( &lt;C-O&gt; makes next cmd
+&quot;  happen as if in command mode )
+imap &lt;C-W&gt; &lt;C-O&gt;&lt;C-W&gt;
+
+&quot; Open NerdTree
+map &lt;leader&gt;n :NERDTreeToggle&lt;CR&gt;
+
+&quot; Commenting blocks of code.
+autocmd FileType c,cpp,java,scala,atg let b:comment_leader = &#39;// &#39;
+autocmd FileType sh,ruby,python   let b:comment_leader = &#39;# &#39;
+autocmd FileType conf,fstab,coffee let b:comment_leader = &#39;# &#39;
+autocmd FileType tex              let b:comment_leader = &#39;% &#39;
+autocmd FileType mail             let b:comment_leader = &#39;&gt; &#39;
+autocmd FileType vim              let b:comment_leader = &#39;&quot; &#39;
+noremap &lt;silent&gt; ,cc :&lt;C-B&gt;silent &lt;C-E&gt;s/^/&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
+noremap &lt;silent&gt; ,cu :&lt;C-B&gt;silent &lt;C-E&gt;s/^\V&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;//e&lt;CR&gt;:nohlsearch&lt;CR&gt;
+
+&quot; Mappings to move line
+
+nnoremap &lt;A-j&gt; :m .+1&lt;CR&gt;==
+nnoremap &lt;A-k&gt; :m .-2&lt;CR&gt;==
+inoremap &lt;A-j&gt; &lt;Esc&gt;:m .+1&lt;CR&gt;==gi
+inoremap &lt;A-k&gt; &lt;Esc&gt;:m .-2&lt;CR&gt;==gi
+vnoremap &lt;A-j&gt; :m &#39;&gt;+1&lt;CR&gt;gv=gv
+vnoremap &lt;A-k&gt; :m &#39;&lt;-2&lt;CR&gt;gv=gv
+
+&quot; editing/reloading vimrc
+map ,v :sp $MYVIMRC&lt;CR&gt;&lt;C-W&gt;_
+map &lt;silent&gt; ,V :source $MYVIMRC&lt;CR&gt;:filetype detect&lt;CR&gt;:echo &#39;vimrc reloaded&#39;&lt;CR&gt;
+
+&quot;Map escape key to jj -- much faster
+imap jj &lt;esc&gt;
+
+&quot; Pressing return clears highlighted search
+&quot; nmap &lt;CR&gt; :nohlsearch&lt;CR&gt;
+
+
+inoremap &lt;S-TAB&gt; &lt;Esc&gt;&lt;&lt;i
+&quot; imap &lt;Tab&gt; strpart(getline(&quot;.&quot;), col(&quot;.&quot;) - 3, 1)=&quot;*&quot; ? &quot;\&lt;Lt&gt;Esc&gt;&gt;&gt;$a&quot;:&quot;&quot;
+imap &lt;C-Tab&gt; &lt;Esc&gt;&gt;&gt;$a
+
+imap ,[ &lt;Esc&gt;&lt;&lt;a
+imap ,] &lt;Esc&gt;&gt;&gt;$a
+
+map ,r :set wrap!&lt;cr&gt; 
+map ,s :set spell!&lt;cr&gt; 
+
+
+au BufEnter *.wiki set wrap
+au BufLeave *.wiki set nowrap
+au BufEnter *.wiki set spell
+au BufLeave *.wiki set nospell
+au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
+
+map &lt;up&gt; gk
+map &lt;down&gt; gj
+&quot; map &lt;left&gt; gh
+&quot; map &lt;right&gt; gl
+
+&quot; &lt;Ctrl-l&gt; redraws the screen and removes any search highlighting.
+&quot; nnoremap &lt;silent&gt; &lt;C-l&gt; :nohl&lt;CR&gt;&lt;C-l&gt;
+
+
+&quot; for coffee script syntax
+let coffee_compile_vert = 1
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+au BufNewFile,BufRead *.jshtml setf html
+&quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cc vat:s/^\(.*\)$/&lt;!--\1--&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
+&quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cu vat:s/--&gt;//&lt;CR&gt;:nohlsearch&lt;CR&gt;
+
+au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.proto setf proto
+
+xnoremap p pgvy
+
+let g:plantuml_executable_script = &quot;plantuml.jar&quot;
+
+&quot; au BufNewFile,BufRead *.md nnoremap &lt;F5&gt; :w&lt;CR&gt; :silent PandocHtml&lt;CR&gt;
+&quot; au BufNewFile,BufRead *.md let g:F6Command = &#39;PandocHtml&#39;
+
+nnoremap &lt;F6&gt; :w&lt;CR&gt;:call RunF6Command()&lt;CR&gt;
+inoremap &lt;F6&gt; &lt;C-O&gt;:w&lt;CR&gt;&lt;C-O&gt;:silent call RunF6Command()&lt;CR&gt;
+vnoremap &lt;F6&gt; :&lt;C-U&gt;:w&lt;CR&gt;:call RunF6Command()&lt;CR&gt;
+
+
+let g:F6Command = &#39;&#39;
+function! RunF6Command()
+if g:F6Command != &#39;&#39;
+    execute g:F6Command
+else 
+    let l:temppath = getcwd()
+    let l:buildpath = expand(&quot;%:p:h&quot;) 
+    let l:list = &quot;build.bat:make.bat:&quot;
+    while strlen(l:list)
+        let i = match(l:list, &quot;:&quot;)
+        let l:buildfile = strpart(l:list, 0, i)
+        let l:list = strpart(l:list, i+1)
+
+        if filereadable(l:buildpath . &#39;\\&#39; . l:buildfile)
+            exe &#39;lcd &#39; . l:buildpath
+            exe &#39;silent !&#39; . l:buildpath. &#39;\\&#39; . l:buildfile
+        endif
+    endwhile
+    exe &#39;lcd &#39; . l:temppath
+endif
+endfunction
+
+
+
+&quot; nnoremap &lt;F5&gt; :w&lt;CR&gt; :silent make&lt;CR&gt;
+&quot; inoremap &lt;F5&gt; &lt;Esc&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
+&quot; vnoremap &lt;F5&gt; :&lt;C-U&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
+
+nmap &lt;F11&gt; :silent !start explorer /select,%:p&lt;CR&gt;
+imap &lt;F11&gt; &lt;Esc&gt;&lt;F11&gt;
+
+
+&quot; change the current directory automatically
+autocmd BufEnter * silent! lcd %:p:h
+&quot; change the current directory by command
+nnoremap ,cd :cd %:p:h&lt;CR&gt;:pwd&lt;CR&gt;
+
+let g:Powerline_symbols = &#39;fancy&#39;
+
+let maplocalleader = &quot;,&quot;
+
+
+&quot; load specific config by hostname
+let hostfile = $HOME . &#39;\vimfiles\vimrc-&#39; . substitute(hostname(), &quot;\\..*&quot;, &quot;&quot;, &quot;&quot;)
+if filereadable(hostfile)
+exe &#39;source &#39; . hostfile
+endif</code></pre>
+</body>
+</html>

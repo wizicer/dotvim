@@ -19,6 +19,7 @@ goto link_file
 :link_file
     cd ..
     rem for /f %%i in ('dir vimfiles\vimrc* /b') do mklink _%%i vimfiles\%%i /h
+    if exist _vimrc del _vimrc
     mklink _vimrc vimfiles\vimrc /h
 
 :update_submodule

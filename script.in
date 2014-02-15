@@ -1,0 +1,4 @@
+ggVGy
+:e! %:h/vimrc.md
+ggVGx"0pggVx:%s/^" \=//g
+:wq!

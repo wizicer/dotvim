@@ -1,15 +1,15 @@
-" # Introduction
-" test
-" dggd
-"
-" `hello` *world*
-"
-" * 123
-" * 342
-" * 4353
-" 
-" # Configurations
-" ## Basic
+# Introduction
+test
+dggd
+
+`hello` *world*
+
+* 123
+* 342
+* 4353
+
+# Configurations
+## Basic
     call pathogen#infect()
     call pathogen#helptags()
     Helptags
@@ -24,7 +24,7 @@
     set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
     set nocompatible
     set magic
-    set ru "±ê³ßĞÅÏ¢
+    set ru "æ ‡å°ºä¿¡æ¯
     set ai
     set sw=4
     set ts=4
@@ -32,12 +32,12 @@
     set dir=%temp%
     filetype plugin on
     syntax on
-    set dy=lastline "ÏÔÊ¾×î¶àĞĞ£¬²»ÓÃ@@
-    "ÒÔÉÏÊÇËõ½øÏà¹Ø
+    set dy=lastline "æ˜¾ç¤ºæœ€å¤šè¡Œï¼Œä¸ç”¨@@
+    "ä»¥ä¸Šæ˜¯ç¼©è¿›ç›¸å…³
     set backspace=indent,eol,start
     colo evening
     sy on
-    set go=r "ÎŞ²Ëµ¥¡¢¹¤¾ßÀ¸
+    set go=r "æ— èœå•ã€å·¥å…·æ 
     set nobackup
     set hlsearch
     set showmatch
@@ -102,7 +102,7 @@
     noremap <C-S> :update<CR>
     vnoremap <C-S> <C-C>:update<CR>
     inoremap <C-S> <C-O>:update<CR>
-    "2006-09-13 ÈçÏÂ£º±£´æÊÓÍ¼
+    "2006-09-13 å¦‚ä¸‹ï¼šä¿å­˜è§†å›¾
             au BufWinLeave *.ztx mkview
             au BufWinEnter *.ztx silent loadview
     au BufNewFile,BufRead *.tx1 setf tx1
@@ -150,26 +150,26 @@
 
     let g:Tlist_Ctags_Cmd = "\"C:/Program Files/Vim/vimfiles/ctags58/ctags.exe\""
 
-    " ######### VimWiki Ğ´×÷ÖúÊÖ ######### "
+    " ######### VimWiki å†™ä½œåŠ©æ‰‹ ######### "
     
-    " Ê¹ÓÃÊó±êÓ³Éä
+    " ä½¿ç”¨é¼ æ ‡æ˜ å°„
     let g:vimwiki_use_mouse = 1
     
-    " ²»Òª½«ÍÕ·åÊ½´Ê×é×÷Îª Wiki ´ÊÌõ
+    " ä¸è¦å°†é©¼å³°å¼è¯ç»„ä½œä¸º Wiki è¯æ¡
     let g:vimwiki_camel_case = 0
 
-    " ±ê¼ÇÎªÍê³ÉµÄ checklist ÏîÄ¿»áÓĞÌØ±ğµÄÑÕÉ«
+    " æ ‡è®°ä¸ºå®Œæˆçš„ checklist é¡¹ç›®ä¼šæœ‰ç‰¹åˆ«çš„é¢œè‰²
     let g:vimwiki_hl_cb_checked = 1
     
     let g:vimwiki_hl_headers = 1
 
-    " ÎÒµÄ vim ÊÇÃ»ÓĞ²Ëµ¥µÄ£¬¼ÓÒ»¸ö vimwiki ²Ëµ¥ÏîÒ²Ã»ÓĞÒâÒå
+    " æˆ‘çš„ vim æ˜¯æ²¡æœ‰èœå•çš„ï¼ŒåŠ ä¸€ä¸ª vimwiki èœå•é¡¹ä¹Ÿæ²¡æœ‰æ„ä¹‰
     let g:vimwiki_menu = ''
     
-    " ÊÇ·ñ¿ªÆô°´Óï·¨ÕÛµş  »áÈÃÎÄ¼ş±È½ÏÂı
+    " æ˜¯å¦å¼€å¯æŒ‰è¯­æ³•æŠ˜å   ä¼šè®©æ–‡ä»¶æ¯”è¾ƒæ…¢
     " let g:vimwiki_folding = 1
     
-    " ÊÇ·ñÔÚ¼ÆËã×Ö´®³¤¶ÈÊ±ÓÃÌØ±ğ¿¼ÂÇÖĞÎÄ×Ö·û
+    " æ˜¯å¦åœ¨è®¡ç®—å­—ä¸²é•¿åº¦æ—¶ç”¨ç‰¹åˆ«è€ƒè™‘ä¸­æ–‡å­—ç¬¦
     let g:vimwiki_CJK_length = 1
 
     " set markdown syntax default for none-folding
