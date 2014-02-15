@@ -7,6 +7,13 @@ Install like this in Windows:
     $ cd %USERPROFILE%\vimfiles
     $ install.bat
 
+Configuration Markdown
+======================
+
+To outline the vimrc file, I have a `make` file to generate markdown file from vimrc.
+
+You can open it to see the comments: [vimrc.md](vimrc.md)
+
 References
 ==========
 
