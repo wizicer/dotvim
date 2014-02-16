@@ -195,7 +195,7 @@
 
             if filereadable(l:buildpath . '\\' . l:buildfile)
                 exe 'lcd ' . l:buildpath
-                exe 'silent !' . l:buildpath. '\\' . l:buildfile
+                exe 'silent !' . escape(l:buildpath, '!') . '\\' . l:buildfile
             endif
         endwhile
         exe 'lcd ' . l:temppath
