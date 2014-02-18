@@ -1,4 +1,5 @@
 ggVGy
 :e! %:h/vimrc.md
 ggVGx"0pggVx:%s/^" \=//g
+:%s/\(    .\+\n\+\)\+/\="```vim\r" . substitute(substitute(submatch(0), "\\n    ", "\r", "g"), "^    ", "" ,"g") . "```\r"/g
 :wq!
