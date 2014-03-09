@@ -302,11 +302,20 @@
     " inoremap <F5> <Esc>:w<CR>:silent make<CR>
     " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
-" map `F11` to open current file in explorer
+" map `F11` to open shell in current directory 
 
-    nmap <F11> :silent !start explorer /select,%:p<CR>
+    nmap <F11> :silent !start cmd<CR>
     imap <F11> <Esc><F11>
 
+" map `Alt-F11` to open git bash shell in current directory
+
+    nmap <A-F11> :silent !sh --login<CR>
+    imap <A-F11> <Esc><A-F11>
+
+" map `Shift-F11` to open current file in explorer
+
+    nmap <S-F11> :silent !start explorer /select,%:p<CR>
+    imap <S-F11> <Esc><S-F11>
 
 " change the current directory automatically
 
