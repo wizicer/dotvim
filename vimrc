@@ -51,6 +51,8 @@
     set ignorecase
     set tabstop=2
     set expandtab
+    set guifont=Consolas:h10:cANSI
+    set laststatus=2
 
     """ Moving Around/Editing
     set cursorline              " have a line indicate the cursor location
