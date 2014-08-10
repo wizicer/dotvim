@@ -55,3 +55,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
+[submodule "bundle/xml.vim"]
+	path = bundle/xml.vim
+	url = https://github.com/othree/xml.vim.git
