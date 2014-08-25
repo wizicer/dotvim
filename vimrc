@@ -73,7 +73,7 @@
     set shiftround              " rounds indent to a multiple of shiftwidth
     set matchpairs+=<:>         " show matching <> (html mainly) as well
     set foldmethod=indent       " allow us to fold on indents
-    set foldlevel=99            " don't fold by default
+    set foldlevel=5             " don't fold by default
 
     """ Searching and Patterns
     set ignorecase              " Default to using case insensitive searches,
@@ -81,6 +81,9 @@
     set smarttab                " Handle tabs more intelligently 
     set hlsearch                " Highlight searches by default.
     set incsearch               " Incrementally search while typing a /regex
+
+    """ make sure undo history can be saved after switched files
+    set hidden
 
     let mapleader=","
 
@@ -220,7 +223,7 @@
 
 
     " Commenting blocks of code.
-    autocmd FileType c,cpp,java,scala,atg let b:comment_leader = '// '
+    autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = '// '
     autocmd FileType sh,ruby,python   let b:comment_leader = '# '
     autocmd FileType conf,fstab,coffee let b:comment_leader = '# '
     autocmd FileType tex              let b:comment_leader = '% '
@@ -258,6 +261,12 @@
 
     map ,r :set wrap!<cr> 
     map ,s :set spell!<cr> 
+
+    " use `vimgrep` to search current word
+    :nmap g* :vimgrep /<C-R><C-W>/ **/*<CR>
+    :nmap g# :vimgrep /<C-R><C-W>/ *<CR>
+    :nmap gn :cn<CR>
+    :nmap gp :cp<CR>
 
 " ## Other
 
