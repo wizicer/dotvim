@@ -42,9 +42,9 @@
     set dy=lastline "显示最多行，不用@@
     "以上是缩进相关
     set backspace=indent,eol,start
-    colo evening
+    colo desert " other my fav color is evening/slate
     sy on
-    set go=r "无菜单、工具栏
+    set go=r " no menu and toolbar
     set nobackup
     set hlsearch
     set showmatch
@@ -118,11 +118,13 @@
     vnoremap <C-S> <C-C>:update<CR>
     inoremap <C-S> <C-O>:update<CR>
     "2006-09-13 如下：保存视图
-            au BufWinLeave *.ztx mkview
-            au BufWinEnter *.ztx silent loadview
+    au BufWinLeave *.ztx mkview
+    au BufWinEnter *.ztx silent loadview
     au BufNewFile,BufRead *.tx1 setf tx1
     au BufNewFile,BufRead *.xaml set filetype=xml
-        au BufRead,BufNewFile *.atg    setfiletype coco
+    au BufRead,BufNewFile *.atg    setfiletype coco
+    au BufNewFile,BufRead *.ejs set filetype=html
+    au BufNewFile,BufRead *.js set shiftwidth=2
 
 " ## Enhanced Command
 " ### Window Maximized Shortcut
@@ -335,6 +337,32 @@
 " change the current directory by command `<leader>cd`
 
     nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+" ## Custom fold
+" download from <http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/>
+    fu! CustomFoldText()
+        " get first non-blank line
+        let fs = v:foldstart
+        while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+        endwhile
+        if fs > v:foldend
+            let line = getline(v:foldstart)
+        else
+            let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+        endif
+    
+        let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+        let foldSize = 1 + v:foldend - v:foldstart
+        let foldSizeStr = " " . foldSize . " lines "
+        let foldLevelStr = repeat("+--", v:foldlevel)
+        let lineCount = line("$")
+        let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+        let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+        return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+    endf
+
+    " set custom fold text to system
+    set foldtext=CustomFoldText()
 
 
 
