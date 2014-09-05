@@ -45,15 +45,17 @@ syntax on
 set dy=lastline "显示最多行，不用@@
 "以上是缩进相关
 set backspace=indent,eol,start
-colo evening
+colo desert " other my fav color is evening/slate
 sy on
-set go=r "无菜单、工具栏
+set go=r " no menu and toolbar
 set nobackup
 set hlsearch
 set showmatch
 set ignorecase
 set tabstop=2
 set expandtab
+set guifont=Consolas:h10:cANSI
+set laststatus=2
 
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
@@ -74,7 +76,7 @@ set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
 set foldmethod=indent       " allow us to fold on indents
-set foldlevel=99            " don't fold by default
+set foldlevel=5             " don't fold by default
 
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
@@ -82,6 +84,9 @@ set smartcase               " unless uppercase letters are used in the regex.
 set smarttab                " Handle tabs more intelligently 
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
+
+""" make sure undo history can be saved after switched files
+set hidden
 
 let mapleader=","
 
@@ -120,11 +125,14 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 "2006-09-13 如下：保存视图
-        au BufWinLeave *.ztx mkview
-        au BufWinEnter *.ztx silent loadview
+au BufWinLeave *.ztx mkview
+au BufWinEnter *.ztx silent loadview
 au BufNewFile,BufRead *.tx1 setf tx1
 au BufNewFile,BufRead *.xaml set filetype=xml
-    au BufRead,BufNewFile *.atg    setfiletype coco
+au BufRead,BufNewFile *.atg    setfiletype coco
+au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 ```
 ## Enhanced Command
@@ -237,7 +245,7 @@ imap <C-W> <C-O><C-W>
 
 
 " Commenting blocks of code.
-autocmd FileType c,cpp,java,scala,atg let b:comment_leader = '// '
+autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = '// '
 autocmd FileType sh,ruby,python   let b:comment_leader = '# '
 autocmd FileType conf,fstab,coffee let b:comment_leader = '# '
 autocmd FileType tex              let b:comment_leader = '% '
@@ -276,6 +284,12 @@ imap ,] <Esc>>>$a
 map ,r :set wrap!<cr> 
 map ,s :set spell!<cr> 
 
+" use `vimgrep` to search current word
+:nmap g* :vimgrep /<C-R><C-W>/ **/*<CR>
+:nmap g# :vimgrep /<C-R><C-W>/ *<CR>
+:nmap gn :cn<CR>
+:nmap gp :cp<CR>
+
 ```
 ## Other
 
@@ -292,12 +306,6 @@ au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
 
 map <up> gk
 map <down> gj
-" map <left> gh
-" map <right> gl
-
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-" nnoremap <silent> <C-l> :nohl<CR><C-l>
-
 
 " for coffee script syntax
 let coffee_compile_vert = 1
@@ -310,12 +318,12 @@ au BufNewFile,BufRead *.jshtml setf html
 au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.proto setf proto
 
+```
+map p to multiple time paste without change current clipboard item
+```vim
 xnoremap p pgvy
 
 let g:plantuml_executable_script = "plantuml.jar"
-
-" au BufNewFile,BufRead *.md nnoremap <F5> :w<CR> :silent PandocHtml<CR>
-" au BufNewFile,BufRead *.md let g:F6Command = 'PandocHtml'
 
 ```
 ## Other
@@ -326,12 +334,25 @@ let g:plantuml_executable_script = "plantuml.jar"
 " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
 ```
-map `F11` to open current file in explorer
+map `F11` to open shell in current directory 
 
 ```vim
-nmap <F11> :silent !start explorer /select,%:p<CR>
+nmap <F11> :silent !start cmd<CR>
 imap <F11> <Esc><F11>
 
+```
+map `Alt-F11` to open git bash shell in current directory
+
+```vim
+nmap <A-F11> :silent !start sh --login<CR>
+imap <A-F11> <Esc><A-F11>
+
+```
+map `Shift-F11` to open current file in explorer
+
+```vim
+nmap <S-F11> :silent !start explorer /select,%:p<CR>
+imap <S-F11> <Esc><S-F11>
 
 ```
 change the current directory automatically
@@ -344,6 +365,36 @@ change the current directory by command `<leader>cd`
 
 ```vim
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+```
+## Custom fold
+download from <http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/>
+```vim
+fu! CustomFoldText()
+    " get first non-blank line
+    let fs = v:foldstart
+    while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+    endwhile
+    if fs > v:foldend
+        let line = getline(v:foldstart)
+    else
+        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+    endif
+```
+    
+```vim
+    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    let foldSize = 1 + v:foldend - v:foldstart
+    let foldSizeStr = " " . foldSize . " lines "
+    let foldLevelStr = repeat("+--", v:foldlevel)
+    let lineCount = line("$")
+    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+    let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+
+" set custom fold text to system
+set foldtext=CustomFoldText()
 
 
 

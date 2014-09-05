@@ -13,9 +13,6 @@ let g:vimwiki_list = [{
 " \ 'syntax': 'markdown',
 " \ 'ext': '.md'
     " \ 'syntax': 'markdown', 
-augroup filetypedetect
-  au! BufRead,BufNewFile */wiki.icerdesign.com/* set filetype=vimwiki
-augroup END
 
 "     \	'cpp': 'c++',
 " \	'cs': 'c#',

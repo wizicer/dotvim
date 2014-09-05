@@ -25,6 +25,7 @@
 <li><a href="#split-window">Split window</a></li>
 <li><a href="#other-1">Other</a></li>
 <li><a href="#other-2">Other</a></li>
+<li><a href="#custom-fold">Custom fold</a></li>
 <li><a href="#plugin-settings">Plugin Settings</a><ul>
 <li><a href="#vimwiki-configuration">[VimWiki] Configuration</a></li>
 <li><a href="#nerdtree"><a href="https://github.com/scrooloose/nerdtree">NerdTree</a></a></li>
@@ -34,7 +35,7 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="introduction"><a href="#introduction">Introduction</a></h1>
+<h1 id="introduction">Introduction</h1>
 <p>This vimrc can be translate to markdown file by removing all leading double qoutes, here is the example:</p>
 <ol style="list-style-type: decimal">
 <li>put script in <code>script.in</code> file</li>
@@ -47,13 +48,13 @@ ggVGx&quot;0pggVx:%s/^&quot; \=//g
 <li>start vim by following command <code>vim -s script.in -n vimrc</code></li>
 <li><code>Optional</code> generate html from markdown via pandoc</li>
 </ol>
-<h1 id="configurations"><a href="#configurations">Configurations</a></h1>
-<h2 id="initialize-pathogen"><a href="#initialize-pathogen">Initialize <a href="https://github.com/tpope/vim-pathogen">pathogen</a></a></h2>
+<h1 id="configurations">Configurations</h1>
+<h2 id="initialize-pathogen">Initialize <a href="https://github.com/tpope/vim-pathogen">pathogen</a></h2>
 <pre class="vim"><code>call pathogen#infect()
 call pathogen#helptags()
 Helptags
 </code></pre>
-<h2 id="basic-initialization"><a href="#basic-initialization">Basic Initialization</a></h2>
+<h2 id="basic-initialization">Basic Initialization</h2>
 <pre class="vim"><code>&quot;set langmenu=en_US
 &quot;let $LANG = &#39;en_US&#39;
 source $VIMRUNTIME/menu.vim
@@ -75,15 +76,17 @@ syntax on
 set dy=lastline &quot;显示最多行，不用@@
 &quot;以上是缩进相关
 set backspace=indent,eol,start
-colo evening
+colo desert &quot; other my fav color is evening/slate
 sy on
-set go=r &quot;无菜单、工具栏
+set go=r &quot; no menu and toolbar
 set nobackup
 set hlsearch
 set showmatch
 set ignorecase
 set tabstop=2
 set expandtab
+set guifont=Consolas:h10:cANSI
+set laststatus=2
 
 &quot;&quot;&quot; Moving Around/Editing
 set cursorline              &quot; have a line indicate the cursor location
@@ -104,7 +107,7 @@ set expandtab               &quot; Use spaces, not tabs, for autoindent/tab key.
 set shiftround              &quot; rounds indent to a multiple of shiftwidth
 set matchpairs+=&lt;:&gt;         &quot; show matching &lt;&gt; (html mainly) as well
 set foldmethod=indent       &quot; allow us to fold on indents
-set foldlevel=99            &quot; don&#39;t fold by default
+set foldlevel=5             &quot; don&#39;t fold by default
 
 &quot;&quot;&quot; Searching and Patterns
 set ignorecase              &quot; Default to using case insensitive searches,
@@ -113,9 +116,12 @@ set smarttab                &quot; Handle tabs more intelligently
 set hlsearch                &quot; Highlight searches by default.
 set incsearch               &quot; Incrementally search while typing a /regex
 
+&quot;&quot;&quot; make sure undo history can be saved after switched files
+set hidden
+
 let mapleader=&quot;,&quot;
 </code></pre>
-<h2 id="other"><a href="#other">Other</a></h2>
+<h2 id="other">Other</h2>
 <pre class="vim"><code>&quot;tab mappings
 map &lt;M-1&gt; 1gt
 map &lt;M-2&gt; 2gt
@@ -144,14 +150,17 @@ noremap &lt;C-S&gt; :update&lt;CR&gt;
 vnoremap &lt;C-S&gt; &lt;C-C&gt;:update&lt;CR&gt;
 inoremap &lt;C-S&gt; &lt;C-O&gt;:update&lt;CR&gt;
 &quot;2006-09-13 如下：保存视图
-        au BufWinLeave *.ztx mkview
-        au BufWinEnter *.ztx silent loadview
+au BufWinLeave *.ztx mkview
+au BufWinEnter *.ztx silent loadview
 au BufNewFile,BufRead *.tx1 setf tx1
 au BufNewFile,BufRead *.xaml set filetype=xml
-    au BufRead,BufNewFile *.atg    setfiletype coco
+au BufRead,BufNewFile *.atg    setfiletype coco
+au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 </code></pre>
-<h2 id="enhanced-command"><a href="#enhanced-command">Enhanced Command</a></h2>
-<h3 id="window-maximized-shortcut"><a href="#window-maximized-shortcut">Window Maximized Shortcut</a></h3>
+<h2 id="enhanced-command">Enhanced Command</h2>
+<h3 id="window-maximized-shortcut">Window Maximized Shortcut</h3>
 <p>Use <code>Ctrl+F5</code> to switch between maximized and normal</p>
 <pre class="vim"><code>let g:WindowMaximized = 0
 function! MaxRestoreWindow()
@@ -167,7 +176,7 @@ endif
 endfunction
 map &lt;c-F5&gt; :call MaxRestoreWindow()&lt;CR&gt;
 </code></pre>
-<h3 id="change-font"><a href="#change-font">Change Font</a></h3>
+<h3 id="change-font">Change Font</h3>
 <p>No shortcut, but command <code>ChangeFont</code> to switch between Chinese character available and english font</p>
 <pre class="vim"><code>let g:ChineseFont = 1
 function! ChangeFont()
@@ -181,7 +190,7 @@ endif
 endfunction
 command Changefont :call ChangeFont()
 </code></pre>
-<h3 id="tab-enhancement"><a href="#tab-enhancement">Tab Enhancement</a></h3>
+<h3 id="tab-enhancement">Tab Enhancement</h3>
 <p>Temporary enable tab to fire auto-completion, should consider other tab enhancement script to replace this, use <code>ChangeTabCompletion</code> command to switch</p>
 <pre class="vim"><code>let g:EnableTabCompletion = 1
 function! ChangeTabCompletion()
@@ -198,7 +207,7 @@ command TabCompletion :call ChangeTabCompletion()
 let g:Tlist_Ctags_Cmd = &quot;\&quot;C:/Program Files/Vim/vimfiles/ctags58/ctags.exe\&quot;&quot;
 
 </code></pre>
-<h3 id="build-command"><a href="#build-command">Build command</a></h3>
+<h3 id="build-command">Build command</h3>
 <p>For the habit of using visual studio, I mapped <code>F6</code> to build command</p>
 <pre class="vim"><code>nnoremap &lt;F6&gt; :w&lt;CR&gt;:call RunF6Command()&lt;CR&gt;
 inoremap &lt;F6&gt; &lt;C-O&gt;:w&lt;CR&gt;&lt;C-O&gt;:silent call RunF6Command()&lt;CR&gt;
@@ -226,7 +235,7 @@ else
 endif
 endfunction
 </code></pre>
-<h2 id="split-window"><a href="#split-window">Split window</a></h2>
+<h2 id="split-window">Split window</h2>
 <p><code>Ctrl-jklm</code> to change to that split</p>
 <pre class="vim"><code>map &lt;c-j&gt; &lt;c-w&gt;j
 map &lt;c-k&gt; &lt;c-w&gt;k
@@ -238,7 +247,7 @@ map &lt;c-h&gt; &lt;c-w&gt;h
 
 
 &quot; Commenting blocks of code.
-autocmd FileType c,cpp,java,scala,atg let b:comment_leader = &#39;// &#39;
+autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = &#39;// &#39;
 autocmd FileType sh,ruby,python   let b:comment_leader = &#39;# &#39;
 autocmd FileType conf,fstab,coffee let b:comment_leader = &#39;# &#39;
 autocmd FileType tex              let b:comment_leader = &#39;% &#39;
@@ -276,8 +285,14 @@ imap ,] &lt;Esc&gt;&gt;&gt;$a
 
 map ,r :set wrap!&lt;cr&gt; 
 map ,s :set spell!&lt;cr&gt; 
+
+&quot; use `vimgrep` to search current word
+:nmap g* :vimgrep /&lt;C-R&gt;&lt;C-W&gt;/ **/*&lt;CR&gt;
+:nmap g# :vimgrep /&lt;C-R&gt;&lt;C-W&gt;/ *&lt;CR&gt;
+:nmap gn :cn&lt;CR&gt;
+:nmap gp :cp&lt;CR&gt;
 </code></pre>
-<h2 id="other-1"><a href="#other-1">Other</a></h2>
+<h2 id="other-1">Other</h2>
 <pre class="vim"><code>let g:fsharp_interactive_bin = &#39;C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe&#39;
 
 let g:html_number_lines=0
@@ -290,12 +305,6 @@ au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
 
 map &lt;up&gt; gk
 map &lt;down&gt; gj
-&quot; map &lt;left&gt; gh
-&quot; map &lt;right&gt; gl
-
-&quot; &lt;Ctrl-l&gt; redraws the screen and removes any search highlighting.
-&quot; nnoremap &lt;silent&gt; &lt;C-l&gt; :nohl&lt;CR&gt;&lt;C-l&gt;
-
 
 &quot; for coffee script syntax
 let coffee_compile_vert = 1
@@ -307,34 +316,64 @@ au BufNewFile,BufRead *.jshtml setf html
 
 au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.proto setf proto
-
-xnoremap p pgvy
+</code></pre>
+<p>map p to multiple time paste without change current clipboard item</p>
+<pre class="vim"><code>xnoremap p pgvy
 
 let g:plantuml_executable_script = &quot;plantuml.jar&quot;
-
-&quot; au BufNewFile,BufRead *.md nnoremap &lt;F5&gt; :w&lt;CR&gt; :silent PandocHtml&lt;CR&gt;
-&quot; au BufNewFile,BufRead *.md let g:F6Command = &#39;PandocHtml&#39;
 </code></pre>
-<h2 id="other-2"><a href="#other-2">Other</a></h2>
+<h2 id="other-2">Other</h2>
 <pre class="vim"><code>&quot; nnoremap &lt;F5&gt; :w&lt;CR&gt; :silent make&lt;CR&gt;
 &quot; inoremap &lt;F5&gt; &lt;Esc&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
 &quot; vnoremap &lt;F5&gt; :&lt;C-U&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
 </code></pre>
-<p>map <code>F11</code> to open current file in explorer</p>
-<pre class="vim"><code>nmap &lt;F11&gt; :silent !start explorer /select,%:p&lt;CR&gt;
+<p>map <code>F11</code> to open shell in current directory</p>
+<pre class="vim"><code>nmap &lt;F11&gt; :silent !start cmd&lt;CR&gt;
 imap &lt;F11&gt; &lt;Esc&gt;&lt;F11&gt;
-
+</code></pre>
+<p>map <code>Alt-F11</code> to open git bash shell in current directory</p>
+<pre class="vim"><code>nmap &lt;A-F11&gt; :silent !start sh --login&lt;CR&gt;
+imap &lt;A-F11&gt; &lt;Esc&gt;&lt;A-F11&gt;
+</code></pre>
+<p>map <code>Shift-F11</code> to open current file in explorer</p>
+<pre class="vim"><code>nmap &lt;S-F11&gt; :silent !start explorer /select,%:p&lt;CR&gt;
+imap &lt;S-F11&gt; &lt;Esc&gt;&lt;S-F11&gt;
 </code></pre>
 <p>change the current directory automatically</p>
 <pre class="vim"><code>autocmd BufEnter * silent! lcd %:p:h
 </code></pre>
 <p>change the current directory by command <code>&lt;leader&gt;cd</code></p>
 <pre class="vim"><code>nnoremap ,cd :cd %:p:h&lt;CR&gt;:pwd&lt;CR&gt;
+</code></pre>
+<h2 id="custom-fold">Custom fold</h2>
+<p>download from <a href="http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/">http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/</a></p>
+<pre class="vim"><code>fu! CustomFoldText()
+    &quot; get first non-blank line
+    let fs = v:foldstart
+    while getline(fs) =~ &#39;^\s*$&#39; | let fs = nextnonblank(fs + 1)
+    endwhile
+    if fs &gt; v:foldend
+        let line = getline(v:foldstart)
+    else
+        let line = substitute(getline(fs), &#39;\t&#39;, repeat(&#39; &#39;, &amp;tabstop), &#39;g&#39;)
+    endif</code></pre>
+<pre class="vim"><code>    let w = winwidth(0) - &amp;foldcolumn - (&amp;number ? 8 : 0)
+    let foldSize = 1 + v:foldend - v:foldstart
+    let foldSizeStr = &quot; &quot; . foldSize . &quot; lines &quot;
+    let foldLevelStr = repeat(&quot;+--&quot;, v:foldlevel)
+    let lineCount = line(&quot;$&quot;)
+    let foldPercentage = printf(&quot;[%.1f&quot;, (foldSize*1.0)/lineCount*100) . &quot;%] &quot;
+    let expansionString = repeat(&quot;.&quot;, w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+
+&quot; set custom fold text to system
+set foldtext=CustomFoldText()
 
 
 </code></pre>
-<h2 id="plugin-settings"><a href="#plugin-settings">Plugin Settings</a></h2>
-<h3 id="vimwiki-configuration"><a href="#vimwiki-configuration">[VimWiki] Configuration</a></h3>
+<h2 id="plugin-settings">Plugin Settings</h2>
+<h3 id="vimwiki-configuration">[VimWiki] Configuration</h3>
 <p>使用鼠标映射</p>
 <pre class="vim"><code>let g:vimwiki_use_mouse = 1</code></pre>
 <p>不要将驼峰式词组作为 Wiki 词条</p>
@@ -360,15 +399,15 @@ let g:vimwiki_hl_headers = 1
 <p>map <code>Alt+Shift+Q</code> to trigger todo item switch between checked or not</p>
 <pre class="vim"><code>nmap &lt;A-Q&gt; :VimwikiToggleListItem&lt;CR&gt;
 </code></pre>
-<h3 id="nerdtree"><a href="#nerdtree"><a href="https://github.com/scrooloose/nerdtree">NerdTree</a></a></h3>
+<h3 id="nerdtree"><a href="https://github.com/scrooloose/nerdtree">NerdTree</a></h3>
 <p>Map `<leader>n&quot; to open <a href="https://github.com/scrooloose/nerdtree">NerdTree</a></p>
 <pre class="vim"><code>map &lt;leader&gt;n :NERDTreeToggle&lt;CR&gt;
 </code></pre>
-<h3 id="powerline"><a href="#powerline">[Powerline]</a></h3>
+<h3 id="powerline">[Powerline]</h3>
 <pre class="vim"><code>let g:Powerline_symbols = &#39;fancy&#39;
 let maplocalleader = &quot;,&quot;
 </code></pre>
-<h2 id="host-specifed-config"><a href="#host-specifed-config">Host specifed config</a></h2>
+<h2 id="host-specifed-config">Host specifed config</h2>
 <p>load specific config by hostname</p>
 <pre class="vim"><code>let hostfile = $HOME . &#39;\vimfiles\vimrc-&#39; . substitute(hostname(), &quot;\\..*&quot;, &quot;&quot;, &quot;&quot;)
 if filereadable(hostfile)
