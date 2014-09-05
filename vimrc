@@ -124,7 +124,8 @@
     au BufNewFile,BufRead *.xaml set filetype=xml
     au BufRead,BufNewFile *.atg    setfiletype coco
     au BufNewFile,BufRead *.ejs set filetype=html
-    au BufNewFile,BufRead *.js set shiftwidth=2
+    au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+    au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 " ## Enhanced Command
 " ### Window Maximized Shortcut
@@ -284,12 +285,6 @@
 
     map <up> gk
     map <down> gj
-    " map <left> gh
-    " map <right> gl
-
-    " <Ctrl-l> redraws the screen and removes any search highlighting.
-    " nnoremap <silent> <C-l> :nohl<CR><C-l>
-
 
     " for coffee script syntax
     let coffee_compile_vert = 1
@@ -302,12 +297,10 @@
     au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
     au BufNewFile,BufReadPost *.proto setf proto
 
+" map p to multiple time paste without change current clipboard item
     xnoremap p pgvy
 
     let g:plantuml_executable_script = "plantuml.jar"
-
-    " au BufNewFile,BufRead *.md nnoremap <F5> :w<CR> :silent PandocHtml<CR>
-    " au BufNewFile,BufRead *.md let g:F6Command = 'PandocHtml'
 
 " ## Other
 
