@@ -271,6 +271,9 @@
     :nmap gn :cn<CR>
     :nmap gp :cp<CR>
 
+    " replace words under cursor
+    :nnoremap gh :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 " ## Other
 
     let g:fsharp_interactive_bin = 'C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe'
