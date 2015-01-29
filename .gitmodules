@@ -55,3 +55,9 @@
 [submodule "bundle/xml.vim"]
 	path = bundle/xml.vim
 	url = https://github.com/othree/xml.vim.git
+[submodule "bundle/detect-indentation"]
+	path = bundle/detect-indentation
+	url = https://github.com/requalix/detect-indentation.git
+[submodule "bundle/indentLine"]
+	path = bundle/indentLine
+	url = https://github.com/Yggdroot/indentLine.git
