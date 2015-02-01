@@ -36,7 +36,7 @@
 	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
-	url = git://github.com/vim-scripts/vimwiki.git
+	url = https://github.com/vim-scripts/vimwiki.git
 [submodule "bundle/tcomment_vim"]
 	path = bundle/tcomment_vim
 	url = https://github.com/tomtom/tcomment_vim.git
@@ -64,3 +64,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/vim-markdown-folding"]
+	path = bundle/vim-markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git

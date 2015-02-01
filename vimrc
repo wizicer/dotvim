@@ -38,6 +38,9 @@
     set number
     set dir=%temp%
     filetype plugin on
+    if has("autocmd")
+        filetype plugin indent on
+    endif
     syntax on
     set dy=lastline "显示最多行，不用@@
     "以上是缩进相关
