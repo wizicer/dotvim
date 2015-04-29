@@ -127,7 +127,7 @@
     au BufNewFile,BufRead *.xaml set filetype=xml
     au BufRead,BufNewFile *.atg    setfiletype coco
     au BufNewFile,BufRead *.ejs set filetype=html
-    au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+    au BufNewFile,BufRead *.cson set filetype=coffee
     au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 " ## Enhanced Command
@@ -295,13 +295,11 @@
 
     " for coffee script syntax
     let coffee_compile_vert = 1
-    au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
     au BufNewFile,BufRead *.jshtml setf html
     " au BufNewFile,BufRead *.jshtml noremap <silent> ,cc vat:s/^\(.*\)$/<!--\1-->/<CR>:nohlsearch<CR>
     " au BufNewFile,BufRead *.jshtml noremap <silent> ,cu vat:s/-->//<CR>:nohlsearch<CR>
 
-    au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
     au BufNewFile,BufReadPost *.proto setf proto
 
 " map p to multiple time paste without change current clipboard item
