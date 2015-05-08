@@ -41,6 +41,9 @@ set ts=4
 set number
 set dir=%temp%
 filetype plugin on
+if has("autocmd")
+    filetype plugin indent on
+endif
 syntax on
 set dy=lastline "显示最多行，不用@@
 "以上是缩进相关
@@ -131,7 +134,7 @@ au BufNewFile,BufRead *.tx1 setf tx1
 au BufNewFile,BufRead *.xaml set filetype=xml
 au BufRead,BufNewFile *.atg    setfiletype coco
 au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+au BufNewFile,BufRead *.cson set filetype=coffee
 au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 ```
@@ -251,6 +254,7 @@ autocmd FileType conf,fstab,coffee let b:comment_leader = '# '
 autocmd FileType tex              let b:comment_leader = '% '
 autocmd FileType mail             let b:comment_leader = '> '
 autocmd FileType vim              let b:comment_leader = '" '
+autocmd FileType jade             let b:comment_leader = '//- '
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
@@ -290,6 +294,9 @@ map ,s :set spell!<cr>
 :nmap gn :cn<CR>
 :nmap gp :cp<CR>
 
+" replace words under cursor
+:nnoremap gh :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 ```
 ## Other
 
@@ -309,13 +316,11 @@ map <down> gj
 
 " for coffee script syntax
 let coffee_compile_vert = 1
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 au BufNewFile,BufRead *.jshtml setf html
 " au BufNewFile,BufRead *.jshtml noremap <silent> ,cc vat:s/^\(.*\)$/<!--\1-->/<CR>:nohlsearch<CR>
 " au BufNewFile,BufRead *.jshtml noremap <silent> ,cu vat:s/-->//<CR>:nohlsearch<CR>
 
-au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.proto setf proto
 
 ```

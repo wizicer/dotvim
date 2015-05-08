@@ -72,6 +72,9 @@ set ts=4
 set number
 set dir=%temp%
 filetype plugin on
+if has(&quot;autocmd&quot;)
+    filetype plugin indent on
+endif
 syntax on
 set dy=lastline &quot;显示最多行，不用@@
 &quot;以上是缩进相关
@@ -156,7 +159,7 @@ au BufNewFile,BufRead *.tx1 setf tx1
 au BufNewFile,BufRead *.xaml set filetype=xml
 au BufRead,BufNewFile *.atg    setfiletype coco
 au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.js,*.jade,*.coffee set shiftwidth=2
+au BufNewFile,BufRead *.cson set filetype=coffee
 au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 </code></pre>
 <h2 id="enhanced-command">Enhanced Command</h2>
@@ -253,6 +256,7 @@ autocmd FileType conf,fstab,coffee let b:comment_leader = &#39;# &#39;
 autocmd FileType tex              let b:comment_leader = &#39;% &#39;
 autocmd FileType mail             let b:comment_leader = &#39;&gt; &#39;
 autocmd FileType vim              let b:comment_leader = &#39;&quot; &#39;
+autocmd FileType jade             let b:comment_leader = &#39;//- &#39;
 noremap &lt;silent&gt; ,cc :&lt;C-B&gt;silent &lt;C-E&gt;s/^/&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
 noremap &lt;silent&gt; ,cu :&lt;C-B&gt;silent &lt;C-E&gt;s/^\V&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;//e&lt;CR&gt;:nohlsearch&lt;CR&gt;
 
@@ -291,6 +295,9 @@ map ,s :set spell!&lt;cr&gt;
 :nmap g# :vimgrep /&lt;C-R&gt;&lt;C-W&gt;/ *&lt;CR&gt;
 :nmap gn :cn&lt;CR&gt;
 :nmap gp :cp&lt;CR&gt;
+
+&quot; replace words under cursor
+:nnoremap gh :%s/\&lt;&lt;C-r&gt;&lt;C-w&gt;\&gt;//g&lt;Left&gt;&lt;Left&gt;
 </code></pre>
 <h2 id="other-1">Other</h2>
 <pre class="vim"><code>let g:fsharp_interactive_bin = &#39;C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe&#39;
@@ -308,13 +315,11 @@ map &lt;down&gt; gj
 
 &quot; for coffee script syntax
 let coffee_compile_vert = 1
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 au BufNewFile,BufRead *.jshtml setf html
 &quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cc vat:s/^\(.*\)$/&lt;!--\1--&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
 &quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cu vat:s/--&gt;//&lt;CR&gt;:nohlsearch&lt;CR&gt;
 
-au BufNewFile,BufReadPost *.proto setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.proto setf proto
 </code></pre>
 <p>map p to multiple time paste without change current clipboard item</p>
@@ -346,7 +351,7 @@ imap &lt;S-F11&gt; &lt;Esc&gt;&lt;S-F11&gt;
 <pre class="vim"><code>nnoremap ,cd :cd %:p:h&lt;CR&gt;:pwd&lt;CR&gt;
 </code></pre>
 <h2 id="custom-fold">Custom fold</h2>
-<p>download from <a href="http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/">http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/</a></p>
+<p>download from <a href="http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/" class="uri">http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/</a></p>
 <pre class="vim"><code>fu! CustomFoldText()
     &quot; get first non-blank line
     let fs = v:foldstart
