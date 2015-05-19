@@ -415,6 +415,17 @@
     let g:Powerline_symbols = 'fancy'
     let maplocalleader = ","
 
+" ### [Tabular]
+
+    if exists(":Tabularize")
+      nmap <leader>t= :Tabularize /=<CR>
+      vmap <leader>t= :Tabularize /=<CR>
+      nmap <leader>tf :Tabularize /<bar><CR>
+      vmap <leader>tf :Tabularize /<bar><CR>
+      nmap <leader>t: :Tabularize /:\zs<CR>
+      vmap <leader>t: :Tabularize /:\zs<CR>
+    endif
+
 " ## Host specifed config
 " load specific config by hostname
 
