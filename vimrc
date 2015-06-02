@@ -236,8 +236,8 @@
     autocmd FileType mail             let b:comment_leader = '> '
     autocmd FileType vim              let b:comment_leader = '" '
     autocmd FileType jade             let b:comment_leader = '//- '
-    noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-    noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+    noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+    noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
     " Mappings to move line
 
@@ -249,8 +249,8 @@
     vnoremap <A-k> :m '<-2<CR>gv=gv
 
     " editing/reloading vimrc
-    map ,v :sp $MYVIMRC<CR><C-W>_
-    map <silent> ,V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
+    map <leader>v :sp $MYVIMRC<CR><C-W>_
+    map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
     "Map escape key to jj -- much faster
     imap jj <esc>
@@ -263,11 +263,11 @@
     " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
     imap <C-Tab> <Esc>>>$a
 
-    imap ,[ <Esc><<a
-    imap ,] <Esc>>>$a
+    imap <leader>[ <Esc><<a
+    imap <leader>] <Esc>>>$a
 
-    map ,r :set wrap!<cr> 
-    map ,s :set spell!<cr> 
+    map <leader>rr :set wrap!<cr> 
+    map <leader>ss :set spell!<cr> 
 
     " use `vimgrep` to search current word
     :nmap g* :vimgrep /<C-R><C-W>/ **/*<CR>
@@ -334,7 +334,7 @@
 
 " change the current directory by command `<leader>cd`
 
-    nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+    nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " ## Custom fold
 " download from <http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/>
@@ -417,14 +417,12 @@
 
 " ### [Tabular]
 
-    if exists(":Tabularize")
-      nmap <leader>t= :Tabularize /=<CR>
-      vmap <leader>t= :Tabularize /=<CR>
-      nmap <leader>tf :Tabularize /<bar><CR>
-      vmap <leader>tf :Tabularize /<bar><CR>
-      nmap <leader>t: :Tabularize /:\zs<CR>
-      vmap <leader>t: :Tabularize /:\zs<CR>
-    endif
+    nmap <leader>t= :Tabularize /=<CR>
+    vmap <leader>t= :Tabularize /=<CR>
+    nmap <leader>tf :Tabularize /<bar><CR>
+    vmap <leader>tf :Tabularize /<bar><CR>
+    nmap <leader>t: :Tabularize /:\zs<CR>
+    vmap <leader>t: :Tabularize /:\zs<CR>
 
 " ## Host specifed config
 " load specific config by hostname
