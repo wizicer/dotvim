@@ -427,9 +427,9 @@
 " ## Host specifed config
 " load specific config by hostname
 
-    let hostfile = $HOME . '\vimfiles\vimrc-' . substitute(hostname(), "\\..*", "", "")
+    let hostfile = $HOME . '/vimfiles/vimrc-' . substitute(hostname(), "\\..*", "", "")
     if filereadable(hostfile)
-    exe 'source ' . hostfile
+        exe 'source ' . hostfile
     endif
 
 " [pathogen]: https://github.com/tpope/vim-pathogen
