@@ -415,6 +415,22 @@
     let g:Powerline_symbols = 'fancy'
     let maplocalleader = ","
 
+" ### [altr]
+
+	call altr#define('%.css',
+	\                '%.less',
+	\                '%.styl',
+	\                '%.scss',
+	\                '%.coffee',
+	\                '%.js',
+	\                '%.ts',
+	\                '%.json',
+	\                '%.jade',
+	\                '%.htm',
+	\                '%.html')
+    nmap <F7> <Plug>(altr-forward)
+    nmap <S-F7> <Plug>(altr-back)
+
 " ### [Tabular]
 
     nmap <leader>t= :Tabularize /=<CR>
@@ -434,3 +450,4 @@
 
 " [pathogen]: https://github.com/tpope/vim-pathogen
 " [NerdTree]: https://github.com/scrooloose/nerdtree 
+" [altr]: https://github.com/kana/vim-altr
