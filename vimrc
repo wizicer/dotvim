@@ -263,8 +263,8 @@
     " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
     imap <C-Tab> <Esc>>>$a
 
-    imap <leader>[ <Esc><<a
-    imap <leader>] <Esc>>>$a
+    " imap <leader>[ <Esc><<a
+    " imap <leader>] <Esc>>>$a
 
     map <leader>rr :set wrap!<cr> 
     map <leader>ss :set spell!<cr> 
