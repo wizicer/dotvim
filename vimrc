@@ -23,7 +23,9 @@
 
     "set langmenu=en_US
     "let $LANG = 'en_US'
-    source $VIMRUNTIME/menu.vim
+    if has("gui_running")
+        source $VIMRUNTIME/menu.vim
+    endif
     " source $VIMRUNTIME/delmenu.vim
     set encoding=utf-8
     "set langmenu=zh_CN.UTF-8
@@ -45,7 +47,9 @@
     set dy=lastline "显示最多行，不用@@
     "以上是缩进相关
     set backspace=indent,eol,start
-    colo desert " other my fav color is evening/slate
+    if has("gui_running")
+        colo desert " other my fav color is evening/slate
+    endif
     sy on
     set go=r " no menu and toolbar
     set nobackup
