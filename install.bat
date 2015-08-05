@@ -26,5 +26,5 @@ goto link_file
 
 :update_submodule
     cd vimfiles
-    git submodule update --init
+    git submodule update --init --recursive
 :end

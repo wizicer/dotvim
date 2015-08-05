@@ -230,18 +230,6 @@
 
     imap <C-W> <C-O><C-W>
 
-
-    " Commenting blocks of code.
-    autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = '// '
-    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-    autocmd FileType conf,fstab,coffee let b:comment_leader = '# '
-    autocmd FileType tex              let b:comment_leader = '% '
-    autocmd FileType mail             let b:comment_leader = '> '
-    autocmd FileType vim              let b:comment_leader = '" '
-    autocmd FileType jade             let b:comment_leader = '//- '
-    noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-    noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
     " Mappings to move line
 
     nnoremap <A-j> :m .+1<CR>==
@@ -258,16 +246,9 @@
     "Map escape key to jj -- much faster
     imap jj <esc>
 
-    " Pressing return clears highlighted search
-    " nmap <CR> :nohlsearch<CR>
-
-
     inoremap <S-TAB> <Esc><<i
     " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
     imap <C-Tab> <Esc>>>$a
-
-    " imap <leader>[ <Esc><<a
-    " imap <leader>] <Esc>>>$a
 
     map <leader>rr :set wrap!<cr> 
     map <leader>ss :set spell!<cr> 
@@ -287,11 +268,11 @@
 
     let g:html_number_lines=0
 
-    au BufEnter *.wiki set wrap
-    au BufLeave *.wiki set nowrap
-    au BufEnter *.wiki set spell
-    au BufLeave *.wiki set nospell
-    au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
+    au FileType vimwiki setl wrap
+    au FileType vimwiki setl spell
+    au FileType vimwiki setl shiftwidth=2 expandtab
+
+    au FileType markdown setl textwidth=100
 
     map <up> gk
     map <down> gj
@@ -300,9 +281,6 @@
     let coffee_compile_vert = 1
 
     au BufNewFile,BufRead *.jshtml setf html
-    " au BufNewFile,BufRead *.jshtml noremap <silent> ,cc vat:s/^\(.*\)$/<!--\1-->/<CR>:nohlsearch<CR>
-    " au BufNewFile,BufRead *.jshtml noremap <silent> ,cu vat:s/-->//<CR>:nohlsearch<CR>
-
     au BufNewFile,BufReadPost *.proto setf proto
 
 " map p to multiple time paste without change current clipboard item
@@ -443,6 +421,20 @@
     nmap <leader>t: :Tabularize /:\zs<CR>
     vmap <leader>t: :Tabularize /:\zs<CR>
 
+" ### [vim-jsbeautify]
+
+  autocmd FileType javascript,typescript vnoremap <buffer> gd :call RangeJsBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> gd :call RangeHtmlBeautify()<cr>
+  autocmd FileType css,less vnoremap <buffer> gd :call RangeCSSBeautify()<cr>
+
+  autocmd FileType javascript,typescript noremap <buffer> gd :call JsBeautify()<cr>
+  autocmd FileType html noremap <buffer> gd :call HtmlBeautify()<cr>
+  autocmd FileType css,less noremap <buffer> gd :call CSSBeautify()<cr>
+
+" ### [VOoM]
+
+  autocmd FileType markdown noremap <buffer> <leader>vm :VoomToggle markdown<cr>
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -454,3 +446,5 @@
 " [pathogen]: https://github.com/tpope/vim-pathogen
 " [NerdTree]: https://github.com/scrooloose/nerdtree 
 " [altr]: https://github.com/kana/vim-altr
+" [vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
+" [VOoM]: https://github.com/vim-voom/VOoM
