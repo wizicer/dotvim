@@ -25,6 +25,8 @@
     "let $LANG = 'en_US'
     if has("gui_running")
         source $VIMRUNTIME/menu.vim
+        set lines=999 columns=999
+        colo desert " other my fav color is evening/slate
     endif
     " source $VIMRUNTIME/delmenu.vim
     set encoding=utf-8
@@ -47,9 +49,6 @@
     set dy=lastline "显示最多行，不用@@
     "以上是缩进相关
     set backspace=indent,eol,start
-    if has("gui_running")
-        colo desert " other my fav color is evening/slate
-    endif
     sy on
     set go=r " no menu and toolbar
     set nobackup
@@ -90,6 +89,12 @@
 
     """ make sure undo history can be saved after switched files
     set hidden
+
+    """ wild mode for easy to use command
+    set wildmenu
+    set wildmode=full
+    set wildcharm=<C-Z>
+    map <F10> :emenu <C-Z>
 
     let mapleader=","
 
