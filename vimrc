@@ -26,77 +26,66 @@
     if has("gui_running")
         source $VIMRUNTIME/menu.vim
         set lines=999 columns=999
-        colo desert " other my fav color is evening/slate
+        colo desert " other fav color is evening/slate
     endif
     " source $VIMRUNTIME/delmenu.vim
     set encoding=utf-8
     "set langmenu=zh_CN.UTF-8
     "language message zh_CN.UTF-8
     set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-    set nocompatible
-    set magic
-    set ru "标尺信息
-    set ai
-    set sw=4
-    set ts=4
-    set number
     set dir=%temp%
     filetype plugin on
     if has("autocmd")
         filetype plugin indent on
     endif
-    syntax on
-    set dy=lastline "显示最多行，不用@@
-    "以上是缩进相关
+
+    """ Moving Around/Editing
+    set cursorline                  " have a line indicate the cursor location
+    set ruler                       " show the cursor position all the time
+    set nostartofline               " Avoid moving cursor to BOL when jumping around
+    set virtualedit=block           " Let cursor move past the last char in <C-v> mode
+    set scrolloff=3                 " Keep 3 context lines above and below the cursor
+    set backspace=2                 " Allow backspacing over autoindent, EOL, and BOL
+    set showmatch                   " Briefly jump to a paren once it's balanced
+    set nowrap                      " don't wrap text
+    set linebreak                   " don't wrap textin the middle of a word
+    set autoindent                  " always set autoindenting on
+    set tabstop=2                   " <tab> inserts 4 spaces 
+    set shiftwidth=4                " but an indent level is 2 spaces wide.
+    set softtabstop=4               " <BS> over an autoindent deletes both spaces.
+    set expandtab                   " Use spaces, not tabs, for autoindent/tab key.
+    set shiftround                  " rounds indent to a multiple of shiftwidth
+    set matchpairs+=<:>             " show matching <> (html mainly) as well
+    set foldmethod=indent           " allow us to fold on indents
+    set foldlevel=5                 " don't fold by default
+                                    
+    """ Searching and Patterns      
+    set ignorecase                  " Default to using case insensitive searches,
+    set smartcase                   " unless uppercase letters are used in the regex.
+    set smarttab                    " Handle tabs more intelligently 
+    set hlsearch                    " Highlight searches by default.
+    set incsearch                   " Incrementally search while typing a /regex
+                                    
+                                    
+    """ UI                          
+    set nocompatible
+    set magic
+    set number
+    set wildmenu                    " Enable smart command line completion on <Tab>
+    set wildmode=full               " Make repeated presses cycle between all matching choices
+    set wildcharm=<C-Z>             " Make Ctrl-Z in a mapping act like pressing <Tab> interactively on the command line
+    map <F10> :emenu <C-Z>          " Make a binding that automatically invokes :emenu completion
+    syntax on                       
+    set display=lastline            " 显示最多行，不用@@
     set backspace=indent,eol,start
-    sy on
-    set go=r " no menu and toolbar
-    set nobackup
-    set hlsearch
-    set showmatch
-    set ignorecase
-    set tabstop=2
-    set expandtab
+    set guioptions=r                " no menu and toolbar, only right hand scrollbar
     set guifont=Consolas:h10:cANSI
     set laststatus=2
 
-    """ Moving Around/Editing
-    set cursorline              " have a line indicate the cursor location
-    set ruler                   " show the cursor position all the time
-    set nostartofline           " Avoid moving cursor to BOL when jumping around
-    set virtualedit=block       " Let cursor move past the last char in <C-v> mode
-    set scrolloff=3             " Keep 3 context lines above and below the cursor
-    set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
-    set showmatch               " Briefly jump to a paren once it's balanced
-    set nowrap                  " don't wrap text
-    set linebreak               " don't wrap textin the middle of a word
-    set autoindent              " always set autoindenting on
-    set tabstop=4               " <tab> inserts 4 spaces 
-    set shiftwidth=4            " but an indent level is 2 spaces wide.
-    set softtabstop=4           " <BS> over an autoindent deletes both spaces.
-    set expandtab               " Use spaces, not tabs, for autoindent/tab key.
-    set shiftround              " rounds indent to a multiple of shiftwidth
-    set matchpairs+=<:>         " show matching <> (html mainly) as well
-    set foldmethod=indent       " allow us to fold on indents
-    set foldlevel=5             " don't fold by default
-
-    """ Searching and Patterns
-    set ignorecase              " Default to using case insensitive searches,
-    set smartcase               " unless uppercase letters are used in the regex.
-    set smarttab                " Handle tabs more intelligently 
-    set hlsearch                " Highlight searches by default.
-    set incsearch               " Incrementally search while typing a /regex
-
-    """ make sure undo history can be saved after switched files
-    set hidden
-
-    """ wild mode for easy to use command
-    set wildmenu
-    set wildmode=full
-    set wildcharm=<C-Z>
-    map <F10> :emenu <C-Z>
-
+    """ Miscellaneous
+    set nobackup
     let mapleader=","
+    set hidden                      " make sure undo history can be saved after switched files
 
 " ## Other
 
