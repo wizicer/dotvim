@@ -14,6 +14,14 @@
 " 3. `Optional` generate html from markdown via pandoc
 " 
 " # Configurations
+" ## Initialize shell for windows
+    if has("win32") || has("win64") || has("win16")
+    " On windows, if called from cygwin or msys(git bash), the shell needs to be changed
+    " to cmd.exe to make sure some plugin is working
+        if &shell=~#'bash$'
+            set shell=$COMSPEC " sets shell to correct path for cmd.exe
+        endif
+    endif
 " ## Initialize [pathogen]
     call pathogen#infect()
     call pathogen#helptags()
