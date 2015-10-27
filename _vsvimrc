@@ -14,6 +14,9 @@
 " 3. `Optional` generate html from markdown via pandoc
 " 
 " # Configurations
+"
+" following keys should be mapping in VS options: `A` `B` `D` `F` `N` `O` `P` `Q` `R` `U` `V` `X`
+"
 " ## Basic Initialization
 
     "set langmenu=en_US
