@@ -33,7 +33,6 @@
     "let $LANG = 'en_US'
     if has("gui_running")
         source $VIMRUNTIME/menu.vim
-        set lines=999 columns=999
         colo desert " other fav color is evening/slate
     endif
     " source $VIMRUNTIME/delmenu.vim
@@ -152,6 +151,11 @@
     endif
     endfunction
     map <c-F5> :call MaxRestoreWindow()<CR>
+
+    function! MaximizeLineColumn()
+        set lines=999 columns=999
+    endfunction
+    command MaximizeLineColumn :call MaximizeLineColumn()
 
 " ### Change Font
 " No shortcut, but command `ChangeFont` to switch between Chinese character
@@ -296,10 +300,10 @@
     " inoremap <F5> <Esc>:w<CR>:silent make<CR>
     " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
-" map `F11` to open shell in current directory 
+" map `Ctrl-F11` to open shell in current directory 
 
-    nmap <F11> :silent !start cmd<CR>
-    imap <F11> <Esc><F11>
+    nmap <C-F11> :silent !start cmd<CR>
+    imap <C-F11> <Esc><C-F11>
 
 " map `Alt-F11` to open git bash shell in current directory
 
@@ -444,6 +448,11 @@
     if filereadable(hostfile)
         exe 'source ' . hostfile
     endif
+
+
+  let g:vimtex_view_general_viewer = 'SumatraPDF'
+  let g:vimtex_view_general_options = '-forward-search @tex @line @pdf'
+  let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
 " [pathogen]: https://github.com/tpope/vim-pathogen
 " [NerdTree]: https://github.com/scrooloose/nerdtree 
