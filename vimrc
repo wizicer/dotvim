@@ -29,6 +29,11 @@
 
 " ## Basic Initialization
 
+    " Maximized window when in diff mode
+    if &diff
+        set lines=999 columns=999
+    endif
+
     "set langmenu=en_US
     "let $LANG = 'en_US'
     if has("gui_running")
