@@ -45,7 +45,7 @@
     "set langmenu=zh_CN.UTF-8
     "language message zh_CN.UTF-8
     set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-    set dir=%temp%
+    set directory=$TEMP,/tmp
     filetype plugin on
     if has("autocmd")
         filetype plugin indent on
@@ -91,7 +91,11 @@
     set display=lastline            " 显示最多行，不用@@
     set backspace=indent,eol,start
     set guioptions=r                " no menu and toolbar, only right hand scrollbar
-    set guifont=Consolas:h10:cANSI
+    if has("gui_gtk2")
+        set guifont=Droid\ Sans\ Mono
+    else
+        set guifont=Consolas:h10:cANSI
+    end
     set laststatus=2
 
     """ Miscellaneous
