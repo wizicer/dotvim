@@ -71,11 +71,6 @@
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
 	branch = master
-[submodule "bundle/xml.vim"]
-	path = bundle/xml.vim
-	url = https://github.com/othree/xml.vim.git
-	branch = master
-	ignore = untracked
 [submodule "bundle/detect-indentation"]
 	path = bundle/detect-indentation
 	url = https://github.com/requalix/detect-indentation.git
