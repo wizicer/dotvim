@@ -328,6 +328,10 @@
 
     autocmd BufEnter * silent! lcd %:p:h
 
+" make `gf` with file extension based on current FileType
+
+    autocmd FileType markdown setlocal suffixesadd=.md,.markdown
+
 " change the current directory by command `<leader>cd`
 
     nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
