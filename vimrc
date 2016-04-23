@@ -14,13 +14,15 @@
 " 3. `Optional` generate html from markdown via pandoc
 " 
 " # Configurations
-" ## Initialize shell for windows
+" ## Initialize specialty for windows
     if has("win32") || has("win64") || has("win16")
     " On windows, if called from cygwin or msys(git bash), the shell needs to be changed
     " to cmd.exe to make sure some plugin is working
         if &shell=~#'bash$'
             set shell=$COMSPEC " sets shell to correct path for cmd.exe
         endif
+    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization across (heterogeneous) systems easier.
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
     endif
 " ## Initialize [pathogen]
     call pathogen#infect()
@@ -457,7 +459,7 @@
 " ## Host specifed config
 " load specific config by hostname
 
-    let hostfile = $HOME . '/vimfiles/vimrc-' . substitute(hostname(), "\\..*", "", "")
+    let hostfile = $HOME . '/.vim/vimrc-' . substitute(hostname(), "\\..*", "", "")
     if filereadable(hostfile)
         exe 'source ' . hostfile
     endif
