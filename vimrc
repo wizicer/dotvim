@@ -42,6 +42,18 @@
         source $VIMRUNTIME/menu.vim
         colo desert " other fav color is evening/slate
     endif
+    if !empty($CONEMUBUILD) && !has("gui_running")
+        " refer to http://conemu.github.io/en/VimXterm.html
+        " also refer to http://stackoverflow.com/a/27673246/2558077 for <BS> fix
+        set term=pcansi
+        set t_Co=256
+        let &t_AB="\e[48;5;%dm"
+        let &t_AF="\e[38;5;%dm"
+        colorscheme zenburn
+
+        let g:indentLine_char = '|'
+        let g:indentLine_color_term = 239
+    endif
     " source $VIMRUNTIME/delmenu.vim
     set encoding=utf-8
     "set langmenu=zh_CN.UTF-8
