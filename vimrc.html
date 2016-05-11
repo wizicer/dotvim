@@ -13,6 +13,7 @@
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#configurations">Configurations</a><ul>
+<li><a href="#initialize-specialty-for-windows">Initialize specialty for windows</a></li>
 <li><a href="#initialize-pathogen">Initialize <a href="https://github.com/tpope/vim-pathogen">pathogen</a></a></li>
 <li><a href="#basic-initialization">Basic Initialization</a></li>
 <li><a href="#other">Other</a></li>
@@ -30,6 +31,10 @@
 <li><a href="#vimwiki-configuration">[VimWiki] Configuration</a></li>
 <li><a href="#nerdtree"><a href="https://github.com/scrooloose/nerdtree">NerdTree</a></a></li>
 <li><a href="#powerline">[Powerline]</a></li>
+<li><a href="#altr"><a href="https://github.com/kana/vim-altr">altr</a></a></li>
+<li><a href="#tabular">[Tabular]</a></li>
+<li><a href="#vim-jsbeautify"><a href="https://github.com/maksimr/vim-jsbeautify">vim-jsbeautify</a></a></li>
+<li><a href="#voom"><a href="https://github.com/vim-voom/VOoM">VOoM</a></a></li>
 </ul></li>
 <li><a href="#host-specifed-config">Host specifed config</a></li>
 </ul></li>
@@ -49,80 +54,107 @@ ggVGx&quot;0pggVx:%s/^&quot; \=//g
 <li><code>Optional</code> generate html from markdown via pandoc</li>
 </ol>
 <h1 id="configurations">Configurations</h1>
+<h2 id="initialize-specialty-for-windows">Initialize specialty for windows</h2>
+<pre class="vim"><code>if has(&quot;win32&quot;) || has(&quot;win64&quot;) || has(&quot;win16&quot;)
+&quot; On windows, if called from cygwin or msys(git bash), the shell needs to be changed
+&quot; to cmd.exe to make sure some plugin is working
+    if &amp;shell=~#&#39;bash$&#39;
+        set shell=$COMSPEC &quot; sets shell to correct path for cmd.exe
+    endif
+&quot; On Windows, also use &#39;.vim&#39; instead of &#39;vimfiles&#39;; this makes synchronization across (heterogeneous) systems easier.
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif</code></pre>
 <h2 id="initialize-pathogen">Initialize <a href="https://github.com/tpope/vim-pathogen">pathogen</a></h2>
 <pre class="vim"><code>call pathogen#infect()
 call pathogen#helptags()
 Helptags
 </code></pre>
 <h2 id="basic-initialization">Basic Initialization</h2>
-<pre class="vim"><code>&quot;set langmenu=en_US
+<pre class="vim"><code>&quot; Maximized window when in diff mode
+if &amp;diff
+    set lines=999 columns=999
+endif
+
+&quot;set langmenu=en_US
 &quot;let $LANG = &#39;en_US&#39;
-source $VIMRUNTIME/menu.vim
+if has(&quot;gui_running&quot;)
+    source $VIMRUNTIME/menu.vim
+    colo desert &quot; other fav color is evening/slate
+endif
+if !empty($CONEMUBUILD) &amp;&amp; !has(&quot;gui_running&quot;)
+    &quot; refer to http://conemu.github.io/en/VimXterm.html
+    &quot; also refer to http://stackoverflow.com/a/27673246/2558077 for &lt;BS&gt; fix
+    set term=pcansi
+    set t_Co=256
+    let &amp;t_AB=&quot;\e[48;5;%dm&quot;
+    let &amp;t_AF=&quot;\e[38;5;%dm&quot;
+    colorscheme zenburn
+
+    let g:indentLine_char = &#39;|&#39;
+    let g:indentLine_color_term = 239
+endif
 &quot; source $VIMRUNTIME/delmenu.vim
 set encoding=utf-8
 &quot;set langmenu=zh_CN.UTF-8
 &quot;language message zh_CN.UTF-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set nocompatible
-set magic
-set ru &quot;标尺信息
-set ai
-set sw=4
-set ts=4
-set number
-set dir=%temp%
+set directory=$TEMP,/tmp
 filetype plugin on
 if has(&quot;autocmd&quot;)
     filetype plugin indent on
 endif
-syntax on
-set dy=lastline &quot;显示最多行，不用@@
-&quot;以上是缩进相关
-set backspace=indent,eol,start
-colo desert &quot; other my fav color is evening/slate
-sy on
-set go=r &quot; no menu and toolbar
-set nobackup
-set hlsearch
-set showmatch
-set ignorecase
-set tabstop=2
-set expandtab
-set guifont=Consolas:h10:cANSI
-set laststatus=2
 
 &quot;&quot;&quot; Moving Around/Editing
-set cursorline              &quot; have a line indicate the cursor location
-set ruler                   &quot; show the cursor position all the time
-set nostartofline           &quot; Avoid moving cursor to BOL when jumping around
-set virtualedit=block       &quot; Let cursor move past the last char in &lt;C-v&gt; mode
-set scrolloff=3             &quot; Keep 3 context lines above and below the cursor
-set backspace=2             &quot; Allow backspacing over autoindent, EOL, and BOL
-set showmatch               &quot; Briefly jump to a paren once it&#39;s balanced
-set nowrap                  &quot; don&#39;t wrap text
-set linebreak               &quot; don&#39;t wrap textin the middle of a word
-set autoindent              &quot; always set autoindenting on
-set smartindent             &quot; use smart indent if there is no indent file
-set tabstop=4               &quot; &lt;tab&gt; inserts 4 spaces 
-set shiftwidth=4            &quot; but an indent level is 2 spaces wide.
-set softtabstop=4           &quot; &lt;BS&gt; over an autoindent deletes both spaces.
-set expandtab               &quot; Use spaces, not tabs, for autoindent/tab key.
-set shiftround              &quot; rounds indent to a multiple of shiftwidth
-set matchpairs+=&lt;:&gt;         &quot; show matching &lt;&gt; (html mainly) as well
-set foldmethod=indent       &quot; allow us to fold on indents
-set foldlevel=5             &quot; don&#39;t fold by default
+set cursorline                  &quot; have a line indicate the cursor location
+set ruler                       &quot; show the cursor position all the time
+set nostartofline               &quot; Avoid moving cursor to BOL when jumping around
+set virtualedit=block           &quot; Let cursor move past the last char in &lt;C-v&gt; mode
+set scrolloff=3                 &quot; Keep 3 context lines above and below the cursor
+set backspace=2                 &quot; Allow backspacing over autoindent, EOL, and BOL
+set showmatch                   &quot; Briefly jump to a paren once it&#39;s balanced
+set nowrap                      &quot; don&#39;t wrap text
+set linebreak                   &quot; don&#39;t wrap textin the middle of a word
+set autoindent                  &quot; always set autoindenting on
+set tabstop=2                   &quot; &lt;tab&gt; inserts 4 spaces 
+set shiftwidth=4                &quot; but an indent level is 2 spaces wide.
+set softtabstop=4               &quot; &lt;BS&gt; over an autoindent deletes both spaces.
+set expandtab                   &quot; Use spaces, not tabs, for autoindent/tab key.
+set shiftround                  &quot; rounds indent to a multiple of shiftwidth
+set matchpairs+=&lt;:&gt;             &quot; show matching &lt;&gt; (html mainly) as well
+set foldmethod=indent           &quot; allow us to fold on indents
+set foldlevel=5                 &quot; don&#39;t fold by default
+                                
+&quot;&quot;&quot; Searching and Patterns      
+set ignorecase                  &quot; Default to using case insensitive searches,
+set smartcase                   &quot; unless uppercase letters are used in the regex.
+set smarttab                    &quot; Handle tabs more intelligently 
+set hlsearch                    &quot; Highlight searches by default.
+set incsearch                   &quot; Incrementally search while typing a /regex
+                                
+                                
+&quot;&quot;&quot; UI                          
+set nocompatible
+set magic
+set number
+set wildmenu                    &quot; Enable smart command line completion on &lt;Tab&gt;
+set wildmode=full               &quot; Make repeated presses cycle between all matching choices
+set wildcharm=&lt;C-Z&gt;             &quot; Make Ctrl-Z in a mapping act like pressing &lt;Tab&gt; interactively on the command line
+map &lt;F10&gt; :emenu &lt;C-Z&gt;          &quot; Make a binding that automatically invokes :emenu completion
+syntax on                       
+set display=lastline            &quot; 显示最多行，不用@@
+set backspace=indent,eol,start
+set guioptions=r                &quot; no menu and toolbar, only right hand scrollbar
+if has(&quot;gui_gtk2&quot;)
+    set guifont=Droid\ Sans\ Mono
+else
+    set guifont=Consolas:h10:cANSI
+end
+set laststatus=2
 
-&quot;&quot;&quot; Searching and Patterns
-set ignorecase              &quot; Default to using case insensitive searches,
-set smartcase               &quot; unless uppercase letters are used in the regex.
-set smarttab                &quot; Handle tabs more intelligently 
-set hlsearch                &quot; Highlight searches by default.
-set incsearch               &quot; Incrementally search while typing a /regex
-
-&quot;&quot;&quot; make sure undo history can be saved after switched files
-set hidden
-
+&quot;&quot;&quot; Miscellaneous
+set nobackup
 let mapleader=&quot;,&quot;
+set hidden                      &quot; make sure undo history can be saved after switched files
 </code></pre>
 <h2 id="other">Other</h2>
 <pre class="vim"><code>&quot;tab mappings
@@ -178,6 +210,11 @@ else
 endif
 endfunction
 map &lt;c-F5&gt; :call MaxRestoreWindow()&lt;CR&gt;
+
+function! MaximizeLineColumn()
+    set lines=999 columns=999
+endfunction
+command MaximizeLineColumn :call MaximizeLineColumn()
 </code></pre>
 <h3 id="change-font">Change Font</h3>
 <p>No shortcut, but command <code>ChangeFont</code> to switch between Chinese character available and english font</p>
@@ -248,18 +285,6 @@ map &lt;c-h&gt; &lt;c-w&gt;h
 <p>and lets make these all work in insert mode too ( <C-O> makes next cmd happen as if in command mode )</p>
 <pre class="vim"><code>imap &lt;C-W&gt; &lt;C-O&gt;&lt;C-W&gt;
 
-
-&quot; Commenting blocks of code.
-autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = &#39;// &#39;
-autocmd FileType sh,ruby,python   let b:comment_leader = &#39;# &#39;
-autocmd FileType conf,fstab,coffee let b:comment_leader = &#39;# &#39;
-autocmd FileType tex              let b:comment_leader = &#39;% &#39;
-autocmd FileType mail             let b:comment_leader = &#39;&gt; &#39;
-autocmd FileType vim              let b:comment_leader = &#39;&quot; &#39;
-autocmd FileType jade             let b:comment_leader = &#39;//- &#39;
-noremap &lt;silent&gt; ,cc :&lt;C-B&gt;silent &lt;C-E&gt;s/^/&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
-noremap &lt;silent&gt; ,cu :&lt;C-B&gt;silent &lt;C-E&gt;s/^\V&lt;C-R&gt;=escape(b:comment_leader,&#39;\/&#39;)&lt;CR&gt;//e&lt;CR&gt;:nohlsearch&lt;CR&gt;
-
 &quot; Mappings to move line
 
 nnoremap &lt;A-j&gt; :m .+1&lt;CR&gt;==
@@ -270,25 +295,18 @@ vnoremap &lt;A-j&gt; :m &#39;&gt;+1&lt;CR&gt;gv=gv
 vnoremap &lt;A-k&gt; :m &#39;&lt;-2&lt;CR&gt;gv=gv
 
 &quot; editing/reloading vimrc
-map ,v :sp $MYVIMRC&lt;CR&gt;&lt;C-W&gt;_
-map &lt;silent&gt; ,V :source $MYVIMRC&lt;CR&gt;:filetype detect&lt;CR&gt;:echo &#39;vimrc reloaded&#39;&lt;CR&gt;
+map &lt;leader&gt;v :sp $MYVIMRC&lt;CR&gt;&lt;C-W&gt;_
+map &lt;silent&gt; &lt;leader&gt;V :source $MYVIMRC&lt;CR&gt;:filetype detect&lt;CR&gt;:echo &#39;vimrc reloaded&#39;&lt;CR&gt;
 
 &quot;Map escape key to jj -- much faster
 imap jj &lt;esc&gt;
-
-&quot; Pressing return clears highlighted search
-&quot; nmap &lt;CR&gt; :nohlsearch&lt;CR&gt;
-
 
 inoremap &lt;S-TAB&gt; &lt;Esc&gt;&lt;&lt;i
 &quot; imap &lt;Tab&gt; strpart(getline(&quot;.&quot;), col(&quot;.&quot;) - 3, 1)=&quot;*&quot; ? &quot;\&lt;Lt&gt;Esc&gt;&gt;&gt;$a&quot;:&quot;&quot;
 imap &lt;C-Tab&gt; &lt;Esc&gt;&gt;&gt;$a
 
-imap ,[ &lt;Esc&gt;&lt;&lt;a
-imap ,] &lt;Esc&gt;&gt;&gt;$a
-
-map ,r :set wrap!&lt;cr&gt; 
-map ,s :set spell!&lt;cr&gt; 
+map &lt;leader&gt;rr :set wrap!&lt;cr&gt; 
+map &lt;leader&gt;ss :set spell!&lt;cr&gt; 
 
 &quot; use `vimgrep` to search current word
 :nmap g* :vimgrep /&lt;C-R&gt;&lt;C-W&gt;/ **/*&lt;CR&gt;
@@ -304,11 +322,11 @@ map ,s :set spell!&lt;cr&gt;
 
 let g:html_number_lines=0
 
-au BufEnter *.wiki set wrap
-au BufLeave *.wiki set nowrap
-au BufEnter *.wiki set spell
-au BufLeave *.wiki set nospell
-au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
+au FileType vimwiki setl wrap
+au FileType vimwiki setl spell
+au FileType vimwiki setl shiftwidth=2 expandtab
+
+au FileType markdown setl textwidth=100
 
 map &lt;up&gt; gk
 map &lt;down&gt; gj
@@ -317,9 +335,6 @@ map &lt;down&gt; gj
 let coffee_compile_vert = 1
 
 au BufNewFile,BufRead *.jshtml setf html
-&quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cc vat:s/^\(.*\)$/&lt;!--\1--&gt;/&lt;CR&gt;:nohlsearch&lt;CR&gt;
-&quot; au BufNewFile,BufRead *.jshtml noremap &lt;silent&gt; ,cu vat:s/--&gt;//&lt;CR&gt;:nohlsearch&lt;CR&gt;
-
 au BufNewFile,BufReadPost *.proto setf proto
 </code></pre>
 <p>map p to multiple time paste without change current clipboard item</p>
@@ -332,9 +347,9 @@ let g:plantuml_executable_script = &quot;plantuml.jar&quot;
 &quot; inoremap &lt;F5&gt; &lt;Esc&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
 &quot; vnoremap &lt;F5&gt; :&lt;C-U&gt;:w&lt;CR&gt;:silent make&lt;CR&gt;
 </code></pre>
-<p>map <code>F11</code> to open shell in current directory</p>
-<pre class="vim"><code>nmap &lt;F11&gt; :silent !start cmd&lt;CR&gt;
-imap &lt;F11&gt; &lt;Esc&gt;&lt;F11&gt;
+<p>map <code>Ctrl-F11</code> to open shell in current directory</p>
+<pre class="vim"><code>nmap &lt;C-F11&gt; :silent !start cmd&lt;CR&gt;
+imap &lt;C-F11&gt; &lt;Esc&gt;&lt;C-F11&gt;
 </code></pre>
 <p>map <code>Alt-F11</code> to open git bash shell in current directory</p>
 <pre class="vim"><code>nmap &lt;A-F11&gt; :silent !start sh --login&lt;CR&gt;
@@ -347,8 +362,11 @@ imap &lt;S-F11&gt; &lt;Esc&gt;&lt;S-F11&gt;
 <p>change the current directory automatically</p>
 <pre class="vim"><code>autocmd BufEnter * silent! lcd %:p:h
 </code></pre>
+<p>make <code>gf</code> with file extension based on current FileType</p>
+<pre class="vim"><code>autocmd FileType markdown setlocal suffixesadd=.md,.markdown
+</code></pre>
 <p>change the current directory by command <code>&lt;leader&gt;cd</code></p>
-<pre class="vim"><code>nnoremap ,cd :cd %:p:h&lt;CR&gt;:pwd&lt;CR&gt;
+<pre class="vim"><code>nnoremap &lt;leader&gt;cd :cd %:p:h&lt;CR&gt;:pwd&lt;CR&gt;
 </code></pre>
 <h2 id="custom-fold">Custom fold</h2>
 <p>download from <a href="http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/" class="uri">http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/</a></p>
@@ -412,12 +430,52 @@ let g:vimwiki_hl_headers = 1
 <pre class="vim"><code>let g:Powerline_symbols = &#39;fancy&#39;
 let maplocalleader = &quot;,&quot;
 </code></pre>
+<h3 id="altr"><a href="https://github.com/kana/vim-altr">altr</a></h3>
+<pre><code>call altr#define(&#39;%.css&#39;,
+\```vim
+        &#39;%.less&#39;,</code></pre>
+<pre><code>    \```vim
+            &#39;%.styl&#39;,</code></pre>
+<pre><code>\```vim
+        &#39;%.scss&#39;,</code></pre>
+<pre><code>    \```vim
+            &#39;%.coffee&#39;,</code></pre>
+<pre><code>\```vim
+        &#39;%.js&#39;,</code></pre>
+<pre><code>    \```vim
+            &#39;%.ts&#39;,</code></pre>
+<pre><code>\```vim
+        &#39;%.json&#39;,</code></pre>
+<pre><code>    \```vim
+            &#39;%.jade&#39;,</code></pre>
+<pre><code>\```vim
+        &#39;%.htm&#39;,</code></pre>
+<pre><code>    \```vim
+            &#39;%.html&#39;)
+nmap &lt;F7&gt; &lt;Plug&gt;(altr-forward)
+nmap &lt;S-F7&gt; &lt;Plug&gt;(altr-back)
+</code></pre>
+<h3 id="tabular">[Tabular]</h3>
+<pre class="vim"><code>nmap &lt;leader&gt;t= :Tabularize /=&lt;CR&gt;
+vmap &lt;leader&gt;t= :Tabularize /=&lt;CR&gt;
+nmap &lt;leader&gt;tf :Tabularize /&lt;bar&gt;&lt;CR&gt;
+vmap &lt;leader&gt;tf :Tabularize /&lt;bar&gt;&lt;CR&gt;
+nmap &lt;leader&gt;t: :Tabularize /:\zs&lt;CR&gt;
+vmap &lt;leader&gt;t: :Tabularize /:\zs&lt;CR&gt;
+</code></pre>
+<h3 id="vim-jsbeautify"><a href="https://github.com/maksimr/vim-jsbeautify">vim-jsbeautify</a></h3>
+<p>autocmd FileType javascript,typescript vnoremap <buffer> gd :call RangeJsBeautify()<cr> autocmd FileType html vnoremap <buffer> gd :call RangeHtmlBeautify()<cr> autocmd FileType css,less vnoremap <buffer> gd :call RangeCSSBeautify()<cr></p>
+<p>autocmd FileType javascript,typescript noremap <buffer> gd :call JsBeautify()<cr> autocmd FileType html noremap <buffer> gd :call HtmlBeautify()<cr> autocmd FileType css,less noremap <buffer> gd :call CSSBeautify()<cr></p>
+<h3 id="voom"><a href="https://github.com/vim-voom/VOoM">VOoM</a></h3>
+<p>autocmd FileType markdown noremap <buffer> <leader>vm :VoomToggle markdown<cr></p>
 <h2 id="host-specifed-config">Host specifed config</h2>
 <p>load specific config by hostname</p>
-<pre class="vim"><code>let hostfile = $HOME . &#39;\vimfiles\vimrc-&#39; . substitute(hostname(), &quot;\\..*&quot;, &quot;&quot;, &quot;&quot;)
+<pre class="vim"><code>let hostfile = $HOME . &#39;/.vim/vimrc-&#39; . substitute(hostname(), &quot;\\..*&quot;, &quot;&quot;, &quot;&quot;)
 if filereadable(hostfile)
-exe &#39;source &#39; . hostfile
+    exe &#39;source &#39; . hostfile
 endif
+
 </code></pre>
+<p>let g:vimtex_view_general_viewer = 'SumatraPDF' let g:vimtex_view_general_options = '-forward-search <span class="citation">@tex</span> <span class="citation">@line</span> <span class="citation">@pdf</span>' let g:vimtex_view_general_options_latexmk = '-reuse-instance'</p>
 </body>
 </html>

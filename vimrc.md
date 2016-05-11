@@ -14,6 +14,18 @@ ggVGx"0pggVx:%s/^" \=//g
 3. `Optional` generate html from markdown via pandoc
 
 # Configurations
+## Initialize specialty for windows
+```vim
+if has("win32") || has("win64") || has("win16")
+" On windows, if called from cygwin or msys(git bash), the shell needs to be changed
+" to cmd.exe to make sure some plugin is working
+    if &shell=~#'bash$'
+        set shell=$COMSPEC " sets shell to correct path for cmd.exe
+    endif
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization across (heterogeneous) systems easier.
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+```
 ## Initialize [pathogen]
 ```vim
 call pathogen#infect()
@@ -24,74 +36,91 @@ Helptags
 ## Basic Initialization
 
 ```vim
+" Maximized window when in diff mode
+if &diff
+    set lines=999 columns=999
+endif
+
 "set langmenu=en_US
 "let $LANG = 'en_US'
-source $VIMRUNTIME/menu.vim
+if has("gui_running")
+    source $VIMRUNTIME/menu.vim
+    colo desert " other fav color is evening/slate
+endif
+if !empty($CONEMUBUILD) && !has("gui_running")
+    " refer to http://conemu.github.io/en/VimXterm.html
+    " also refer to http://stackoverflow.com/a/27673246/2558077 for <BS> fix
+    set term=pcansi
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    colorscheme zenburn
+
+    let g:indentLine_char = '|'
+    let g:indentLine_color_term = 239
+endif
 " source $VIMRUNTIME/delmenu.vim
 set encoding=utf-8
 "set langmenu=zh_CN.UTF-8
 "language message zh_CN.UTF-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set nocompatible
-set magic
-set ru "标尺信息
-set ai
-set sw=4
-set ts=4
-set number
-set dir=%temp%
+set directory=$TEMP,/tmp
 filetype plugin on
 if has("autocmd")
     filetype plugin indent on
 endif
-syntax on
-set dy=lastline "显示最多行，不用@@
-"以上是缩进相关
-set backspace=indent,eol,start
-colo desert " other my fav color is evening/slate
-sy on
-set go=r " no menu and toolbar
-set nobackup
-set hlsearch
-set showmatch
-set ignorecase
-set tabstop=2
-set expandtab
-set guifont=Consolas:h10:cANSI
-set laststatus=2
 
 """ Moving Around/Editing
-set cursorline              " have a line indicate the cursor location
-set ruler                   " show the cursor position all the time
-set nostartofline           " Avoid moving cursor to BOL when jumping around
-set virtualedit=block       " Let cursor move past the last char in <C-v> mode
-set scrolloff=3             " Keep 3 context lines above and below the cursor
-set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
-set showmatch               " Briefly jump to a paren once it's balanced
-set nowrap                  " don't wrap text
-set linebreak               " don't wrap textin the middle of a word
-set autoindent              " always set autoindenting on
-set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces 
-set shiftwidth=4            " but an indent level is 2 spaces wide.
-set softtabstop=4           " <BS> over an autoindent deletes both spaces.
-set expandtab               " Use spaces, not tabs, for autoindent/tab key.
-set shiftround              " rounds indent to a multiple of shiftwidth
-set matchpairs+=<:>         " show matching <> (html mainly) as well
-set foldmethod=indent       " allow us to fold on indents
-set foldlevel=5             " don't fold by default
+set cursorline                  " have a line indicate the cursor location
+set ruler                       " show the cursor position all the time
+set nostartofline               " Avoid moving cursor to BOL when jumping around
+set virtualedit=block           " Let cursor move past the last char in <C-v> mode
+set scrolloff=3                 " Keep 3 context lines above and below the cursor
+set backspace=2                 " Allow backspacing over autoindent, EOL, and BOL
+set showmatch                   " Briefly jump to a paren once it's balanced
+set nowrap                      " don't wrap text
+set linebreak                   " don't wrap textin the middle of a word
+set autoindent                  " always set autoindenting on
+set tabstop=2                   " <tab> inserts 4 spaces 
+set shiftwidth=4                " but an indent level is 2 spaces wide.
+set softtabstop=4               " <BS> over an autoindent deletes both spaces.
+set expandtab                   " Use spaces, not tabs, for autoindent/tab key.
+set shiftround                  " rounds indent to a multiple of shiftwidth
+set matchpairs+=<:>             " show matching <> (html mainly) as well
+set foldmethod=indent           " allow us to fold on indents
+set foldlevel=5                 " don't fold by default
+                                
+""" Searching and Patterns      
+set ignorecase                  " Default to using case insensitive searches,
+set smartcase                   " unless uppercase letters are used in the regex.
+set smarttab                    " Handle tabs more intelligently 
+set hlsearch                    " Highlight searches by default.
+set incsearch                   " Incrementally search while typing a /regex
+                                
+                                
+""" UI                          
+set nocompatible
+set magic
+set number
+set wildmenu                    " Enable smart command line completion on <Tab>
+set wildmode=full               " Make repeated presses cycle between all matching choices
+set wildcharm=<C-Z>             " Make Ctrl-Z in a mapping act like pressing <Tab> interactively on the command line
+map <F10> :emenu <C-Z>          " Make a binding that automatically invokes :emenu completion
+syntax on                       
+set display=lastline            " 显示最多行，不用@@
+set backspace=indent,eol,start
+set guioptions=r                " no menu and toolbar, only right hand scrollbar
+if has("gui_gtk2")
+    set guifont=Droid\ Sans\ Mono
+else
+    set guifont=Consolas:h10:cANSI
+end
+set laststatus=2
 
-""" Searching and Patterns
-set ignorecase              " Default to using case insensitive searches,
-set smartcase               " unless uppercase letters are used in the regex.
-set smarttab                " Handle tabs more intelligently 
-set hlsearch                " Highlight searches by default.
-set incsearch               " Incrementally search while typing a /regex
-
-""" make sure undo history can be saved after switched files
-set hidden
-
+""" Miscellaneous
+set nobackup
 let mapleader=","
+set hidden                      " make sure undo history can be saved after switched files
 
 ```
 ## Other
@@ -156,6 +185,11 @@ else
 endif
 endfunction
 map <c-F5> :call MaxRestoreWindow()<CR>
+
+function! MaximizeLineColumn()
+    set lines=999 columns=999
+endfunction
+command MaximizeLineColumn :call MaximizeLineColumn()
 
 ```
 ### Change Font
@@ -246,18 +280,6 @@ and lets make these all work in insert mode too ( <C-O> makes next cmd
 ```vim
 imap <C-W> <C-O><C-W>
 
-
-" Commenting blocks of code.
-autocmd FileType c,cpp,java,scala,atg,javascript let b:comment_leader = '// '
-autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-autocmd FileType conf,fstab,coffee let b:comment_leader = '# '
-autocmd FileType tex              let b:comment_leader = '% '
-autocmd FileType mail             let b:comment_leader = '> '
-autocmd FileType vim              let b:comment_leader = '" '
-autocmd FileType jade             let b:comment_leader = '//- '
-noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
 " Mappings to move line
 
 nnoremap <A-j> :m .+1<CR>==
@@ -268,25 +290,18 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " editing/reloading vimrc
-map ,v :sp $MYVIMRC<CR><C-W>_
-map <silent> ,V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
+map <leader>v :sp $MYVIMRC<CR><C-W>_
+map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
 "Map escape key to jj -- much faster
 imap jj <esc>
-
-" Pressing return clears highlighted search
-" nmap <CR> :nohlsearch<CR>
-
 
 inoremap <S-TAB> <Esc><<i
 " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
 imap <C-Tab> <Esc>>>$a
 
-imap ,[ <Esc><<a
-imap ,] <Esc>>>$a
-
-map ,r :set wrap!<cr> 
-map ,s :set spell!<cr> 
+map <leader>rr :set wrap!<cr> 
+map <leader>ss :set spell!<cr> 
 
 " use `vimgrep` to search current word
 :nmap g* :vimgrep /<C-R><C-W>/ **/*<CR>
@@ -305,11 +320,11 @@ let g:fsharp_interactive_bin = 'C:\Program Files (x86)\Microsoft F#\v4.0\Fsi.exe
 
 let g:html_number_lines=0
 
-au BufEnter *.wiki set wrap
-au BufLeave *.wiki set nowrap
-au BufEnter *.wiki set spell
-au BufLeave *.wiki set nospell
-au BufNewFile,BufReadPost *.wiki setl shiftwidth=2 expandtab
+au FileType vimwiki setl wrap
+au FileType vimwiki setl spell
+au FileType vimwiki setl shiftwidth=2 expandtab
+
+au FileType markdown setl textwidth=100
 
 map <up> gk
 map <down> gj
@@ -318,9 +333,6 @@ map <down> gj
 let coffee_compile_vert = 1
 
 au BufNewFile,BufRead *.jshtml setf html
-" au BufNewFile,BufRead *.jshtml noremap <silent> ,cc vat:s/^\(.*\)$/<!--\1-->/<CR>:nohlsearch<CR>
-" au BufNewFile,BufRead *.jshtml noremap <silent> ,cu vat:s/-->//<CR>:nohlsearch<CR>
-
 au BufNewFile,BufReadPost *.proto setf proto
 
 ```
@@ -339,11 +351,11 @@ let g:plantuml_executable_script = "plantuml.jar"
 " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
 ```
-map `F11` to open shell in current directory 
+map `Ctrl-F11` to open shell in current directory 
 
 ```vim
-nmap <F11> :silent !start cmd<CR>
-imap <F11> <Esc><F11>
+nmap <C-F11> :silent !start cmd<CR>
+imap <C-F11> <Esc><C-F11>
 
 ```
 map `Alt-F11` to open git bash shell in current directory
@@ -366,10 +378,16 @@ change the current directory automatically
 autocmd BufEnter * silent! lcd %:p:h
 
 ```
+make `gf` with file extension based on current FileType
+
+```vim
+autocmd FileType markdown setlocal suffixesadd=.md,.markdown
+
+```
 change the current directory by command `<leader>cd`
 
 ```vim
-nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 ```
 ## Custom fold
@@ -477,15 +495,84 @@ let g:Powerline_symbols = 'fancy'
 let maplocalleader = ","
 
 ```
+### [altr]
+
+	call altr#define('%.css',
+	\```vim
+            '%.less',
+```
+	\```vim
+            '%.styl',
+```
+	\```vim
+            '%.scss',
+```
+	\```vim
+            '%.coffee',
+```
+	\```vim
+            '%.js',
+```
+	\```vim
+            '%.ts',
+```
+	\```vim
+            '%.json',
+```
+	\```vim
+            '%.jade',
+```
+	\```vim
+            '%.htm',
+```
+	\```vim
+            '%.html')
+nmap <F7> <Plug>(altr-forward)
+nmap <S-F7> <Plug>(altr-back)
+
+```
+### [Tabular]
+
+```vim
+nmap <leader>t= :Tabularize /=<CR>
+vmap <leader>t= :Tabularize /=<CR>
+nmap <leader>tf :Tabularize /<bar><CR>
+vmap <leader>tf :Tabularize /<bar><CR>
+nmap <leader>t: :Tabularize /:\zs<CR>
+vmap <leader>t: :Tabularize /:\zs<CR>
+
+```
+### [vim-jsbeautify]
+
+  autocmd FileType javascript,typescript vnoremap <buffer> gd :call RangeJsBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> gd :call RangeHtmlBeautify()<cr>
+  autocmd FileType css,less vnoremap <buffer> gd :call RangeCSSBeautify()<cr>
+
+  autocmd FileType javascript,typescript noremap <buffer> gd :call JsBeautify()<cr>
+  autocmd FileType html noremap <buffer> gd :call HtmlBeautify()<cr>
+  autocmd FileType css,less noremap <buffer> gd :call CSSBeautify()<cr>
+
+### [VOoM]
+
+  autocmd FileType markdown noremap <buffer> <leader>vm :VoomToggle markdown<cr>
+
 ## Host specifed config
 load specific config by hostname
 
 ```vim
-let hostfile = $HOME . '\vimfiles\vimrc-' . substitute(hostname(), "\\..*", "", "")
+let hostfile = $HOME . '/.vim/vimrc-' . substitute(hostname(), "\\..*", "", "")
 if filereadable(hostfile)
-exe 'source ' . hostfile
+    exe 'source ' . hostfile
 endif
 
+
 ```
+  let g:vimtex_view_general_viewer = 'SumatraPDF'
+  let g:vimtex_view_general_options = '-forward-search @tex @line @pdf'
+  let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
 [pathogen]: https://github.com/tpope/vim-pathogen
 [NerdTree]: https://github.com/scrooloose/nerdtree 
+[altr]: https://github.com/kana/vim-altr
+[vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
+[VOoM]: https://github.com/vim-voom/VOoM
