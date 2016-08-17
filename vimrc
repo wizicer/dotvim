@@ -158,6 +158,10 @@
     au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 " ## Enhanced Command
+" ### Beautify
+
+    command! -range -nargs=0 -bar BeautifyJson <line1>,<line2>!python -m json.tool
+
 " ### Window Maximized Shortcut
 " Use `Ctrl+F5` to switch between maximized and normal
 
