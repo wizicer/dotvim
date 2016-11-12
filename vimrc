@@ -25,7 +25,11 @@
         set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
     endif
 " ## Initialize [pathogen]
-    call pathogen#infect()
+    " in diff mode, load no plugins, could manually enable some plugins by
+    " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
+    if !&diff
+        call pathogen#infect()
+    endif
     call pathogen#helptags()
     Helptags
 
@@ -435,17 +439,19 @@
 
 " ### [altr]
 
-	call altr#define('%.css',
-	\                '%.less',
-	\                '%.styl',
-	\                '%.scss',
-	\                '%.coffee',
-	\                '%.js',
-	\                '%.ts',
-	\                '%.json',
-	\                '%.jade',
-	\                '%.htm',
-	\                '%.html')
+    if exists('altr#define')
+        call altr#define('%.css',
+        \                '%.less',
+        \                '%.styl',
+        \                '%.scss',
+        \                '%.coffee',
+        \                '%.js',
+        \                '%.ts',
+        \                '%.json',
+        \                '%.jade',
+        \                '%.htm',
+        \                '%.html')
+    endif
     nmap <F7> <Plug>(altr-forward)
     nmap <S-F7> <Plug>(altr-back)
 
