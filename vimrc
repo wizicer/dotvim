@@ -289,6 +289,17 @@
 
     map <leader>rr :set wrap!<cr> 
     map <leader>ss :set spell!<cr> 
+    " toggle the syntax on/off with this command:
+    map <leader>sn :if exists("g:syntax_on") <Bar>
+        \   syntax off <Bar>
+        \ else <Bar>
+        \   syntax enable <Bar>
+        \ endif <CR>
+    map <leader>sl :if &syntax != "off" <Bar>
+        \   setlocal syntax=off <Bar>
+        \ else <Bar>
+        \   setlocal syntax=on <Bar>
+        \ endif <CR>
 
     " use `vimgrep` to search current word
     :nmap g* :vimgrep /<C-R><C-W>/ **/*<CR>
