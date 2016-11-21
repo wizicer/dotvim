@@ -45,7 +45,7 @@
         Plug 'tomtom/tcomment_vim'
         Plug 'tomtom/tlib_vim'
         Plug 'digitaltoad/vim-pug'
-        Plug 'bling/vim-airline'
+        Plug 'vim-airline/vim-airline'
         Plug 'groenewege/vim-less', { 'for': 'less' }
         Plug 'requalix/detect-indentation', { 'commit': '3a46293' }
         Plug 'Yggdroot/indentLine'
