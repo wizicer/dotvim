@@ -46,30 +46,29 @@
         Plug 'tomtom/tlib_vim'
         Plug 'digitaltoad/vim-pug'
         Plug 'vim-airline/vim-airline'
-        Plug 'groenewege/vim-less', { 'for': 'less' }
         Plug 'requalix/detect-indentation', { 'commit': '3a46293' }
         Plug 'Yggdroot/indentLine'
         Plug 'ervandew/supertab'
-        Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
         Plug 'curist/vim-angular-template'
         Plug 'tpope/vim-repeat'
-        Plug 'drmikehenry/vim-fontsize'
         Plug 'godlygeek/tabular'
         Plug 'kana/vim-altr'
         Plug 'kana/vim-smartinput'
-        Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
         Plug 'dkprice/vim-easygrep'
         Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-fugitive' ", { 'on':  'Gstatus' } ref to https://github.com/junegunn/vim-plug/issues/525#issuecomment-256169881 for why it not work
-        Plug 'vim-voom/VOoM', { 'for': 'markdown' }
-        Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
         Plug 'ekalinin/Dockerfile.vim'
         Plug 'vim-scripts/VisIncr'
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
-    else
-        Plug 'drmikehenry/vim-fontsize'
     endif
+
+    Plug 'drmikehenry/vim-fontsize'
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
+    Plug 'groenewege/vim-less', { 'for': 'less' }
+    Plug 'vim-voom/VOoM', { 'for': 'markdown' }
+    Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
 
     " Add plugins to &runtimepath
     call plug#end()
