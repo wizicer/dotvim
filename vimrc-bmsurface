@@ -1,1 +1,3 @@
-set guifont=Consolas:h12:cANSI
+if !&diff
+    set guifont=Consolas:h12:cANSI
+endif
