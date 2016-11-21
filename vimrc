@@ -24,14 +24,55 @@
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization across (heterogeneous) systems easier.
         set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
     endif
-" ## Initialize [pathogen]
-    " in diff mode, load no plugins, could manually enable some plugins by
+" ## Initialize [vim-plug]
+    " in diff mode, almost load no plugins, could manually enable some plugins by
     " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
+    call plug#begin('~/.vim/plugged')
     if !&diff
-        call pathogen#infect()
+        Plug 'msanders/snipmate.vim'
+        Plug 'othree/html5.vim'
+        Plug 'aklt/plantuml-syntax'
+        Plug 'MarcWeber/vim-addon-mw-utils'
+        Plug 'kchmck/vim-coffee-script'
+        Plug 'Lokaltog/vim-easymotion'
+        Plug 'elzr/vim-json'
+        Plug 'enthooz/vim-razor'
+        Plug 'garbas/vim-snipmate'
+        Plug 'honza/vim-snippets'
+        Plug 'wavded/vim-stylus'
+        Plug 'tpope/vim-surround'
+        Plug 'vim-scripts/vimwiki'
+        Plug 'tomtom/tcomment_vim'
+        Plug 'tomtom/tlib_vim'
+        Plug 'digitaltoad/vim-pug'
+        Plug 'bling/vim-airline'
+        Plug 'groenewege/vim-less', { 'for': 'less' }
+        Plug 'requalix/detect-indentation', { 'commit': '3a46293' }
+        Plug 'Yggdroot/indentLine'
+        Plug 'ervandew/supertab'
+        Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
+        Plug 'curist/vim-angular-template'
+        Plug 'tpope/vim-repeat'
+        Plug 'drmikehenry/vim-fontsize'
+        Plug 'godlygeek/tabular'
+        Plug 'kana/vim-altr'
+        Plug 'kana/vim-smartinput'
+        Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+        Plug 'dkprice/vim-easygrep'
+        Plug 'airblade/vim-gitgutter'
+        Plug 'tpope/vim-fugitive' ", { 'on':  'Gstatus' } ref to https://github.com/junegunn/vim-plug/issues/525#issuecomment-256169881 for why it not work
+        Plug 'vim-voom/VOoM', { 'for': 'markdown' }
+        Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
+        Plug 'ekalinin/Dockerfile.vim'
+        Plug 'vim-scripts/VisIncr'
+        Plug 'xolox/vim-misc'
+        Plug 'xolox/vim-shell'
+    else
+        Plug 'drmikehenry/vim-fontsize'
     endif
-    call pathogen#helptags()
-    Helptags
+
+    " Add plugins to &runtimepath
+    call plug#end()
 
 " ## Basic Initialization
 
@@ -221,7 +262,7 @@
     endfunction
     command TabCompletion :call ChangeTabCompletion()
 
-    let g:Tlist_Ctags_Cmd = "\"C:/Program Files/Vim/vimfiles/ctags58/ctags.exe\""
+    let g:Tlist_Ctags_Cmd = "\"%HOME%/.vim/ctags58/ctags.exe\""
 
 
 " ### Build command
@@ -502,7 +543,7 @@
   let g:vimtex_view_general_options = '-forward-search @tex @line @pdf'
   let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
-" [pathogen]: https://github.com/tpope/vim-pathogen
+" [vim-plug]: https://github.com/junegunn/vim-plug 
 " [NerdTree]: https://github.com/scrooloose/nerdtree 
 " [altr]: https://github.com/kana/vim-altr
 " [vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
