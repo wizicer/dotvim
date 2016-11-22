@@ -262,7 +262,7 @@
     endfunction
     command TabCompletion :call ChangeTabCompletion()
 
-    let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
+    let g:tagbar_ctags_bin = '~\.vim\bin\ctags.exe'
 
 
 " ### Build command
