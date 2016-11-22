@@ -66,6 +66,7 @@
 
     Plug 'drmikehenry/vim-fontsize'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    " Plug 'mattn/calendar-vim', { 'on':  'Calendar' }
     Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
     Plug 'groenewege/vim-less', { 'for': 'less' }
     Plug 'vim-voom/VOoM', { 'for': 'markdown' }
