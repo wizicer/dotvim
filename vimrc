@@ -46,7 +46,7 @@
         Plug 'tomtom/tlib_vim'
         Plug 'digitaltoad/vim-pug'
         Plug 'vim-airline/vim-airline'
-        Plug 'requalix/detect-indentation', { 'commit': '3a46293' }
+        Plug 'tpope/vim-sleuth'
         Plug 'Yggdroot/indentLine'
         Plug 'ervandew/supertab'
         Plug 'curist/vim-angular-template'
@@ -61,6 +61,7 @@
         Plug 'vim-scripts/VisIncr'
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
+        Plug 'majutsushi/tagbar' ", { 'on': 'TagbarToggle' }
     endif
 
     Plug 'drmikehenry/vim-fontsize'
@@ -261,7 +262,7 @@
     endfunction
     command TabCompletion :call ChangeTabCompletion()
 
-    let g:Tlist_Ctags_Cmd = "\"%HOME%/.vim/ctags58/ctags.exe\""
+    let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
 
 
 " ### Build command
@@ -483,6 +484,10 @@
 
     map <leader>n :NERDTreeToggle<CR>
 
+" ### [Tagbar]
+"
+    nmap <leader>tt :TagbarToggle<CR>
+
 " ### [Powerline]
 
     let g:Powerline_symbols = 'fancy'
@@ -547,3 +552,4 @@
 " [altr]: https://github.com/kana/vim-altr
 " [vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
 " [VOoM]: https://github.com/vim-voom/VOoM
+" [Tagbar]: https://github.com/majutsushi/tagbar
