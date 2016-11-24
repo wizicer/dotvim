@@ -48,7 +48,7 @@
         Plug 'vim-airline/vim-airline'
         Plug 'tpope/vim-sleuth'
         Plug 'Yggdroot/indentLine'
-        Plug 'ervandew/supertab'
+        " Plug 'ervandew/supertab'
         Plug 'curist/vim-angular-template'
         Plug 'tpope/vim-repeat'
         Plug 'godlygeek/tabular'
@@ -61,6 +61,7 @@
         Plug 'vim-scripts/VisIncr'
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
+        Plug 'ctrlpvim/ctrlp.vim'
         Plug 'majutsushi/tagbar' ", { 'on': 'TagbarToggle' }
     endif
 
@@ -264,6 +265,8 @@
     command TabCompletion :call ChangeTabCompletion()
 
     let g:tagbar_ctags_bin = '~\.vim\bin\ctags.exe'
+    let g:ctrlp_buftag_ctags_bin = '~\.vim\bin\ctags.exe'
+
 
 
 " ### Build command
@@ -534,6 +537,11 @@
 " ### [VOoM]
 
   autocmd FileType markdown noremap <buffer> <leader>vm :VoomToggle markdown<cr>
+
+" ### [CtrlP]
+
+    " Ignore files in .gitignore
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " ## Host specifed config
 " load specific config by hostname
