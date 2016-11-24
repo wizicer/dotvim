@@ -63,6 +63,8 @@
         Plug 'xolox/vim-shell'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'majutsushi/tagbar' ", { 'on': 'TagbarToggle' }
+        Plug 'haya14busa/incsearch.vim'
+        Plug 'haya14busa/incsearch-fuzzy.vim'
     endif
 
     Plug 'drmikehenry/vim-fontsize'
@@ -72,6 +74,7 @@
     Plug 'groenewege/vim-less', { 'for': 'less' }
     Plug 'vim-voom/VOoM', { 'for': 'markdown' }
     Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
+    Plug 'tpope/vim-liquid', {'for': ['liquid']}
 
     " Add plugins to &runtimepath
     call plug#end()
@@ -543,6 +546,22 @@
     " Ignore files in .gitignore
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
+" ### [incsearch]
+
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+    map z/ <Plug>(incsearch-fuzzy-/)
+    map z? <Plug>(incsearch-fuzzy-?)
+    map zg/ <Plug>(incsearch-fuzzy-stay)
+    let g:incsearch#auto_nohlsearch = 1
+    map n  <Plug>(incsearch-nohl-n)
+    map N  <Plug>(incsearch-nohl-N)
+    map *  <Plug>(incsearch-nohl-*)
+    map #  <Plug>(incsearch-nohl-#)
+    map g* <Plug>(incsearch-nohl-g*)
+    map g# <Plug>(incsearch-nohl-g#)
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -562,3 +581,4 @@
 " [vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
 " [VOoM]: https://github.com/vim-voom/VOoM
 " [Tagbar]: https://github.com/majutsushi/tagbar
+" [incsearch]: https://github.com/haya14busa/incsearch.vim
