@@ -65,6 +65,7 @@
         Plug 'majutsushi/tagbar' ", { 'on': 'TagbarToggle' }
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
+        Plug 'terryma/vim-expand-region'
     endif
 
     Plug 'drmikehenry/vim-fontsize'
