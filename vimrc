@@ -55,14 +55,14 @@
         Plug 'kana/vim-altr'
         Plug 'kana/vim-smartinput'
         Plug 'dkprice/vim-easygrep'
-        Plug 'airblade/vim-gitgutter'
+        Plug 'airblade/vim-gitgutter', { 'commit': '339f8ba079ed7d465ca442c9032b36bc56c21f61' }
         Plug 'tpope/vim-fugitive' ", { 'on':  'Gstatus' } ref to https://github.com/junegunn/vim-plug/issues/525#issuecomment-256169881 for why it not work
         Plug 'ekalinin/Dockerfile.vim'
         Plug 'vim-scripts/VisIncr'
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
         Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'majutsushi/tagbar' ", { 'on': 'TagbarToggle' }
+        Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
         Plug 'terryma/vim-expand-region'
@@ -559,6 +559,10 @@
     map z? <Plug>(incsearch-fuzzy-?)
     map zg/ <Plug>(incsearch-fuzzy-stay)
 
+" ### [airline]
+
+    let g:airline#extensions#tagbar#enabled = 0
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -579,3 +583,4 @@
 " [VOoM]: https://github.com/vim-voom/VOoM
 " [Tagbar]: https://github.com/majutsushi/tagbar
 " [incsearch]: https://github.com/haya14busa/incsearch.vim
+" [airline]: https://github.com/vim-airline/vim-airline
