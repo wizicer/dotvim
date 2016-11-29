@@ -193,6 +193,9 @@
     map! <M-9> <esc>9gt
     map! <M-t> <esc>:tabnew<CR>
     map! <M-w> <esc>:tabclose<CR>
+
+
+    nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
     
     " Use CTRL-S for saving, also in Insert mode
     noremap <C-S> :update<CR>
@@ -555,13 +558,6 @@
     map z/ <Plug>(incsearch-fuzzy-/)
     map z? <Plug>(incsearch-fuzzy-?)
     map zg/ <Plug>(incsearch-fuzzy-stay)
-    let g:incsearch#auto_nohlsearch = 1
-    map n  <Plug>(incsearch-nohl-n)
-    map N  <Plug>(incsearch-nohl-N)
-    map *  <Plug>(incsearch-nohl-*)
-    map #  <Plug>(incsearch-nohl-#)
-    map g* <Plug>(incsearch-nohl-g*)
-    map g# <Plug>(incsearch-nohl-g#)
 
 " ## Host specifed config
 " load specific config by hostname
