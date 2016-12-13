@@ -165,6 +165,7 @@
 
     """ Miscellaneous
     set nobackup
+    set nomore                      " make listings no pause when whole screen is filled, useful when operating on multiple file
     let mapleader=","
     set hidden                      " make sure undo history can be saved after switched files
 
