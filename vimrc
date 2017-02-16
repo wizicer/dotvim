@@ -252,7 +252,7 @@
         set guifont=SimHei:h10
     else
         let g:ChineseFont = 1
-        set guifont=FixedSys:h8
+        set guifont=Consolas:h10:cANSI
     endif
     endfunction
     command Changefont :call ChangeFont()
