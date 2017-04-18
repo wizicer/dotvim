@@ -67,6 +67,7 @@
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
         Plug 'terryma/vim-expand-region'
+        Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle' }
     endif
 
     Plug 'drmikehenry/vim-fontsize'
