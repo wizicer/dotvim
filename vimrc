@@ -68,6 +68,7 @@
         Plug 'haya14busa/incsearch-fuzzy.vim'
         Plug 'terryma/vim-expand-region'
         Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle' }
+        Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
     endif
 
     Plug 'drmikehenry/vim-fontsize'
@@ -78,6 +79,7 @@
     Plug 'vim-voom/VOoM', { 'for': 'markdown' }
     Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
     Plug 'tpope/vim-liquid', {'for': ['liquid']}
+    Plug 'leafgarland/typescript-vim', {'for': [ 'ts', 'typescript']}
 
     " Add plugins to &runtimepath
     call plug#end()
