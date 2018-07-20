@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='C:\Work\1-Blockchain\BingChain\BingChainFrontEnd\BingChainFrontend\ClientApp\app\components\database'
+let g:netrw_dirhist_2='C:\Work\1-Blockchain\BingChain\ref\elliptic\lib'
+let g:netrw_dirhist_3='C:/Work/1-Blockchain/BingChain/ref/elliptic/lib/elliptic'
+let g:netrw_dirhist_4='C:/Work/1-Blockchain/BingChain/ref/elliptic/lib/elliptic/ec'
+let g:netrw_dirhist_5='C:\Users\icer\OneDrive\日语\20180520\旅游'

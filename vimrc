@@ -29,7 +29,7 @@
     " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
     call plug#begin('~/.vim/plugged')
     if !&diff
-        Plug 'msanders/snipmate.vim'
+        Plug 'garbas/snipmate.vim'
         Plug 'othree/html5.vim'
         Plug 'aklt/plantuml-syntax'
         Plug 'MarcWeber/vim-addon-mw-utils'
@@ -80,6 +80,7 @@
     Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
     Plug 'tpope/vim-liquid', {'for': ['liquid']}
     Plug 'leafgarland/typescript-vim', {'for': [ 'ts', 'typescript']}
+    Plug 'posva/vim-vue', {'for': [ 'vue', 'wpy']}
 
     " Add plugins to &runtimepath
     call plug#end()
