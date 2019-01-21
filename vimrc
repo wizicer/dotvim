@@ -218,6 +218,10 @@
     au BufNewFile,BufRead *.markdown,*.md,*.mkd set filetype=markdown
 
 " ## Enhanced Command
+" ### Start editing the file under the cursor even not exist yet, from: https://superuser.com/a/277326
+
+    map <leader>gf :e <cfile><cr>
+
 " ### Beautify
 
     command! -range -nargs=0 -bar BeautifyJson <line1>,<line2>!python -m json.tool
