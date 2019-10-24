@@ -130,6 +130,6 @@
 " ## Other
 
 " map p to multiple time paste without change current clipboard item
-    " xnoremap p pgvy
+    xnoremap p pgvy
 
 
