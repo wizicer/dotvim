@@ -69,6 +69,7 @@
         Plug 'terryma/vim-expand-region'
         Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle' }
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
+        Plug 'isobit/vim-caddyfile'
     endif
 
     Plug 'drmikehenry/vim-fontsize'
@@ -173,6 +174,7 @@
     set nomore                      " make listings no pause when whole screen is filled, useful when operating on multiple file
     let mapleader=","
     set hidden                      " make sure undo history can be saved after switched files
+    set formatoptions+=m            " reflow chinese text for `gq` command
 
 " ## Other
 
