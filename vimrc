@@ -29,7 +29,6 @@
     " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
     call plug#begin('~/.vim/plugged')
     if !&diff
-        Plug 'garbas/snipmate.vim'
         Plug 'othree/html5.vim'
         Plug 'aklt/plantuml-syntax'
         Plug 'MarcWeber/vim-addon-mw-utils'
