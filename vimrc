@@ -379,10 +379,6 @@
 
     let g:html_number_lines=0
 
-    au FileType vimwiki setl wrap
-    au FileType vimwiki setl spell
-    au FileType vimwiki setl shiftwidth=2 expandtab
-
     au FileType markdown setl textwidth=100
 
     map <up> gk
@@ -463,6 +459,12 @@
 " ## Plugin Settings
 
 " ### [VimWiki] Configuration
+
+" basic settings
+
+    au FileType vimwiki setl wrap
+    au FileType vimwiki setl spell
+    au FileType vimwiki setl shiftwidth=2 expandtab
     
 "  π”√ Û±Í”≥…‰
 
@@ -497,9 +499,50 @@
 
     let g:vimwiki_conceallevel = -1
 
+" map `Alt+Shift+I` and `Alt+Shift+C` to toggle conceallevel 
+
+    au FileType vimwiki nmap <A-I> :set conceallevel=0<CR>
+    au FileType vimwiki nmap <A-C> :set conceallevel=2<CR>
+
 " map `Alt+Shift+Q` to trigger todo item switch between checked or not 
 
-    nmap <A-Q> :VimwikiToggleListItem<CR>
+    au FileType vimwiki nmap <A-Q> :VimwikiToggleListItem<CR>
+
+" map vimwiki to onedrive folder 
+ 
+    let g:vimwiki_list = [{
+    \ 'path': 'C:/Users/icer/OneDrive/Work/wiki/personal',
+    \ 'path_html': 'C:/Users/icer/OneDrive/Work/wiki/html/personal',
+    \ 'syntax': 'markdown',
+    \ 'ext': '.md',
+    \ 'auto_export': 0,
+    \}]
+
+" Vim file type -> Syntax highlighter language
+
+    let g:vimwiki_list[0].nested_syntaxes = {
+    \	'css': 'css',
+    \	'pascal': 'pascal',
+    \	'vb': 'vb',
+    \	'java': 'java',
+    \	'javascript': 'javascript',
+    \	'php': 'php',
+    \	'sql': 'sql',
+    \	'python': 'python',
+    \	'perl': 'perl',
+    \	'sh': 'sh',
+    \	'xml': 'xml',
+    \	'html': 'html',
+    \	'xhtml': 'xhtml',
+    \	'xslt': 'xslt',
+    \	'haskell': 'haskell',
+    \	'ini': 'ini',
+    \	'cpp': 'c',
+    \	'csharp': 'cs',
+    \	'bat': 'dosbatch',
+    \	'uml': 'plantuml',
+    \	'plantuml': 'plantuml',
+    \}
 
 " ### [NerdTree]
 " Map `<leader>n" to open [NerdTree]
