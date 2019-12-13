@@ -617,6 +617,12 @@
 
     let g:airline#extensions#tagbar#enabled = 0
 
+" ### [xolox:shell]
+
+    let g:shell_mappings_enabled = 0
+    nmap <F11> :Fullscreen<CR>
+    imap <F11> <Esc><F11>
+
 " ## Host specifed config
 " load specific config by hostname
 
