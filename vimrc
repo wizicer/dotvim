@@ -408,7 +408,7 @@
 
 " map `Alt-F11` to open git bash shell in current directory
 
-    nmap <A-F11> :silent !start sh --login<CR>
+    nmap <A-F11> :silent !start bash<CR>
     imap <A-F11> <Esc><A-F11>
 
 " map `Shift-F11` to open current file in explorer
@@ -542,6 +542,7 @@
     \	'bat': 'dosbatch',
     \	'uml': 'plantuml',
     \	'plantuml': 'plantuml',
+    \	'go': 'go',
     \}
 
 " ### [NerdTree]
