@@ -1,0 +1,7 @@
+let g:vimwiki_list = [{
+\ 'path': 'C:/Users/liangshuang/OneDrive/Work/wiki/personal',
+\ 'path_html': 'C:/Users/liangshuang/OneDrive/Work/wiki/html/personal',
+\ 'syntax': 'markdown',
+\ 'ext': '.md',
+\ 'auto_export': 0,
+\}]
