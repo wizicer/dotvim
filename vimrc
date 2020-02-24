@@ -624,6 +624,14 @@
     nmap <F11> :Fullscreen<CR>
     imap <F11> <Esc><F11>
 
+" ### [fugitive.vim]
+
+    nmap <leader>gs :Gstatus<CR>
+    nmap <leader>gl :Gpull<CR>
+    nmap <leader>gp :Gpush<CR>
+    nmap <leader>gw :Git add -A <bar> Git commit -am "updated"<CR>
+    nmap <leader>gac :Git add -A <bar> Git commit<CR>
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -645,3 +653,4 @@
 " [Tagbar]: https://github.com/majutsushi/tagbar
 " [incsearch]: https://github.com/haya14busa/incsearch.vim
 " [airline]: https://github.com/vim-airline/vim-airline
+" [fugitive.vim]: https://github.com/tpope/vim-fugitive
