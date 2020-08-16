@@ -639,6 +639,7 @@
     nmap <leader>gp :Gpush<CR>
     nmap <leader>gw :Git add -A <bar> Git commit -am "updated"<CR>
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
+    let $GIT_ASKPASS = 'no'
 
 " ## Host specifed config
 " load specific config by hostname
