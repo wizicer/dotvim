@@ -7,6 +7,10 @@ Install like this in Windows:
     $ cd %USERPROFILE%\vimfiles
     $ install.bat
 
+To use neovim:
+
+    :help nvim-from-vim
+
 Configuration Markdown
 ======================
 
