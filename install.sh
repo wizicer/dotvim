@@ -1,5 +1,5 @@
 #!/bin/bash
 
-ln -s .vim/vimrc ../.vimrc
+ln -s .vim/_vimrc ../.vimrc
 
 git submodule update --init --recursive

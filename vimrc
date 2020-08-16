@@ -27,7 +27,15 @@
 " ## Initialize [vim-plug]
     " in diff mode, almost load no plugins, could manually enable some plugins by
     " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
-    call plug#begin('~/.vim/plugged')
+
+    " change to local app data folder to avoid mapped network latency when
+    " computer in domain network
+    if (has("win32") || has("win64") || has("win16")) && $LOCALAPPDATA != ""
+      call plug#begin($LOCALAPPDATA . '/.vim/plugged')
+    else
+      call plug#begin('~/.vim/plugged')
+    endif
+
     if !&diff
         Plug 'othree/html5.vim'
         Plug 'aklt/plantuml-syntax'

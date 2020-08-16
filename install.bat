@@ -3,7 +3,7 @@
 :link_file
     cd ..
     if exist _vimrc del _vimrc
-    mklink _vimrc .vim\vimrc /h
+    mklink _vimrc .vim\_vimrc /h
     if exist _vsvimrc del _vsvimrc
     mklink _vsvimrc .vim\_vsvimrc /h
 
