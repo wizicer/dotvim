@@ -69,7 +69,7 @@
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
         Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'qpkorr/vim-renamer'
+        Plug 'kraxli/vim-renamer', { 'on': 'Renamer' }
         Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
