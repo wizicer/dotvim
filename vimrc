@@ -348,7 +348,7 @@
     vnoremap <A-k> :m '<-2<CR>gv=gv
 
     " editing/reloading vimrc
-    map <leader>v :sp $MYVIMRC<CR><C-W>_
+    map <leader>v :sp $HOME/.vim/vimrc<CR><C-W>_
     map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:echo 'vimrc reloaded'<CR>
 
     "Map escape key to jj -- much faster
