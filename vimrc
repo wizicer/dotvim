@@ -48,7 +48,7 @@
         Plug 'honza/vim-snippets'
         Plug 'wavded/vim-stylus'
         Plug 'tpope/vim-surround'
-        Plug 'vim-scripts/vimwiki'
+        Plug 'vimwiki/vimwiki'
         Plug 'tomtom/tcomment_vim'
         Plug 'tomtom/tlib_vim'
         Plug 'digitaltoad/vim-pug'
@@ -505,7 +505,7 @@
 
 " no conceal for links
 
-    let g:vimwiki_conceallevel = -1
+    let g:vimwiki_conceallevel = 0
 
 " map `Alt+Shift+I` and `Alt+Shift+C` to toggle conceallevel 
 
