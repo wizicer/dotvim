@@ -1,0 +1,8 @@
+set pythonthreedll=C:\Program\ Files\ (x86)\Python37-32\python37.dll
+
+" ## Fix python 37 deprecation warning
+" ref <https://github.com/vim/vim/issues/3117#issuecomment-406853295>
+
+if has('python3')
+  silent! python3 1
+endif
