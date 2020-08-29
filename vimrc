@@ -507,6 +507,10 @@
 
     let g:vimwiki_conceallevel = 0
 
+" disable table mapping for snipmate
+
+    let g:vimwiki_table_mappings = 0
+
 " map `Alt+Shift+I` and `Alt+Shift+C` to toggle conceallevel 
 
     au FileType vimwiki nmap <A-I> :set conceallevel=0<CR>
@@ -552,6 +556,11 @@
     \	'plantuml': 'plantuml',
     \	'go': 'go',
     \}
+
+" ### [SnipMate]
+" Map `<leader>sm" to open [SnipMate]
+
+    map <leader>sm :SnipMateOpenSnippetFiles<CR>
 
 " ### [NerdTree]
 " Map `<leader>n" to open [NerdTree]
@@ -663,3 +672,4 @@
 " [incsearch]: https://github.com/haya14busa/incsearch.vim
 " [airline]: https://github.com/vim-airline/vim-airline
 " [fugitive.vim]: https://github.com/tpope/vim-fugitive
+" [SnipMate]: https://github.com/garbas/vim-snipmate
