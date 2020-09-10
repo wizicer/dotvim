@@ -68,6 +68,7 @@
         Plug 'vim-scripts/VisIncr'
         Plug 'xolox/vim-misc'
         Plug 'xolox/vim-shell'
+        Plug 'xolox/vim-colorscheme-switcher', { 'on': ['NextColorScheme', 'PrevColorScheme'] }
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'kraxli/vim-renamer', { 'on': 'Renamer' }
         Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
