@@ -370,7 +370,7 @@
     "Map escape key to jj -- much faster
     imap jj <esc>
 
-    inoremap <S-TAB> <Esc><<i
+    inoremap <S-TAB> <Esc><<a
     " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
     imap <C-Tab> <Esc>>>$a
 
