@@ -184,6 +184,21 @@
     set hidden                      " make sure undo history can be saved after switched files
     set formatoptions+=m            " reflow chinese text for `gq` command
 
+" ## Nvim specific config
+
+    if has('nvim')
+        colo desert
+        noremap <C-6> <C-^>
+        imap <S-Insert> <C-R>+
+        nmap <S-Insert> "+p
+        vmap <S-Insert> "+p
+        vmap <C-Insert> "+y
+        " set guifont=Consolas:h12
+        set guifontwide=ºÚÌå:h13:cGB2312
+        " set guifontwide=Microsoft\ YaHei:h12
+        " set guifont=Microsoft\ YaHei:h11
+    endif
+
 " ## Other
 
     "tab mappings
