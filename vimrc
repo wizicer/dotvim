@@ -490,8 +490,8 @@
 " basic settings
 
     au FileType vimwiki setl wrap
-    au FileType vimwiki setl spell
-    au FileType vimwiki setl shiftwidth=2 expandtab
+    " au FileType vimwiki setl spell
+    au FileType vimwiki setl shiftwidth=4 expandtab
     
 "  π”√ Û±Í”≥…‰
 
