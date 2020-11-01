@@ -78,18 +78,21 @@
         Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle' }
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
         Plug 'isobit/vim-caddyfile'
+        Plug 'mhinz/vim-startify'
     endif
 
     Plug 'drmikehenry/vim-fontsize'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-    " Plug 'mattn/calendar-vim', { 'on':  'Calendar' }
+    Plug 'mattn/calendar-vim', { 'on':  'Calendar' }
     Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
     Plug 'groenewege/vim-less', { 'for': 'less' }
     Plug 'vim-voom/VOoM', { 'for': 'markdown' }
+    Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
     Plug 'maksimr/vim-jsbeautify', { 'for': [ 'js', 'json' ] }
     Plug 'tpope/vim-liquid', {'for': ['liquid']}
     Plug 'leafgarland/typescript-vim', {'for': [ 'ts', 'typescript']}
     Plug 'posva/vim-vue', {'for': [ 'vue', 'wpy']}
+    Plug 'embark-theme/vim', { 'as': 'embark' }
 
     " Add plugins to &runtimepath
     call plug#end()
@@ -211,7 +214,7 @@
     map <M-7> 7gt
     map <M-8> 8gt
     map <M-9> 9gt
-    map <M-t> :tabnew<CR>
+    map <C-t> :tabnew<CR>
     map <M-w> :tabclose<CR>
     map! <M-1> <esc>1gt
     map! <M-2> <esc>2gt
@@ -666,6 +669,11 @@
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
     let $GIT_ASKPASS = 'no'
 
+" ### [startify]
+
+    let g:startify_custom_header = ''
+    nmap <leader>s :Startify<CR>
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -689,3 +697,4 @@
 " [airline]: https://github.com/vim-airline/vim-airline
 " [fugitive.vim]: https://github.com/tpope/vim-fugitive
 " [SnipMate]: https://github.com/garbas/vim-snipmate
+" [startify]: https://github.com/mhinz/vim-startify
