@@ -75,7 +75,7 @@
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
         Plug 'terryma/vim-expand-region'
-        Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle' }
+        Plug '907th/vim-auto-save' ", { 'on': 'AutoSaveToggle' }
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
         Plug 'isobit/vim-caddyfile'
         Plug 'mhinz/vim-startify'
@@ -492,6 +492,7 @@
     au FileType vimwiki setl wrap
     " au FileType vimwiki setl spell
     au FileType vimwiki setl shiftwidth=4 expandtab
+    au FileType vimwiki let b:auto_save = 1
     
 "  π”√ Û±Í”≥…‰
 
@@ -668,6 +669,10 @@
     nmap <leader>gw :Git add -A <bar> Git commit -am "updated"<CR>
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
     let $GIT_ASKPASS = 'no'
+
+" ### [vim-colorscheme-switcher]
+
+    nmap <F8> :NextColorScheme<CR>
 
 " ### [startify]
 
