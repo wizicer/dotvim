@@ -54,7 +54,7 @@
         Plug 'digitaltoad/vim-pug'
         Plug 'vim-airline/vim-airline'
         Plug 'tpope/vim-sleuth'
-        Plug 'Yggdroot/indentLine'
+        " Plug 'Yggdroot/indentLine'
         " Plug 'ervandew/supertab'
         Plug 'curist/vim-angular-template'
         Plug 'tpope/vim-repeat'
@@ -108,7 +108,7 @@
     "let $LANG = 'en_US'
     if has("gui_running")
         source $VIMRUNTIME/menu.vim
-        colo desert " other fav color is evening/slate
+        colo embark " other fav color is desert/evening/slate
     endif
     if !empty($CONEMUBUILD) && !has("gui_running")
         " refer to http://conemu.github.io/en/VimXterm.html
