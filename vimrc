@@ -679,6 +679,10 @@
     let g:startify_custom_header = ''
     nmap <leader>s :Startify<CR>
 
+" ### [vim-surround]
+
+    let b:surround_{char2nr('b')} = "**\r**"
+
 " ## Host specifed config
 " load specific config by hostname
 
