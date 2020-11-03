@@ -677,11 +677,14 @@
 " ### [startify]
 
     let g:startify_custom_header = ''
+    let g:startify_bookmarks = [
+        \ { 'h': '~/OneDrive/Work/wiki/personal/index.md' },
+        \ ]
     nmap <leader>s :Startify<CR>
 
 " ### [vim-surround]
 
-    let b:surround_{char2nr('b')} = "**\r**"
+    let g:surround_{char2nr('b')} = "**\r**"
 
 " ## Host specifed config
 " load specific config by hostname
