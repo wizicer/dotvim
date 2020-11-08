@@ -71,7 +71,7 @@
         Plug 'xolox/vim-colorscheme-switcher', { 'on': ['NextColorScheme', 'PrevColorScheme'] }
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'kraxli/vim-renamer', { 'on': 'Renamer' }
-        Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+        Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
         Plug 'haya14busa/incsearch.vim'
         Plug 'haya14busa/incsearch-fuzzy.vim'
         Plug 'terryma/vim-expand-region'
@@ -308,10 +308,6 @@
     endif
     endfunction
     command TabCompletion :call ChangeTabCompletion()
-
-    let g:tagbar_ctags_bin = '~\.vim\bin\ctags.exe'
-    let g:ctrlp_buftag_ctags_bin = '~\.vim\bin\ctags.exe'
-
 
 
 " ### Build command
@@ -589,7 +585,10 @@
 
 " ### [Tagbar]
 "
+    let g:tagbar_ctags_bin = '~\.vim\bin\ctags.exe'
+    let g:ctrlp_buftag_ctags_bin = '~\.vim\bin\ctags.exe'
     nmap <leader>tt :TagbarToggle<CR>
+
 
 " ### [Powerline]
 
