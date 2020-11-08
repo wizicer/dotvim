@@ -5,8 +5,8 @@ let g:vimwiki_list = [{
 \ 'ext': '.md',
 \ 'auto_export': 0,
 \},{
-\ 'path': 'C:/Users/icer/OneDrive/交大',
-\ 'path_html': 'C:/Users/icer/OneDrive/交大/html',
+\ 'path': 'C:/Users/icer/OneDrive/SJTU',
+\ 'path_html': 'C:/Users/icer/OneDrive/SJTU/html',
 \ 'syntax': 'markdown',
 \ 'ext': '.md',
 \ 'auto_export': 0,
