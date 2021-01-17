@@ -687,6 +687,11 @@
 
     let g:surround_{char2nr('b')} = "**\r**"
 
+
+" ### [vim-auto-save]
+
+    let g:auto_save_events = ["CursorHold", "CursorHoldI"]
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -711,3 +716,4 @@
 " [fugitive.vim]: https://github.com/tpope/vim-fugitive
 " [SnipMate]: https://github.com/garbas/vim-snipmate
 " [startify]: https://github.com/mhinz/vim-startify
+" [vim-auto-save]: https://github.com/907th/vim-auto-save
