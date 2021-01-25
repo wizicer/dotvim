@@ -667,7 +667,7 @@
     nmap <leader>gs :Gstatus<CR>
     nmap <leader>gl :Gpull<CR>
     nmap <leader>gp :Gpush<CR>
-    nmap <leader>gw :Git add -A <bar> Git commit -am "updated"<CR>
+    nmap <leader>gww :Git add -A <bar> Git commit -am "updated"<CR>
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
     let $GIT_ASKPASS = 'no'
 
