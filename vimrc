@@ -669,6 +669,8 @@
     nmap <leader>gp :Gpush<CR>
     nmap <leader>gwu :Git add -A <bar> Git commit -am "updated"<CR>
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
+    nmap <leader>gtc :silent !tgit commit<CR>
+    nmap <leader>gtl :silent !tgit log<CR>
     let $GIT_ASKPASS = 'no'
 
 " ### [vim-colorscheme-switcher]
