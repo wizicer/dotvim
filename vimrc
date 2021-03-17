@@ -418,6 +418,14 @@
 
     let g:plantuml_executable_script = "plantuml.jar"
 
+" ## Spell
+
+    nnoremap zfp [s1z=
+    nnoremap zfn ]s1z=
+    nnoremap zff 1z=
+    nnoremap zp [s
+    nnoremap zn ]s
+
 " ## Other
 
     " nnoremap <F5> :w<CR> :silent make<CR>
