@@ -37,6 +37,8 @@
     endif
 
     if !&diff
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
         Plug 'othree/html5.vim'
         Plug 'aklt/plantuml-syntax'
         Plug 'MarcWeber/vim-addon-mw-utils'
@@ -702,6 +704,11 @@
 
     let g:auto_save_events = ["CursorHold", "CursorHoldI"]
 
+" ### [fzf.vim]
+
+    command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+    nmap <leader>rg :Rg<CR>
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -727,3 +734,4 @@
 " [SnipMate]: https://github.com/garbas/vim-snipmate
 " [startify]: https://github.com/mhinz/vim-startify
 " [vim-auto-save]: https://github.com/907th/vim-auto-save
+" [fzf.vim]: https://github.com/junegunn/fzf.vim
