@@ -170,7 +170,8 @@
     set wildmenu                    " Enable smart command line completion on <Tab>
     set wildmode=full               " Make repeated presses cycle between all matching choices
     set wildcharm=<C-Z>             " Make Ctrl-Z in a mapping act like pressing <Tab> interactively on the command line
-    map <F10> :emenu <C-Z>          " Make a binding that automatically invokes :emenu completion
+    " Make a binding that automatically invokes :emenu completion
+    map <F10> :emenu <C-Z>
     syntax on                       
     set display=lastline            " 显示最多行，不用@@
     set backspace=indent,eol,start
