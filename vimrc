@@ -189,6 +189,7 @@
     let mapleader=","
     set hidden                      " make sure undo history can be saved after switched files
     set formatoptions+=m            " reflow chinese text for `gq` command
+    set vb t_vb=                    " disable beep and visual bell
 
 " ## Nvim specific config
 
