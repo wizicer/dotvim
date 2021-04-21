@@ -41,18 +41,15 @@
         Plug 'junegunn/fzf.vim'
         Plug 'othree/html5.vim'
         Plug 'aklt/plantuml-syntax'
-        Plug 'MarcWeber/vim-addon-mw-utils'
         Plug 'kchmck/vim-coffee-script'
         Plug 'Lokaltog/vim-easymotion'
         Plug 'elzr/vim-json'
         Plug 'enthooz/vim-razor'
-        Plug 'garbas/vim-snipmate'
         Plug 'honza/vim-snippets'
         Plug 'wavded/vim-stylus'
         Plug 'tpope/vim-surround'
         Plug 'vimwiki/vimwiki'
         Plug 'tomtom/tcomment_vim'
-        Plug 'tomtom/tlib_vim'
         Plug 'digitaltoad/vim-pug'
         Plug 'vim-airline/vim-airline'
         Plug 'tpope/vim-sleuth'
@@ -81,6 +78,14 @@
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
         Plug 'isobit/vim-caddyfile'
         Plug 'mhinz/vim-startify'
+        " if has('python3')
+        if !has('nvim')
+            Plug 'SirVer/ultisnips'
+        else
+            Plug 'garbas/vim-snipmate'
+            Plug 'MarcWeber/vim-addon-mw-utils' "required for snipmate
+            Plug 'tomtom/tlib_vim' "required for snipmate
+        endif
     endif
 
     Plug 'drmikehenry/vim-fontsize'
@@ -624,10 +629,18 @@
     \	'go': 'go',
     \}
 
+" ### [UltiSnips]
+
+    let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+    let g:UltiSnipsListSnippets = '<NUL>'
+
 " ### [SnipMate]
 " Map `<leader>sm" to open [SnipMate]
 
-    map <leader>sm :SnipMateOpenSnippetFiles<CR>
+    " map <leader>sm :SnipMateOpenSnippetFiles<CR>
 
 " ### [NerdTree]
 " Map `<leader>n" to open [NerdTree]
@@ -774,5 +787,6 @@
 " [fugitive.vim]: https://github.com/tpope/vim-fugitive
 " [SnipMate]: https://github.com/garbas/vim-snipmate
 " [startify]: https://github.com/mhinz/vim-startify
+" [UltiSnips]: https://github.com/SirVer/ultisnips
 " [vim-auto-save]: https://github.com/907th/vim-auto-save
 " [fzf.vim]: https://github.com/junegunn/fzf.vim
