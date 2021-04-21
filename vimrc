@@ -720,6 +720,15 @@
 
     let g:airline#extensions#tagbar#enabled = 0
 
+    " " count characters
+    " let g:airline_section_y = '%{has_key(wordcount(), "cursor_chars")?wordcount()["cursor_chars"] : "-"}C'
+
+    " " https://www.vivi.sh/blog/technical/live-wordcount-vim-airline/
+    " " Enable wordcount but only english word
+    " let g:airline#extensions#wordcount#enabled = 1
+    " " Add notes to filetypes
+    " let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|vimwiki|rst|org|text|asciidoc|tex|mail'
+
 " ### [xolox:shell]
 
     let g:shell_mappings_enabled = 0
