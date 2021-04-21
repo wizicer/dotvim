@@ -489,6 +489,45 @@
     " set custom fold text to system
     set foldtext=CustomFoldText()
 
+" ## Translate markdown
+    " https://github.com/rhysd/translate-markdown
+    " install dependence: `npm i -g translate-markdown`
+    function! s:translate_markdown(lang) abort
+        " if &filetype !=# 'markdown'
+        "     echoerr 'Not a Markdown buffer!'
+        "     return
+        " endif
+
+        if !executable('translate-markdown')
+            echoerr '`translate-markdown` command is not found!'
+            return
+        endif
+
+        let start = getpos("'<")
+        let end = getpos("'>")
+        let saved = getpos('.')
+
+        call setpos('.', start)
+        normal! v
+        call setpos('.', end)
+
+        let save_reg_g = getreg('g')
+        let save_regtype_g = getregtype('g')
+        try
+            silent normal! "gy
+            let input = substitute(getreg('g'), '\/', "%2F", "g")
+        finally
+            call setreg('g', save_reg_g, save_regtype_g)
+            call setpos('.', saved)
+        endtry
+
+        silent call system('translate-markdown ' . a:lang, input)
+    endfunction
+    command! -nargs=0 -range=% TranslateMarkdownToEnglish call <SID>translate_markdown('en')<CR>
+    command! -nargs=0 -range=% TranslateMarkdownToChinese call <SID>translate_markdown('zh-CN')<CR>
+    map <leader>te :TranslateMarkdownToEnglish<CR>
+    map <leader>tc :TranslateMarkdownToChinese<CR>
+    " map <leader>tc :call <SID>translate_markdown('zh-CN')<CR>
 
 
 " ## Plugin Settings
