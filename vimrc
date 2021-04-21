@@ -188,7 +188,7 @@
     set nomore                      " make listings no pause when whole screen is filled, useful when operating on multiple file
     let mapleader=","
     set hidden                      " make sure undo history can be saved after switched files
-    set formatoptions+=m            " reflow chinese text for `gq` command
+    set formatoptions+=mM           " reflow chinese text for `gq` command
     set vb t_vb=                    " disable beep and visual bell
 
 " ## Nvim specific config
@@ -406,7 +406,7 @@
 
     let g:html_number_lines=0
 
-    au FileType markdown setl textwidth=100
+    au FileType markdown setl textwidth=120
 
     map <up> gk
     map <down> gj
