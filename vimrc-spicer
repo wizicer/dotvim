@@ -11,11 +11,3 @@ let g:vimwiki_list = [{
 \ 'ext': '.md',
 \ 'auto_export': 0,
 \}]
-
-if !has('nvim')
-  set pythonthreedll=C:\Program\ Files\ (x86)\Python37-32\python37.dll
-endif
-
-if has('python3')
-  silent! python3 1
-endif

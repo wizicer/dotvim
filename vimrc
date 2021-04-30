@@ -24,6 +24,28 @@
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization across (heterogeneous) systems easier.
         set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
     endif
+" ## Initialize python environment
+    " only support python 3.7
+
+    if !has('nvim')
+        if filereadable("C:/Program Files (x86)/Python37-32/python37.dll")
+            set pythonthreedll=C:\Program\ Files\ (x86)\Python37-32\python37.dll
+        endif
+        if filereadable("C:/Program Files (x86)/Python37/python37.dll")
+            set pythonthreedll=C:\Program\ Files\ (x86)\Python37\python37.dll
+        endif
+        if filereadable("C:/DevTools/Python/Python37/python37.dll")
+            set pythonthreedll=C:\DevTools\Python\Python37\python37.dll
+        endif
+    endif
+
+    " **Fix python 37 deprecation warning**
+    " ref <https://github.com/vim/vim/issues/3117#issuecomment-406853295>
+
+    if has('python3')
+        silent! python3 1
+    endif
+
 " ## Initialize [vim-plug]
     " in diff mode, almost load no plugins, could manually enable some plugins by
     " executing something like `pathogen#interpose('bundle/YouCompleteMe')`
@@ -78,8 +100,8 @@
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
         Plug 'isobit/vim-caddyfile'
         Plug 'mhinz/vim-startify'
-        " if has('python3')
-        if !has('nvim')
+        if has('python3')
+        " if !has('nvim')
             Plug 'SirVer/ultisnips'
         else
             Plug 'garbas/vim-snipmate'
