@@ -25,14 +25,11 @@
         set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
     endif
 " ## Initialize python environment
-    " only support python 3.7
+    " only support python 3.7 x86 version
 
     if !has('nvim')
         if filereadable("C:/Program Files (x86)/Python37-32/python37.dll")
             set pythonthreedll=C:\Program\ Files\ (x86)\Python37-32\python37.dll
-        endif
-        if filereadable("C:/Program Files (x86)/Python37/python37.dll")
-            set pythonthreedll=C:\Program\ Files\ (x86)\Python37\python37.dll
         endif
         if filereadable("C:/DevTools/Python/Python37/python37.dll")
             set pythonthreedll=C:\DevTools\Python\Python37\python37.dll
