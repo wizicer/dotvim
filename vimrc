@@ -204,6 +204,7 @@
         set guifont=Droid\ Sans\ Mono
     else
         set guifont=Consolas:h10:cANSI
+        set guifontwide=SimHei:h10:cANSI:qDRAFT
     end
     set laststatus=2
 
