@@ -661,6 +661,7 @@
 " Map `<leader>sm" to open [SnipMate]
 
     " map <leader>sm :SnipMateOpenSnippetFiles<CR>
+    let g:snipMate = { 'snippet_version' : 1 }
 
 " ### [NerdTree]
 " Map `<leader>n" to open [NerdTree]
