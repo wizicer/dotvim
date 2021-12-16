@@ -761,9 +761,9 @@
 
 " ### [fugitive.vim]
 
-    nmap <leader>gs :Gstatus<CR>
-    nmap <leader>gl :Gpull<CR>
-    nmap <leader>gp :Gpush<CR>
+    nmap <leader>gs :Git<CR>
+    nmap <leader>gl :Git pull<CR>
+    nmap <leader>gp :Git push<CR>
     nmap <leader>gwu :Git add -A <bar> Git commit -am "updated"<CR>
     nmap <leader>gac :Git add -A <bar> Git commit<CR>
     nmap <leader>gtc :silent !tgit commit<CR>
