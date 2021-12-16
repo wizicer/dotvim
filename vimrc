@@ -55,6 +55,9 @@
       call plug#begin('~/.vim/plugged')
     endif
 
+    " enable following statement to avoid timeout when connecting https://github...
+    " let g:plug_url_format = 'git@github.com:%s.git'
+
     if !&diff
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
