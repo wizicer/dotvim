@@ -34,6 +34,9 @@
         if filereadable("C:/DevTools/Python/Python37/python37.dll")
             set pythonthreedll=C:\DevTools\Python\Python37\python37.dll
         endif
+        if filereadable("C:/DevTools/Python37-32/python37.dll")
+            set pythonthreedll=C:\DevTools\Python37-32\python37.dll
+        endif
     endif
 
     " **Fix python 37 deprecation warning**
