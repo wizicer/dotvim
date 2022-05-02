@@ -16,3 +16,15 @@ endsnippet
 snippet aq
 \`梁安琪\`
 endsnippet
+snippet datet "Generate diary date title"
+`!p
+import datetime
+# Current Weekday starting on 0 = Monday
+today = datetime.datetime.today().weekday()
+date=datetime.datetime.today().strftime('%Y-%m-%d')
+name='一二三四五六日'
+snip.rv = '## '+date+' 星期'+name[today]
+`
+
+$0
+endsnippet
