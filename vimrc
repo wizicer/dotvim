@@ -86,7 +86,7 @@
         Plug 'kana/vim-altr'
         Plug 'kana/vim-smartinput'
         Plug 'dkprice/vim-easygrep'
-        Plug 'airblade/vim-gitgutter', { 'commit': '339f8ba079ed7d465ca442c9032b36bc56c21f61' }
+        Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-fugitive' ", { 'on':  'Gstatus' } ref to https://github.com/junegunn/vim-plug/issues/525#issuecomment-256169881 for why it not work
         Plug 'ekalinin/Dockerfile.vim'
         Plug 'vim-scripts/VisIncr'
