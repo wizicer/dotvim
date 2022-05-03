@@ -591,7 +591,7 @@
     
 " 是否开启按语法折叠  会让文件比较慢
     
-    " let g:vimwiki_folding = 1
+    let g:vimwiki_folding = 'expr'
     
 " 是否在计算字串长度时用特别考虑中文字符
 
