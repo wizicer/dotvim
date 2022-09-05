@@ -783,6 +783,7 @@
     let g:startify_custom_header = ''
     let g:startify_bookmarks = [
         \ { 'h': '~/OneDrive/Work/wiki/personal/index.md' },
+        \ { 'd': '~/OneDrive/Work/wiki/personal/diary/diary.md' },
         \ ]
     nmap <leader>s :Startify<CR>
 
