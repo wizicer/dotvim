@@ -208,6 +208,9 @@
     set guioptions=r                " no menu and toolbar, only right hand scrollbar
     if has("gui_gtk2")
         set guifont=Droid\ Sans\ Mono
+    elseif has("mac")
+        set guifont=Menlo:h11
+        set guifontwide=PingFang\ SC:h11
     else
         set guifont=Consolas:h10:cANSI
         set guifontwide=SimHei:h10:cANSI:qDRAFT
@@ -467,6 +470,25 @@
     " inoremap <F5> <Esc>:w<CR>:silent make<CR>
     " vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
+
+    if has("mac")
+" map `Ctrl-F11` to open shell in current directory 
+
+    nmap <C-F11> :silent terminal<CR>
+    imap <C-F11> <Esc><C-F11>
+
+" map `Alt-F11` to open external shell in current directory
+
+    nmap <A-F11> :silent !open -a Terminal "`pwd`"<CR>
+    imap <A-F11> <Esc><A-F11>
+
+" map `Shift-F11` to open current file in finder
+
+    nmap <S-F11> :silent !open "`pwd`"<CR>
+    imap <S-F11> <Esc><S-F11>
+
+    else
+
 " map `Ctrl-F11` to open shell in current directory 
 
     nmap <C-F11> :silent !start cmd<CR>
@@ -482,6 +504,7 @@
     nmap <S-F11> :silent !start explorer /select,%:p<CR>
     imap <S-F11> <Esc><S-F11>
 
+    end
 " change the current directory automatically
 
     autocmd BufEnter * silent! lcd %:p:h
