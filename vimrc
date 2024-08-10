@@ -686,6 +686,7 @@
     let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
     let g:UltiSnipsListSnippets = '<NUL>'
     map <leader>sm :UltiSnipsEdit<CR>
+    map <leader>sr :call UltiSnips#RefreshSnippets()<CR>
 
 " ### [SnipMate]
 " Map `<leader>sm" to open [SnipMate]
