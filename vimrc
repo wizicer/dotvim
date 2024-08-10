@@ -203,7 +203,7 @@
     " Make a binding that automatically invokes :emenu completion
     map <F10> :emenu <C-Z>
     syntax on                       
-    set display=lastline            " ÏÔÊ¾×î¶àÐÐ£¬²»ÓÃ@@
+    set display=lastline            " ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½@@
     set backspace=indent,eol,start
     set guioptions=r                " no menu and toolbar, only right hand scrollbar
     if has("gui_gtk2")
@@ -235,7 +235,7 @@
         vmap <S-Insert> "+p
         vmap <C-Insert> "+y
         " set guifont=Consolas:h12
-        set guifontwide=ºÚÌå:h13:cGB2312
+        set guifontwide=ï¿½ï¿½ï¿½ï¿½:h13:cGB2312
         " set guifontwide=Microsoft\ YaHei:h12
         " set guifont=Microsoft\ YaHei:h11
     endif
@@ -273,7 +273,7 @@
     noremap <C-S> :update<CR>
     vnoremap <C-S> <C-C>:update<CR>
     inoremap <C-S> <C-O>:update<CR>
-    "2006-09-13 ÈçÏÂ£º±£´æÊÓÍ¼
+    "2006-09-13 ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
     au BufWinLeave *.ztx mkview
     au BufWinEnter *.ztx silent loadview
     au BufNewFile,BufRead *.tx1 setf tx1
@@ -595,28 +595,28 @@
     au FileType vimwiki setl shiftwidth=4 expandtab
     au FileType vimwiki let b:auto_save = 1
     
-" Ê¹ÓÃÊó±êÓ³Éä
+" Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½
 
     let g:vimwiki_use_mouse = 1
     
-" ²»Òª½«ÍÕ·åÊ½´Ê×é×÷Îª Wiki ´ÊÌõ
+" ï¿½ï¿½Òªï¿½ï¿½ï¿½Õ·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª Wiki ï¿½ï¿½ï¿½ï¿½
 
     let g:vimwiki_camel_case = 0
 
-" ±ê¼ÇÎªÍê³ÉµÄ checklist ÏîÄ¿»áÓÐÌØ±ðµÄÑÕÉ«
+" ï¿½ï¿½ï¿½Îªï¿½ï¿½Éµï¿½ checklist ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½É«
 
     let g:vimwiki_hl_cb_checked = 1
     let g:vimwiki_hl_headers = 1
 
-" ÎÒµÄ vim ÊÇÃ»ÓÐ²Ëµ¥µÄ£¬¼ÓÒ»¸ö vimwiki ²Ëµ¥ÏîÒ²Ã»ÓÐÒâÒå
+" ï¿½Òµï¿½ vim ï¿½ï¿½Ã»ï¿½Ð²Ëµï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ vimwiki ï¿½Ëµï¿½ï¿½ï¿½Ò²Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     let g:vimwiki_menu = ''
     
-" ÊÇ·ñ¿ªÆô°´Óï·¨ÕÛµþ  »áÈÃÎÄ¼þ±È½ÏÂý
+" ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï·¨ï¿½Ûµï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½È½ï¿½ï¿½ï¿½
     
     let g:vimwiki_folding = 'expr'
     
-" ÊÇ·ñÔÚ¼ÆËã×Ö´®³¤¶ÈÊ±ÓÃÌØ±ð¿¼ÂÇÖÐÎÄ×Ö·û
+" ï¿½Ç·ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
 
     let g:vimwiki_CJK_length = 1
 
@@ -807,6 +807,7 @@
     let g:startify_bookmarks = [
         \ { 'h': '~/OneDrive/Work/wiki/personal/index.md' },
         \ { 'd': '~/OneDrive/Work/wiki/personal/diary/diary.md' },
+        \ { 'a': '~/OneDrive/Work/phd/13-application/index.md' },
         \ ]
     nmap <leader>s :Startify<CR>
 
