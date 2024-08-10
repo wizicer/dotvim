@@ -103,6 +103,8 @@
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
         Plug 'isobit/vim-caddyfile'
         Plug 'mhinz/vim-startify'
+        Plug 'lervag/vimtex'
+        Plug 'KeitaNakamura/tex-conceal.vim'
         if has('python3')
         " if !has('nvim')
             Plug 'SirVer/ultisnips'
@@ -203,7 +205,7 @@
     " Make a binding that automatically invokes :emenu completion
     map <F10> :emenu <C-Z>
     syntax on                       
-    set display=lastline            " ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½@@
+    set display=lastline            " ÏÔÊ¾×î¶àÐÐ£¬²»ÓÃ@@
     set backspace=indent,eol,start
     set guioptions=r                " no menu and toolbar, only right hand scrollbar
     if has("gui_gtk2")
@@ -235,7 +237,7 @@
         vmap <S-Insert> "+p
         vmap <C-Insert> "+y
         " set guifont=Consolas:h12
-        set guifontwide=ï¿½ï¿½ï¿½ï¿½:h13:cGB2312
+        set guifontwide=ºÚÌå:h13:cGB2312
         " set guifontwide=Microsoft\ YaHei:h12
         " set guifont=Microsoft\ YaHei:h11
     endif
@@ -273,7 +275,7 @@
     noremap <C-S> :update<CR>
     vnoremap <C-S> <C-C>:update<CR>
     inoremap <C-S> <C-O>:update<CR>
-    "2006-09-13 ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
+    "2006-09-13 ÈçÏÂ£º±£´æÊÓÍ¼
     au BufWinLeave *.ztx mkview
     au BufWinEnter *.ztx silent loadview
     au BufNewFile,BufRead *.tx1 setf tx1
@@ -595,28 +597,28 @@
     au FileType vimwiki setl shiftwidth=4 expandtab
     au FileType vimwiki let b:auto_save = 1
     
-" Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½
+" Ê¹ÓÃÊó±êÓ³Éä
 
     let g:vimwiki_use_mouse = 1
     
-" ï¿½ï¿½Òªï¿½ï¿½ï¿½Õ·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª Wiki ï¿½ï¿½ï¿½ï¿½
+" ²»Òª½«ÍÕ·åÊ½´Ê×é×÷Îª Wiki ´ÊÌõ
 
     let g:vimwiki_camel_case = 0
 
-" ï¿½ï¿½ï¿½Îªï¿½ï¿½Éµï¿½ checklist ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½É«
+" ±ê¼ÇÎªÍê³ÉµÄ checklist ÏîÄ¿»áÓÐÌØ±ðµÄÑÕÉ«
 
     let g:vimwiki_hl_cb_checked = 1
     let g:vimwiki_hl_headers = 1
 
-" ï¿½Òµï¿½ vim ï¿½ï¿½Ã»ï¿½Ð²Ëµï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ vimwiki ï¿½Ëµï¿½ï¿½ï¿½Ò²Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+" ÎÒµÄ vim ÊÇÃ»ÓÐ²Ëµ¥µÄ£¬¼ÓÒ»¸ö vimwiki ²Ëµ¥ÏîÒ²Ã»ÓÐÒâÒå
 
     let g:vimwiki_menu = ''
     
-" ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï·¨ï¿½Ûµï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½È½ï¿½ï¿½ï¿½
+" ÊÇ·ñ¿ªÆô°´Óï·¨ÕÛµþ  »áÈÃÎÄ¼þ±È½ÏÂý
     
     let g:vimwiki_folding = 'expr'
     
-" ï¿½Ç·ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
+" ÊÇ·ñÔÚ¼ÆËã×Ö´®³¤¶ÈÊ±ÓÃÌØ±ð¿¼ÂÇÖÐÎÄ×Ö·û
 
     let g:vimwiki_CJK_length = 1
 
@@ -826,6 +828,22 @@
     command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
     nmap <leader>rg :Rg<CR>
 
+" ### Tex [lervag/vimtex]
+
+    let g:tex_flavor='latex'
+    let g:vimtex_view_method='zathura'
+    let g:vimtex_quickfix_mode=0
+
+  " let g:vimtex_view_general_viewer = 'SumatraPDF'
+  " let g:vimtex_view_general_options = '-forward-search @tex @line @pdf'
+  " let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+" ### Tex [KeitaNakamura/tex-conceal.vim]
+
+    " set conceallevel=1
+    let g:tex_conceal='abdmg'
+    hi Conceal ctermbg=none
+
 " ## Host specifed config
 " load specific config by hostname
 
@@ -834,10 +852,6 @@
         exe 'source ' . hostfile
     endif
 
-
-  let g:vimtex_view_general_viewer = 'SumatraPDF'
-  let g:vimtex_view_general_options = '-forward-search @tex @line @pdf'
-  let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
 " [vim-plug]: https://github.com/junegunn/vim-plug 
 " [NerdTree]: https://github.com/scrooloose/nerdtree 
