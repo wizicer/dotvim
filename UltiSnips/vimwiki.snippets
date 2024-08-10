@@ -1,21 +1,3 @@
-snippet xl
-\`劳秀羚\`
-endsnippet
-snippet yx
-\`杨欣\`
-endsnippet
-snippet wb
-\`王波\`
-endsnippet
-snippet ms
-\`陈梦实\`
-endsnippet
-snippet yt
-\`宋艺童\`
-endsnippet
-snippet aq
-\`梁安琪\`
-endsnippet
 snippet datet "Generate diary date title"
 `!p
 import datetime
@@ -28,11 +10,97 @@ snip.rv = '## '+date+' 星期'+name[today]
 
 $0
 endsnippet
-snippet detail "Generate diary date title"
+snippet datett "Generate diary date title with summary"
+`!p
+import datetime
+# Current Weekday starting on 0 = Monday
+today = datetime.datetime.today().weekday()
+date=datetime.datetime.today().strftime('%Y-%m-%d')
+name='一二三四五六日'
+snip.rv = '## '+date+' 星期'+name[today]
+`
+
+$0
+
+> - 今日科研进度：
+> - 明日科研计划：
+> - new标记论文：
+endsnippet
+snippet detail "Generate detail"
 <details>
 <summary>$1</summary>
 
 $0
 
 </details>
+endsnippet
+snippet \bin
+\\{0, 1\\}
+endsnippet
+snippet \q
+\\{$0\\}
+endsnippet
+snippet \zq
+\mathbb{Z}_{q}
+endsnippet
+snippet \fq
+\mathcal{F}_{q}
+endsnippet
+snippet \seq
+\\{${1:x}_1,\dots,${1:x}_${2:n}\\}$0
+endsnippet
+snippet "([^ ]*)\.lq" "$ (postfix)" r
+$`!p snip.rv = match.group(1)`$$0
+endsnippet
+snippet "([^ ]*)\.l" "$ (postfix)" r
+$`!p snip.rv = match.group(1)`$1$$0
+endsnippet
+snippet "([^\s].*)\.ll" "$ (postfix)" r
+$`!p snip.rv = match.group(1)`$$0
+endsnippet
+snippet "([^\s].*)\.lll" "$$ (postfix)" r
+$$
+`!p snip.rv = match.group(1)`
+$$$0
+endsnippet
+snippet \adv
+$\mathcal{A}$
+endsnippet
+snippet "([\w\d\}])_" "sub" r
+`!p snip.rv = match.group(1)`_{$1}$0
+endsnippet
+snippet "([\w\d\}])\^" "sup" r
+`!p snip.rv = match.group(1)`^{$1}$0
+endsnippet
+
+
+snippet "(\w+)\.c" "code (postfix)" r
+\``!p snip.rv = match.group(1)`\`$0
+endsnippet
+snippet "(\w+)\.b" "bold (postfix)" r
+**`!p snip.rv = match.group(1)`**$0
+endsnippet
+snippet "(\w+)\.i" "bold (postfix)" r
+_`!p snip.rv = match.group(1)`_$0
+endsnippet
+
+snippet seqd
+\`\`\`mermaid
+sequenceDiagram
+$0
+	Alice->>John: Hello John, how are you?
+	John-->>Alice: Great!
+	Alice-)John: See you later!
+\`\`\`
+
+endsnippet
+snippet flowd
+\`\`\`mermaid
+flowchart LR
+$0
+	start["\`_Start_\`"]
+	stop["\`**Stop**\`"]
+	start --> stop
+\`\`\`
+
 endsnippet
