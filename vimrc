@@ -30,12 +30,13 @@
     if !has('nvim')
         if filereadable("C:/Program Files (x86)/Python37-32/python37.dll")
             set pythonthreedll=C:\Program\ Files\ (x86)\Python37-32\python37.dll
-        endif
-        if filereadable("C:/DevTools/Python/Python37/python37.dll")
+        elseif filereadable("C:/DevTools/Python312-64/python312.dll")
+            set pythonthreedll=C:\DevTools\Python312-64\python312.dll
+        elseif filereadable("C:/DevTools/Python/Python37/python37.dll")
             set pythonthreedll=C:\DevTools\Python\Python37\python37.dll
-        endif
-        if filereadable("C:/DevTools/Python37-32/python37.dll")
+        elseif filereadable("C:/DevTools/Python37-32/python37.dll")
             set pythonthreedll=C:\DevTools\Python37-32\python37.dll
+            " set pythonthreehome=C:\\DevTools\\Python37-32
         endif
     endif
 
@@ -684,9 +685,9 @@
 
     let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
     let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<tab>'
-    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-    let g:UltiSnipsListSnippets = '<NUL>'
+    " let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    " let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+    let g:UltiSnipsListSnippets = '<c-;>'
     map <leader>sm :UltiSnipsEdit<CR>
     map <leader>sr :call UltiSnips#RefreshSnippets()<CR>
 
