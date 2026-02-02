@@ -12,7 +12,7 @@
 " ```
 " 2. start vim by following command `vim -s script.in -n vimrc`
 " 3. `Optional` generate html from markdown via pandoc
-" 
+"
 " # Configurations
 " ## Initialize specialty for windows
     if has("win32") || has("win64") || has("win16")
@@ -65,28 +65,29 @@
     if !&diff
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
-        Plug 'othree/html5.vim'
-        Plug 'aklt/plantuml-syntax'
-        Plug 'kchmck/vim-coffee-script'
+        " Plug 'othree/html5.vim'
+        " Plug 'aklt/plantuml-syntax'
+        " Plug 'kchmck/vim-coffee-script'
         Plug 'Lokaltog/vim-easymotion'
         Plug 'elzr/vim-json'
         Plug 'enthooz/vim-razor'
         Plug 'honza/vim-snippets'
         Plug 'wavded/vim-stylus'
         Plug 'tpope/vim-surround'
-        Plug 'vimwiki/vimwiki'
+        Plug 'vimwiki/vimwiki', { 'on': '<Plug>VimwikiIndex' }
         Plug 'tomtom/tcomment_vim'
         Plug 'digitaltoad/vim-pug'
-        Plug 'vim-airline/vim-airline'
+        " Plug 'vim-airline/vim-airline'
+        Plug 'itchyny/lightline.vim'
         Plug 'tpope/vim-sleuth'
         " Plug 'Yggdroot/indentLine'
         " Plug 'ervandew/supertab'
-        Plug 'curist/vim-angular-template'
+        " Plug 'curist/vim-angular-template'
         Plug 'tpope/vim-repeat'
         Plug 'godlygeek/tabular'
         Plug 'kana/vim-altr'
         Plug 'kana/vim-smartinput'
-        Plug 'dkprice/vim-easygrep'
+        Plug 'dkprice/vim-easygrep', { 'on': ['Grep', 'GrepAdd', 'Replace', 'ReplaceUndo'] }
         Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-fugitive' ", { 'on':  'Gstatus' } ref to https://github.com/junegunn/vim-plug/issues/525#issuecomment-256169881 for why it not work
         Plug 'ekalinin/Dockerfile.vim'
@@ -102,10 +103,10 @@
         Plug 'terryma/vim-expand-region'
         Plug '907th/vim-auto-save' ", { 'on': 'AutoSaveToggle' }
         Plug 'tpope/tpope-vim-abolish', { 'on': 'Subvert' }
-        Plug 'isobit/vim-caddyfile'
+        " Plug 'isobit/vim-caddyfile'
         Plug 'mhinz/vim-startify'
-        Plug 'lervag/vimtex'
-        Plug 'KeitaNakamura/tex-conceal.vim'
+        " Plug 'lervag/vimtex'
+        " Plug 'KeitaNakamura/tex-conceal.vim'
         if has('python3')
         " if !has('nvim')
             Plug 'SirVer/ultisnips'
@@ -179,7 +180,7 @@
     set nowrap                      " don't wrap text
     set linebreak                   " don't wrap textin the middle of a word
     set autoindent                  " always set autoindenting on
-    set tabstop=2                   " <tab> inserts 4 spaces 
+    set tabstop=2                   " <tab> inserts 4 spaces
     set shiftwidth=4                " but an indent level is 2 spaces wide.
     set softtabstop=4               " <BS> over an autoindent deletes both spaces.
     set expandtab                   " Use spaces, not tabs, for autoindent/tab key.
@@ -187,16 +188,16 @@
     set matchpairs+=<:>             " show matching <> (html mainly) as well
     set foldmethod=indent           " allow us to fold on indents
     set foldlevel=5                 " don't fold by default
-                                    
-    """ Searching and Patterns      
+
+    """ Searching and Patterns
     set ignorecase                  " Default to using case insensitive searches,
     set smartcase                   " unless uppercase letters are used in the regex.
-    set smarttab                    " Handle tabs more intelligently 
+    set smarttab                    " Handle tabs more intelligently
     set hlsearch                    " Highlight searches by default.
     set incsearch                   " Incrementally search while typing a /regex
-                                    
-                                    
-    """ UI                          
+
+
+    """ UI
     set nocompatible
     set magic
     set number
@@ -205,7 +206,7 @@
     set wildcharm=<C-Z>             " Make Ctrl-Z in a mapping act like pressing <Tab> interactively on the command line
     " Make a binding that automatically invokes :emenu completion
     map <F10> :emenu <C-Z>
-    syntax on                       
+    syntax on
     set display=lastline            " 显示最多行，不用@@
     set backspace=indent,eol,start
     set guioptions=r                " no menu and toolbar, only right hand scrollbar
@@ -271,7 +272,7 @@
 
 
     nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
-    
+
     " Use CTRL-S for saving, also in Insert mode
     noremap <C-S> :update<CR>
     vnoremap <C-S> <C-C>:update<CR>
@@ -362,9 +363,9 @@
     function! RunF6Command()
     if g:F6Command != ''
         execute g:F6Command
-    else 
+    else
         let l:temppath = getcwd()
-        let l:buildpath = expand("%:p:h") 
+        let l:buildpath = expand("%:p:h")
         let l:list = "build.bat:make.bat:"
         while strlen(l:list)
             let i = match(l:list, ":")
@@ -414,8 +415,8 @@
     " imap <Tab> strpart(getline("."), col(".") - 3, 1)="*" ? "\<Lt>Esc>>>$a":""
     imap <C-Tab> <Esc>>>$a
 
-    map <leader>rr :set wrap!<cr> 
-    map <leader>ss :set spell!<cr> 
+    map <leader>rr :set wrap!<cr>
+    map <leader>ss :set spell!<cr>
     " toggle the syntax on/off with this command:
     map <leader>sn :if exists("g:syntax_on") <Bar>
         \   syntax off <Bar>
@@ -475,7 +476,7 @@
 
 
     if has("mac")
-" map `Ctrl-F11` to open shell in current directory 
+" map `Ctrl-F11` to open shell in current directory
 
     nmap <C-F11> :silent terminal<CR>
     imap <C-F11> <Esc><C-F11>
@@ -492,7 +493,7 @@
 
     else
 
-" map `Ctrl-F11` to open shell in current directory 
+" map `Ctrl-F11` to open shell in current directory
 
     nmap <C-F11> :silent !start cmd<CR>
     imap <C-F11> <Esc><C-F11>
@@ -532,7 +533,7 @@
         else
             let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
         endif
-    
+
         let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
         let foldSize = 1 + v:foldend - v:foldstart
         let foldSizeStr = " " . foldSize . " lines "
@@ -591,17 +592,21 @@
 
 " ### [VimWiki] Configuration
 
+" 这里的 <Plug>VimwikiIndex 会被 vim-plug 捕获，从而触发插件加载
+    nmap <leader>ww <Plug>VimwikiIndex
+    autocmd BufRead,BufNewFile index.md call plug#load('vimwiki')
+
 " basic settings
 
     au FileType vimwiki setl wrap
     " au FileType vimwiki setl spell
     au FileType vimwiki setl shiftwidth=4 expandtab
     au FileType vimwiki let b:auto_save = 1
-    
+
 " 使用鼠标映射
 
     let g:vimwiki_use_mouse = 1
-    
+
 " 不要将驼峰式词组作为 Wiki 词条
 
     let g:vimwiki_camel_case = 0
@@ -614,11 +619,11 @@
 " 我的 vim 是没有菜单的，加一个 vimwiki 菜单项也没有意义
 
     let g:vimwiki_menu = ''
-    
+
 " 是否开启按语法折叠  会让文件比较慢
-    
+
     let g:vimwiki_folding = 'expr'
-    
+
 " 是否在计算字串长度时用特别考虑中文字符
 
     let g:vimwiki_CJK_length = 1
@@ -635,17 +640,17 @@
 
     let g:vimwiki_table_mappings = 0
 
-" map `Alt+Shift+I` and `Alt+Shift+C` to toggle conceallevel 
+" map `Alt+Shift+I` and `Alt+Shift+C` to toggle conceallevel
 
     au FileType vimwiki nmap <A-I> :set conceallevel=0<CR>
     au FileType vimwiki nmap <A-C> :set conceallevel=2<CR>
 
-" map `Alt+Shift+Q` to trigger todo item switch between checked or not 
+" map `Alt+Shift+Q` to trigger todo item switch between checked or not
 
     au FileType vimwiki nmap <A-Q> :VimwikiToggleListItem<CR>
 
-" map vimwiki to onedrive folder 
- 
+" map vimwiki to onedrive folder
+
     let g:vimwiki_list = [{
     \ 'path': 'C:/Users/icer/OneDrive/Work/wiki/personal',
     \ 'path_html': 'C:/Users/icer/OneDrive/Work/wiki/html/personal',
@@ -854,8 +859,8 @@
     endif
 
 
-" [vim-plug]: https://github.com/junegunn/vim-plug 
-" [NerdTree]: https://github.com/scrooloose/nerdtree 
+" [vim-plug]: https://github.com/junegunn/vim-plug
+" [NerdTree]: https://github.com/scrooloose/nerdtree
 " [altr]: https://github.com/kana/vim-altr
 " [vim-jsbeautify]: https://github.com/maksimr/vim-jsbeautify
 " [VOoM]: https://github.com/vim-voom/VOoM
